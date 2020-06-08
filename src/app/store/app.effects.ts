@@ -7,7 +7,7 @@ import { mergeMap, map, catchError, take } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { getTodos, setTodos, saveTodos, loadFromAssets } from './todos.actions';
 import { selectTodos } from './todos.selectors';
-
+  
 @Injectable()
 export class EffectsTodo {
     getTodos$ = createEffect(
@@ -61,11 +61,26 @@ export class EffectsTodo {
 }  */
 
 import { Injectable } from '@angular/core';
-import {Actions, createEffect } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { updatedAt, increase, decrease, clear } from './app.actions';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { CompileTypeMetadata } from '@angular/compiler';
+import { TypedAction } from '@ngrx/store/src/models';
 
 @Injectable()
 export class AppEffects {
- constructor (private actions$: Actions) {
- }
 
+	public updatedAt$: Observable<TypedAction<string>> = createEffect(
+		() => this.actions$.pipe(
+			ofType(increase, decrease, clear),
+			map(() => {
+				return updatedAt({ updateAt: Date.now() });
+			}
+			)
+		)
+	);
+
+	constructor(private actions$: Actions) {
+	}
 }

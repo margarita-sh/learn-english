@@ -1,4 +1,4 @@
-import { createAction } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 import { NotAllowedCheck, TypedAction, ActionCreator } from '@ngrx/store/src/models';
 
 type TypeActionCreator<S extends string, O extends object> = ActionCreator<
@@ -15,4 +15,9 @@ export const decrease: TypeActionCreator<string, { data?: any }> = createAction(
 
 export const clear: TypeActionCreator<string, { data?: any }> = createAction(
 	'[Count] clear'
+);
+
+export const updatedAt: TypeActionCreator<string, { updateAt: number }> = createAction(
+	'[Count] updated at',
+	props<{updateAt: number}>()
 );

@@ -1,6 +1,6 @@
 <button (click)="increaseCount()">Increase</button>
-<button (click)="decreaseCount()">Decrease</button>
-<button (click)="clearCount()">Clear</button>
+<button (click)="decreaseCount()" [disabled] = "disableDecrease$ | async">Decrease</button>
+<button (click)="clearCount()" [disabled] = "disableDecrease$ | async">Clear</button>
 <div>
-    <span>Counter is: {{count$ | async }}; Update at: {{updatedAt$| async | date: "dd, MM, yyyy"}}</span>
+    <span>Counter is: {{count$ | async }}; Update at: {{updatedAt$| async | date: "dd/ MM /yyyy, HH : mm : ss"}}</span>
 </div>
