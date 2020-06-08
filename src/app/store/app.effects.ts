@@ -75,7 +75,7 @@ export class AppEffects {
 		() => this.actions$.pipe(
 			ofType(increase, decrease, clear),
 			map(() => {
-				return updatedAt({ updateAt: Date.now() });
+				return updatedAt({ payload: Date.now() });
 			}
 			)
 		)
