@@ -1,4 +1,8 @@
  <input [(ngModel)]="word" placeholder="Enter text..."  type = "text"/>
 	<button (click)="translate()">Перевести</button>
+
+	<p *ngFor="let word of wordsEng$ |async" >
+	{{word}}
+</p>
 	
 
