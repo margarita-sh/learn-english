@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CountState } from '../../store/app.state';
+import { CountState } from '../../store/state/app.state';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectCount, selectUpdatedAt } from '../../store/count.selectors';
-import { increase, decrease, clear } from '../../store/app.actions';
+import { selectCount, selectUpdatedAt } from '../../store/selectors/count.selectors';
+import { increase, decrease, clear } from '../../store/action/app.actions';
 import { map } from 'rxjs/operators';
 import { DataService } from '../translator/service/data.service';
 
@@ -17,9 +17,7 @@ export class GameComponent {
   public updatedAt$: Observable<number> = this._store$.pipe(select(selectUpdatedAt));
   public disableDecrease$: Observable<boolean> = this.count$.pipe(map((count: number) => count <= 0));
 
-  constructor(public _store$: Store<CountState>,   public dataService: DataService) {
-	// tslint:disable-next-line: typedef
-	dataService.authenticate().subscribe(data => console.log(data));
+  constructor(public _store$: Store<CountState>) {
   }
 
   public increaseCount(): void {

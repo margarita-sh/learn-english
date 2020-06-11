@@ -1,6 +1,6 @@
-import { initialState, CountState } from './app.state';
+import { initialState, CountState } from '../state/app.state';
 import { createReducer, on, Action, ActionReducer } from '@ngrx/store';
-import * as CountAction from './app.actions';
+import * as CountAction from '../action/app.actions';
 
 export const countReducer: ActionReducer<CountState, Action> = createReducer(
 	initialState,
@@ -23,8 +23,6 @@ export const countReducer: ActionReducer<CountState, Action> = createReducer(
 		};
 	}),
 	on(CountAction.updatedAt, (state: CountState, action: CountAction.CustomAction): CountState => {
-		console.log(action);
-
 		return {
 			...state,
 			updatedAt: action.payload

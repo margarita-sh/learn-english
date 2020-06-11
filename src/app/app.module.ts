@@ -13,16 +13,15 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { reducer } from './store';
-import { AppEffects } from './store/app.effects';
+import { AppEffects } from './store/effect/app.effects';
 import { HttpClientModule } from '@angular/common/http';
-import { WordComponent } from './word/word.component';
 import { TranslatorComponent } from './components/translator/translator.component';
+import { TranslateEffects } from './store/effect/translate.effect';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		GameComponent,
-		WordComponent,
 		TranslatorComponent
 	],
 	imports: [
@@ -33,7 +32,7 @@ import { TranslatorComponent } from './components/translator/translator.componen
 		HttpClientModule,
 		StoreModule.forRoot(reducer),
 		StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-		EffectsModule.forRoot([AppEffects]),
+		EffectsModule.forRoot([AppEffects, TranslateEffects]),
 		StoreRouterConnectingModule.forRoot()
 	],
 	providers: [DataService],

@@ -1,4 +1,4 @@
-import { CountState, featureKeyCount } from './app.state';
+import { CountState, featureKeyCount } from '../state/app.state';
 import { createFeatureSelector, createSelector, MemoizedSelector } from '@ngrx/store';
 
 export const selectCountFeature: MemoizedSelector<object, CountState> = createFeatureSelector<CountState>(featureKeyCount);
