@@ -27,7 +27,9 @@
 }
  */
 
+// tslint:disable-next-line: no-namespace
 export namespace APIYandex {
+	// tslint:disable-next-line: no-empty-interface
 	export interface Head {
 	}
 

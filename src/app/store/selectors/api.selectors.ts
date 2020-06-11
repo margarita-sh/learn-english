@@ -1,0 +1,7 @@
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { TranslateState, featureKeyTranslate } from '../state/translate.state';
+
+export const selectStateTranslate: any = createFeatureSelector<TranslateState>(featureKeyTranslate);
+
+// tslint:disable-next-line: max-line-length
+export const selectWordEng: any = createSelector(selectStateTranslate, (state: TranslateState) => console.log('state.wordEng', state.wordEng));

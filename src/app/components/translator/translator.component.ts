@@ -1,12 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { DataService } from './service/data.service';
-import { Translator } from './modeAPIYandex';
+import { Component } from '@angular/core';
 import { TranslateState } from 'src/app/store/state/translate.state';
-import { Store } from '@ngrx/store';
-import { filter, debounceTime, catchError } from 'rxjs/operators';
-import { FormControl } from '@angular/forms';
-import { EMPTY } from 'rxjs';
+import { Store, select } from '@ngrx/store';
 import { translate } from 'src/app/store/action/translate.action';
+import { selectWordEng } from 'src/app/store/selectors/api.selectors';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-translator',
@@ -15,43 +12,13 @@ import { translate } from 'src/app/store/action/translate.action';
 })
 
 export class TranslatorComponent {
-	/* public findControl = new FormControl();
-	public word: Translator = null;
-	public error: boolean;
-	*/
+
+	public wordsEng$: Observable<any> = this._store$.pipe(select(selectWordEng));
 	constructor(public _store$: Store<TranslateState>) {
 	}
 
 	public translate(): void {
 		return this._store$.dispatch(translate({ payload: 'Привет' }));
 	}
-/*
-	  public ngOnInit(): void {
-		this.findControl.valueChanges
-		.pipe(filter(value => {
-			return value.length > 2;
-		}),
-		debounceTime(1000),
-			switchMap(value =>
-			this.dataService.translateWord(value).pipe(
-			catchError(err => {
-			this.word = null;
-			this.error = true;
-			return EMPTY;
-			})
-			)
-			)
-			)
-			.subscribe(word => {
-			this.word = word;
-			this.error = false;
-			});
-	  }*/
+
 }
-/*    public serch(): void {
-  this._store$.dispatch.translate({});
-  } */
-/*
-public dataService.translateWord().subscribe((data: Translator[]) => {
-return data;
-});  */
