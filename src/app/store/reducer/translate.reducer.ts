@@ -8,7 +8,6 @@ export const translateReducer: ActionReducer<TranslateState, Action> = createRed
 	on(TranslateAction.resultTranslate, (state: TranslateState, action: TranslateAction.CustomAction): TranslateState => {
 		return {
 			...state,
-			wordRu: action.wordRu,
 			wordEng: action.wordEng
 		};
 

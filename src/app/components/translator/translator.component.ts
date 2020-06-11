@@ -19,7 +19,7 @@ export class TranslatorComponent {
 	}
 
 	public translate(): void {
-		return this._store$.dispatch(translate({ payload: this.word}));
+		return this._store$.dispatch(translate({ wordRu: this.word}));
 	}
 
 }

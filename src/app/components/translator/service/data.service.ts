@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { APIYandex } from '../modelAPIYandex';
+import { FullTranslation } from '../fullTranslator.model';
 
 @Injectable()
 export class DataService {
@@ -13,16 +14,15 @@ export class DataService {
 	constructor(private _http: HttpClient) { }
 
 	// tslint:disable-next-line: typedef
-	public translateWord(data: string): Observable<any> {
+	public translateWord(data: string): Observable<FullTranslation> {
 		const url: string = `${this.urlAPI}${this.mainAPIKey}&lang=ru-en&text=${data}`;
 		return this._http.post(url, null).pipe(
 			map((items: APIYandex.RootObject) => {
+				const translation: FullTranslation = new FullTranslation();
+				translation.parseTranslation(items);
 				const translations: string[] = [];
-				items.def[0].tr.forEach((item: any) => translations.push(item.text));
 				console.log('translations', translations);
-				return {
-					translations
-				};
+				return translation;
 			}));
 	}
 }

@@ -13,15 +13,14 @@ export interface CustomAction extends Action {
 	payload?: any;
 }
 
-export const translate: TypeActionCreator<string, { payload: any }> = createAction(
+export const translate: TypeActionCreator<string, { wordRu: string }> = createAction(
 	'[Translate] translate word',
-	props<{ payload: string }>()
+	props<{ wordRu: string }>()
 );
 
-export const resultTranslate: TypeActionCreator<string, { wordEng: string[],  wordRu: string}> = createAction(
+export const resultTranslate: TypeActionCreator<string, { wordEng: string[]}> = createAction(
 	'[Translate] result translate',
 	props<{
-		wordEng: string[],
-		wordRu: string
+		wordEng: string[]
 	}>()
 );

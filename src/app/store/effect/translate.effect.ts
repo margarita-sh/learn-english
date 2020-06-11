@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { DataService } from 'src/app/components/translator/service/data.service';
 import { translate, resultTranslate, CustomAction } from '../action/translate.action';
 import { TypedAction } from '@ngrx/store/src/models';
+import { FullTranslation } from 'src/app/components/translator/fullTranslator.model';
 
 @Injectable()
 export class TranslateEffects {
@@ -12,12 +13,10 @@ export class TranslateEffects {
 		public translate$: Observable<TypedAction<string>> = createEffect(
 			() => this.actions$.pipe(
 				ofType(translate),
-				mergeMap((action: CustomAction) => this.dataService.translateWord(action.payload)
+				mergeMap((action: CustomAction) => this.dataService.translateWord(action.wordRu)
 					.pipe(
-						map((data: any) => {
-							console.log('data.translations', data.translations);
-							console.log('action.payload', action.payload);
-							return resultTranslate({ wordEng: data.translations, wordRu: action.payload });
+						map((data: FullTranslation) => {
+							return resultTranslate({ wordEng: data.translate});
 						})
 					)
 				)
