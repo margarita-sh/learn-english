@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { APIYandex } from '../modelTranslator';
+import { APIYandex } from '../modeAPIYandex';
 
 @Injectable()
 export class DataService {
@@ -15,16 +15,13 @@ export class DataService {
 	// tslint:disable-next-line: typedef
 	public translateWord(data: string): Observable<Translator> {
 		const url = `${this.urlAPI}${this.mainAPIKey}&lang=ru-en&text=${data}`;
-		console.log(url);
-
 		return this._http.post(url, null).pipe(
-			map((items: APIYandex) => {
-				console.log(items);
+			map((items: APIYandex.RootObject) => {
 				const translations: string[] = [];
 				items.def[0].tr.forEach((item: any) => translations.push(item.text));
 				return {
 					translations
 				};
 			}));
-	};
+	}
 }

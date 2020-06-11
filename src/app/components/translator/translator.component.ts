@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from './service/data.service';
-import { Translator } from './modelTranslator';
+import { Translator } from './modeAPIYandex';
 import { TranslateState } from 'src/app/store/state/translate.state';
 import { Store } from '@ngrx/store';
 import { filter, debounceTime, catchError } from 'rxjs/operators';
@@ -25,8 +25,8 @@ export class TranslatorComponent {
 	public translate(): void {
 		return this._store$.dispatch(translate({ payload: 'Привет' }));
 	}
-
-	/*   public ngOnInit(): void {
+/*
+	  public ngOnInit(): void {
 		this.findControl.valueChanges
 		.pipe(filter(value => {
 			return value.length > 2;
