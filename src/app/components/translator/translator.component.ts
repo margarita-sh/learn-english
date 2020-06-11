@@ -12,14 +12,14 @@ import { Observable } from 'rxjs';
 })
 
 export class TranslatorComponent {
-
 	public wordsEng$: Observable<any> = this._store$.pipe(select(selectWordEng));
 	public wordsRu$: Observable<any> = this._store$.pipe(select(selectWordRu));
+	public word: string;
 	constructor(public _store$: Store<TranslateState>) {
 	}
 
 	public translate(): void {
-		return this._store$.dispatch(translate({ payload: 'Привет'}));
+		return this._store$.dispatch(translate({ payload: this.word}));
 	}
 
 }
