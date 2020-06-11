@@ -19,7 +19,7 @@ export class DataService {
 			map((items: APIYandex.RootObject) => {
 				const translations: string[] = [];
 				items.def[0].tr.forEach((item: any) => translations.push(item.text));
-				console.log('translations', translations)
+				console.log('translations', translations);
 				return {
 					translations
 				};

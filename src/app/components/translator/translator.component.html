@@ -1,4 +1,6 @@
  <input
     placeholder="Enter text..."  type = "text"/>
-	<button (click)="translate()">Перевести</button>
+	<button (click)="translate(wordRu$)">Перевести</button>
+	<span>{{wordEng$ | async}}</span>
+	
 

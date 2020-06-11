@@ -15,6 +15,8 @@ export class TranslateEffects {
 				mergeMap((action: CustomAction) => this.dataService.translateWord(action.payload)
 					.pipe(
 						map((data: any) => {
+							console.log('data.translations', data.translations);
+							console.log('action.payload', action.payload);
 							return resultTranslate({ wordEng: data.translations, wordRu: action.payload });
 						})
 					)

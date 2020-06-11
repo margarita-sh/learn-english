@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TranslateState } from 'src/app/store/state/translate.state';
 import { Store, select } from '@ngrx/store';
 import { translate } from 'src/app/store/action/translate.action';
-import { selectWordEng } from 'src/app/store/selectors/api.selectors';
+import { selectWordEng, selectWordRu } from 'src/app/store/selectors/api.selectors';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -14,11 +14,12 @@ import { Observable } from 'rxjs';
 export class TranslatorComponent {
 
 	public wordsEng$: Observable<any> = this._store$.pipe(select(selectWordEng));
+	public wordsRu$: Observable<any> = this._store$.pipe(select(selectWordRu));
 	constructor(public _store$: Store<TranslateState>) {
 	}
 
 	public translate(): void {
-		return this._store$.dispatch(translate({ payload: 'Привет' }));
+		return this._store$.dispatch(translate({ payload: 'Привет'}));
 	}
 
 }
