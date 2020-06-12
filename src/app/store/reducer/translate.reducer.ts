@@ -11,7 +11,15 @@ export const translateReducer: ActionReducer<TranslateState, Action> = createRed
 			wordEng: action.wordEng
 		};
 
-	})
+	}),
+	on(TranslateAction.error, (state: TranslateState, action: TranslateAction.CustomAction): TranslateState => {
+		return {
+			...state,
+			error: action.error
+		};
+
+	}),
+
 );
 
 export function StateReducerTranslate(state: TranslateState | undefined, action: Action): TranslateState {

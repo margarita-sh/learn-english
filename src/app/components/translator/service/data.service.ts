@@ -13,15 +13,14 @@ export class DataService {
 
 	constructor(private _http: HttpClient) { }
 
-	// tslint:disable-next-line: typedef
 	public translateWord(data: string): Observable<FullTranslation> {
+		throw new Error('Word not found');
 		const url: string = `${this.urlAPI}${this.mainAPIKey}&lang=ru-en&text=${data}`;
+		console.log(url);
 		return this._http.post(url, null).pipe(
 			map((items: APIYandex.RootObject) => {
 				const translation: FullTranslation = new FullTranslation();
 				translation.parseTranslation(items);
-				const translations: string[] = [];
-				console.log('translations', translations);
 				return translation;
 			}));
 	}

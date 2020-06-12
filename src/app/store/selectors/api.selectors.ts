@@ -7,3 +7,5 @@ export const selectStateTranslate: any = createFeatureSelector<TranslateState>(f
 export const selectWordEng: any = createSelector(selectStateTranslate, (state: TranslateState) => state.wordEng);
 // tslint:disable-next-line: max-line-length
 export const selectWordRu: any = createSelector(selectStateTranslate, (state: TranslateState) => state.wordRu);
+
+export const selectError: any = createSelector(selectStateTranslate, (state: TranslateState) => state.error);

@@ -4,5 +4,7 @@
 	<p *ngFor="let word of wordsEng$ |async" >
 	{{word}}
 </p>
+<p *ngIf= "error$ | async">
+	{{error$ | async}}</p>
 	
 

@@ -11,6 +11,7 @@ export interface CustomAction extends Action {
 	wordRu: string;
 	type: string;
 	payload?: any;
+	error: string;
 }
 
 export const translate: TypeActionCreator<string, { wordRu: string }> = createAction(
@@ -22,5 +23,12 @@ export const resultTranslate: TypeActionCreator<string, { wordEng: string[]}> = 
 	'[Translate] result translate',
 	props<{
 		wordEng: string[]
+	}>()
+);
+
+export const error: TypeActionCreator<string, { error: string}> = createAction(
+	'[Translate] error translate',
+	props<{
+		error: string
 	}>()
 );
