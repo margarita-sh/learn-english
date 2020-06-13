@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { APIYandex } from '../modelAPIYandex';
+import { APIYandex } from '../apiYandex.model';
 import { FullTranslation } from '../fullTranslator.model';
 
 @Injectable()
@@ -14,7 +14,6 @@ export class DataService {
 	constructor(private _http: HttpClient) { }
 
 	public translateWord(data: string): Observable<FullTranslation> {
-		throw new Error('Word not found');
 		const url: string = `${this.urlAPI}${this.mainAPIKey}&lang=ru-en&text=${data}`;
 		console.log(url);
 		return this._http.post(url, null).pipe(
