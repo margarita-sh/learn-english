@@ -1,17 +1,17 @@
-<!-- <button (click)="increaseCount()">Increase</button>
-<button (click)="decreaseCount()" [disabled] = "disableDecrease$ | async">Decrease</button>
-<button (click)="clearCount()" [disabled] = "disableDecrease$ | async">Clear</button>
-<div>
-    <span>Counter is: {{count$ | async }}; Update at: {{updatedAt$| async | date: "dd/ MM /yyyy, HH : mm : ss"}}</span>
+<div class="container-game">
+	
+ <!-- <mat-progress-bar mode="determinate" [value]="progressbarValue" class="progress-bar"></mat-progress-bar>  -->
+
+<div *ngIf = "gameStarted === 'start'">
+<button (click)= "timer()" class="buttonred">Начать игру</button>
 </div>
-
-<app-translator></app-translator> -->
-
+<p>{{ count }}</p>
+<div *ngIf = "gameStarted === 'game'">
 <div>{{word.englishWord}}</div>
-
  <button *ngFor = "let w of arrayAnswers" (click)="checkAnswer(w)">{{w}}</button>
-<p>{{outputResult}}</p>
-
-
+<p>{{ outputResult }}</p>
+</div>
+<div *ngIf = "gameStarted === 'complete'"> Game complete</div>
+</div>
 
 

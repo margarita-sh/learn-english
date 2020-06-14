@@ -17,6 +17,8 @@ import { AppEffects } from './store/effect/app.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { TranslatorComponent } from './components/translator/translator.component';
 import { TranslateEffects } from './store/effect/translate.effect';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
 	declarations: [
@@ -33,7 +35,9 @@ import { TranslateEffects } from './store/effect/translate.effect';
 		StoreModule.forRoot(reducer),
 		StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
 		EffectsModule.forRoot([AppEffects, TranslateEffects]),
-		StoreRouterConnectingModule.forRoot()
+		StoreRouterConnectingModule.forRoot(),
+		BrowserAnimationsModule,
+		MatProgressBarModule
 	],
 	providers: [DataService],
 	bootstrap: [AppComponent]

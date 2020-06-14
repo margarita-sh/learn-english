@@ -1,11 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { CountState } from '../../store/state/app.state';
-import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { selectCount, selectUpdatedAt } from '../../store/selectors/count.selectors';
-import { increase, decrease, clear } from '../../store/action/app.actions';
-import { map, delay } from 'rxjs/operators';
-import { DataService } from '../translator/service/data.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { interval } from 'rxjs';
+import { take, timeout } from 'rxjs/operators';
 import { Word } from './game.model';
 
 @Component({
@@ -13,30 +9,14 @@ import { Word } from './game.model';
 	templateUrl: './game.component.html',
 	styleUrls: ['./game.component.scss']
 })
-export class GameComponent implements OnInit {
-	/*  public count$: Observable<number> = this._store$.pipe(select(selectCount));
-	 public updatedAt$: Observable<number> = this._store$.pipe(select(selectUpdatedAt));
-	 public disableDecrease$: Observable<boolean> = this.count$.pipe(map((count: number) => count <= 0));
-
-	 constructor(public _store$: Store<CountState>) {
-	 }
-
-	 public increaseCount(): void {
-	 this._store$.dispatch(increase({}));
-	 }
-
-	 public decreaseCount(): void {
-	 this._store$.dispatch(decrease({}));
-	 }
-
-	 public clearCount(): void {
-	 this._store$.dispatch(clear({}));
-	 } */
-
+export class GameComponent  /* implements OnInit  */ {
 	public word: Word = null;
-
-	public correctAnswer: boolean = true;
-	public wrongAnswer: boolean =  false;
+	public gameStarted: string = 'start';
+	public count: number = null;
+	public arrayAnswers: string[] = [];
+/* 	public outputResult: string = ''; */
+	public sec: number = 1000;
+	public outputResult: string = null;
 
 	public words: Word[] = [{
 		englishWord: 'delay',
@@ -51,18 +31,19 @@ export class GameComponent implements OnInit {
 		russianWord: 'кот'
 	},
 	{
-		englishWord: 'Hello',
+		englishWord: 'hello',
 		russianWord: 'привет'
 	},
 	{
 		englishWord: 'dog',
 		russianWord: 'собака'
 	},
+	{
+		englishWord: 'mood',
+		russianWord: 'настроение'
+	}
 	];
 
-	public arrayAnswers: string[] = [];
-
-	public outputResult: string = '';
 
 	public getRandomWord(): Word {
 		const rand: number = Math.floor(Math.random() * this.words.length);
@@ -70,19 +51,37 @@ export class GameComponent implements OnInit {
 		return randWord;
 	}
 
-	public ngOnInit(): void {
+	public game(): void {
+		this.gameStarted = 'game';
+		this.arrayAnswers = [];
 		this.word = this.getRandomWord();
 		const randomRuWordFirst: Word = this.getRandomWord();
 		const randomRuWordSecond: Word = this.getRandomWord();
 		this.arrayAnswers.push(this.word.russianWord, randomRuWordFirst.russianWord, randomRuWordSecond.russianWord);
 	}
 
-	public checkAnswer(answer: string): string {
-		 if ( answer === this.word.russianWord) {
-			return this.outputResult = 'ок';
-		 } else {
-			return this.outputResult = 'неок';
+	public checkAnswer(answer: string): void {
+		if (answer === this.word.russianWord) {
+			this.outputResult = 'ок';
+		} else {
+			this.outputResult = 'неок';
 		}
+		this.game();
 	}
 
+ 	public timer(): void {
+		 this.game();
+		const timeRound: number = 30;
+		const intervalCount: Observable<number> = interval(this.sec);
+		const takeThirty: Observable<number> = intervalCount.pipe(take(timeRound));
+		takeThirty.subscribe( (x: number) => {
+			this.count = timeRound - x;
+			if (this.count <= 1) {
+				this.gameStarted = 'complete';
+			}
+		});
+	}
+
+/*  public ngOnInit(): void {
+} */
 }
