@@ -11,7 +11,12 @@
  <button *ngFor = "let w of arrayAnswers" (click)="checkAnswer(w)">{{w}}</button>
 <p>{{ outputResult }}</p>
 </div>
-<div *ngIf = "gameStarted === 'complete'"> Game complete</div>
+<div *ngIf = "gameStarted === 'complete'">
+	<p>Количество правильных ответов:<span>{{correctAnswer}}</span></p>
+	<p>Количество неправильных ответов:<span>{{wrongAnswer}}</span></p>
+
+</div>
+
 </div>
 
 

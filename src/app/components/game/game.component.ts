@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, of, pipe } from 'rxjs';
 import { interval } from 'rxjs';
-import { take, timeout } from 'rxjs/operators';
+import { take, timeout, delay } from 'rxjs/operators';
 import { Word } from './game.model';
 
 @Component({
@@ -13,10 +13,12 @@ export class GameComponent  /* implements OnInit  */ {
 	public word: Word = null;
 	public gameStarted: string = 'start';
 	public count: number = null;
-	public arrayAnswers: string[] = [];
-/* 	public outputResult: string = ''; */
-	public sec: number = 1000;
+	public arrayAnswers: string[] = null;
 	public outputResult: string = null;
+	public sec: number = 1000;
+	public resultDuration: number = 700;
+	public correctAnswer: number = null;
+	public wrongAnswer: number = null;
 
 	public words: Word[] = [{
 		englishWord: 'delay',
@@ -41,9 +43,20 @@ export class GameComponent  /* implements OnInit  */ {
 	{
 		englishWord: 'mood',
 		russianWord: 'настроение'
+	},
+	{
+		englishWord: 'chees',
+		russianWord: 'сыр'
+	},
+	{
+		englishWord: 'window',
+		russianWord: 'окно'
+	},
+	{
+		englishWord: 'sky',
+		russianWord: 'небо'
 	}
 	];
-
 
 	public getRandomWord(): Word {
 		const rand: number = Math.floor(Math.random() * this.words.length);
@@ -55,22 +68,35 @@ export class GameComponent  /* implements OnInit  */ {
 		this.gameStarted = 'game';
 		this.arrayAnswers = [];
 		this.word = this.getRandomWord();
+		const wordsForArrayAnswer: Set<string> = new Set();
 		const randomRuWordFirst: Word = this.getRandomWord();
 		const randomRuWordSecond: Word = this.getRandomWord();
-		this.arrayAnswers.push(this.word.russianWord, randomRuWordFirst.russianWord, randomRuWordSecond.russianWord);
+		const randomRuWordThird: Word = this.getRandomWord();
+		wordsForArrayAnswer.add(this.word.russianWord);
+		wordsForArrayAnswer.add(randomRuWordFirst.russianWord);
+		wordsForArrayAnswer.add(randomRuWordSecond.russianWord);
+			if ( wordsForArrayAnswer.size < 3 ) {
+				wordsForArrayAnswer.add(randomRuWordThird.russianWord);
+			}
+			this.arrayAnswers = Array.from(wordsForArrayAnswer).sort(() => Math.random() - 0.5);
 	}
 
 	public checkAnswer(answer: string): void {
 		if (answer === this.word.russianWord) {
-			this.outputResult = 'ок';
+			this.outputResult = 'V';
+			this.correctAnswer++;
 		} else {
-			this.outputResult = 'неок';
+			this.outputResult = 'X';
+			this.wrongAnswer++;
 		}
+		of(this.outputResult).pipe(delay(this.resultDuration)).subscribe(() => {
+			this.outputResult = '';
+		});
 		this.game();
 	}
 
  	public timer(): void {
-		 this.game();
+		this.game();
 		const timeRound: number = 30;
 		const intervalCount: Observable<number> = interval(this.sec);
 		const takeThirty: Observable<number> = intervalCount.pipe(take(timeRound));
@@ -82,6 +108,9 @@ export class GameComponent  /* implements OnInit  */ {
 		});
 	}
 
+	public numberCorrectAnswers(): void {
+
+	}
 /*  public ngOnInit(): void {
 } */
 }
