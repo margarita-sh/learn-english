@@ -19,6 +19,7 @@
 <div *ngIf = "gameStarted === 'complete'">
 	<p>Количество правильных ответов:<span>{{correctAnswer}}</span></p>
 	<p>Количество неправильных ответов:<span>{{wrongAnswer}}</span></p>
+	<button (click)="startTimer()">Сыграть еще</button>
 
 </div>
 

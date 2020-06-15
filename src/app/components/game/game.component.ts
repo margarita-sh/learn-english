@@ -14,7 +14,7 @@ import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 export class GameComponent  /* implements OnInit  */ {
 	public word: Word = null;
 	public gameStarted: string = 'start';
- 	public count: number = null;
+	public count: number = null;
 	public arrayAnswers: string[] = null;
 	public outputResult: string = null;
 	public sec: number = 1000;
@@ -25,8 +25,7 @@ export class GameComponent  /* implements OnInit  */ {
 
 	public color: ThemePalette = 'primary';
 	public mode: ProgressSpinnerMode = 'determinate';
-	public valueProgressSpinner: number = 100;
-	public curSec: number = 0;
+	public valueProgressSpinner: number;
 	public showText: number = this.count;
 	public strokeWidth: number = 10;
 
@@ -79,17 +78,15 @@ export class GameComponent  /* implements OnInit  */ {
 		this.arrayAnswers = [];
 		this.word = this.getRandomWord();
 		const wordsForArrayAnswer: Set<string> = new Set();
-		const randomRuWordFirst: Word = this.getRandomWord();
-		const randomRuWordSecond: Word = this.getRandomWord();
-		const randomRuWordThird: Word = this.getRandomWord();
 		wordsForArrayAnswer.add(this.word.russianWord);
-		wordsForArrayAnswer.add(randomRuWordFirst.russianWord);
-		wordsForArrayAnswer.add(randomRuWordSecond.russianWord);
-			if ( wordsForArrayAnswer.size < 3 ) {
-				wordsForArrayAnswer.add(randomRuWordThird.russianWord);
-			}
-			this.arrayAnswers = Array.from(wordsForArrayAnswer).sort(() => Math.random() - 0.5);
+		while (wordsForArrayAnswer.size < 3) {
+			const randomRuWord: Word = this.getRandomWord();
+			wordsForArrayAnswer.add(randomRuWord.russianWord);
+		}
+		console.log(wordsForArrayAnswer);
+		this.arrayAnswers = Array.from(wordsForArrayAnswer).sort(() => Math.random() - 0.5);
 	}
+
 
 	public checkAnswer(answer: string): void {
 		if (answer === this.word.russianWord) {
@@ -105,25 +102,26 @@ export class GameComponent  /* implements OnInit  */ {
 		this.game();
 	}
 
-	  public startTimer(): void {
+	public startTimer(): void {
 		this.game();
-		const timer$: Observable<number> = interval(this.sec);
-		const takeThirty: Observable<number> = timer$.pipe(take(this.timeRound));
-		takeThirty.subscribe( (x: number) => {
-			this.count = this.timeRound - x;
-			if (this.count <= 1) {
-				this.gameStarted = 'complete';
-			}
-		});
-		const sub: Subscription = timer$.subscribe((sec: number) => {
-		  this.valueProgressSpinner = 100 - sec * 100 / this.timeRound;
-		  this.curSec = sec;
-		  if (this.curSec === this.timeRound) {
-			sub.unsubscribe();
-		  }
-		});
-	  }
+		this.count = this.timeRound;
+	 	this.valueProgressSpinner = 100;
+		interval(this.sec)
+			.pipe(
+				take(this.timeRound)
+			)
+			.subscribe((count: number) => {
+				count = this.timeRound - (count + 1);
+				this.count = count;
+				this.valueProgressSpinner = 100 / this.timeRound * count;
+				console.log(count);
+				if (this.count <= 0) {
+					this.gameStarted = 'complete';
+				}
+			});
 
-/*  public ngOnInit(): void {
-} */
+	}
+
+	/*  public ngOnInit(): void {
+	} */
 }
