@@ -5,6 +5,7 @@ import { take, delay } from 'rxjs/operators';
 import { Word } from './game.model';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
+import { DataGameService } from './service/data-game.service';
 
 @Component({
 	selector: 'app-game',
@@ -30,59 +31,19 @@ export class GameComponent  /* implements OnInit  */ {
 	public showText: number = this.count;
 	public strokeWidth: number = 10;
 
-	public words: Word[] = [{
-		englishWord: 'delay',
-		russianWord: 'задержка'
-	},
-	{
-		englishWord: 'able',
-		russianWord: 'мочь'
-	},
-	{
-		englishWord: 'cat',
-		russianWord: 'кот'
-	},
-	{
-		englishWord: 'hello',
-		russianWord: 'привет'
-	},
-	{
-		englishWord: 'dog',
-		russianWord: 'собака'
-	},
-	{
-		englishWord: 'mood',
-		russianWord: 'настроение'
-	},
-	{
-		englishWord: 'chees',
-		russianWord: 'сыр'
-	},
-	{
-		englishWord: 'window',
-		russianWord: 'окно'
-	},
-	{
-		englishWord: 'sky',
-		russianWord: 'небо'
-	}
-	];
+	constructor(public dataGameService: DataGameService) {
 
-	public getRandomWord(): Word {
-		const rand: number = Math.floor(Math.random() * this.words.length);
-		const randWord: Word = this.words[rand];
-		return randWord;
 	}
 
 	public game(): void {
 		this.gameStarted = 'game';
 		this.arrayAnswers = [];
-		this.word = this.getRandomWord();
+		this.word = this.dataGameService.getRandomWord();
 		const wordsForArrayAnswer: Set<string> = new Set();
 		wordsForArrayAnswer.add(this.word.russianWord);
 		// tslint:disable-next-line: no-magic-numbers
 		while (wordsForArrayAnswer.size < 3) {
-			const randomRuWord: Word = this.getRandomWord();
+			const randomRuWord: Word = this.dataGameService.getRandomWord();
 			wordsForArrayAnswer.add(randomRuWord.russianWord);
 		}
 		// tslint:disable-next-line: no-magic-numbers
@@ -90,7 +51,6 @@ export class GameComponent  /* implements OnInit  */ {
 	}
 
 	public checkAnswer(answer: string): void {
-		this.arrayForDictionary = [];
 		if (answer === this.word.russianWord) {
 			this.outputResult = 'V';
 			this.correctAnswer++;
@@ -108,6 +68,7 @@ export class GameComponent  /* implements OnInit  */ {
 	}
 
 	public startTimer(): void {
+		this.arrayForDictionary = [];
 		this.game();
 		this.count = this.timeRound;
 	 	// tslint:disable-next-line: no-magic-numbers
@@ -121,7 +82,6 @@ export class GameComponent  /* implements OnInit  */ {
 				this.count = count;
 				// tslint:disable-next-line: no-magic-numbers
 				this.valueProgressSpinner = 100 / this.timeRound * count;
-				console.log(count);
 				if (this.count <= 0) {
 					this.gameStarted = 'complete';
 				}
