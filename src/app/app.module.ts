@@ -19,12 +19,15 @@ import { TranslatorComponent } from './components/translator/translator.componen
 import { TranslateEffects } from './store/effect/translate.effect';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { DictionaryComponent } from './components/dictionary/dictionary.component';
+import { DataGameService } from './components/game/service/data-game.service';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		GameComponent,
-		TranslatorComponent
+		TranslatorComponent,
+		DictionaryComponent
 	],
 	imports: [
 		BrowserModule,
@@ -39,7 +42,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 		BrowserAnimationsModule,
 	 	MatProgressSpinnerModule
 	],
-	providers: [DataService],
+	providers: [DataService, DataGameService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

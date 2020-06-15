@@ -22,6 +22,7 @@ export class GameComponent  /* implements OnInit  */ {
 	public correctAnswer: number = null;
 	public wrongAnswer: number = null;
 	public timeRound: number = 30;
+	public arrayForDictionary: Word[] = [];
 
 	public color: ThemePalette = 'primary';
 	public mode: ProgressSpinnerMode = 'determinate';
@@ -79,22 +80,26 @@ export class GameComponent  /* implements OnInit  */ {
 		this.word = this.getRandomWord();
 		const wordsForArrayAnswer: Set<string> = new Set();
 		wordsForArrayAnswer.add(this.word.russianWord);
+		// tslint:disable-next-line: no-magic-numbers
 		while (wordsForArrayAnswer.size < 3) {
 			const randomRuWord: Word = this.getRandomWord();
 			wordsForArrayAnswer.add(randomRuWord.russianWord);
 		}
-		console.log(wordsForArrayAnswer);
+		// tslint:disable-next-line: no-magic-numbers
 		this.arrayAnswers = Array.from(wordsForArrayAnswer).sort(() => Math.random() - 0.5);
 	}
 
-
 	public checkAnswer(answer: string): void {
+		this.arrayForDictionary = [];
 		if (answer === this.word.russianWord) {
 			this.outputResult = 'V';
 			this.correctAnswer++;
 		} else {
 			this.outputResult = 'X';
 			this.wrongAnswer++;
+			this.arrayForDictionary.push(this.word);
+			console.log('arrayForDictionary', this.arrayForDictionary);
+
 		}
 		of(this.outputResult).pipe(delay(this.resultDuration)).subscribe(() => {
 			this.outputResult = '';
@@ -105,6 +110,7 @@ export class GameComponent  /* implements OnInit  */ {
 	public startTimer(): void {
 		this.game();
 		this.count = this.timeRound;
+	 	// tslint:disable-next-line: no-magic-numbers
 	 	this.valueProgressSpinner = 100;
 		interval(this.sec)
 			.pipe(
@@ -113,6 +119,7 @@ export class GameComponent  /* implements OnInit  */ {
 			.subscribe((count: number) => {
 				count = this.timeRound - (count + 1);
 				this.count = count;
+				// tslint:disable-next-line: no-magic-numbers
 				this.valueProgressSpinner = 100 / this.timeRound * count;
 				console.log(count);
 				if (this.count <= 0) {
