@@ -1,11 +1,16 @@
 <div class="container-game">
-	
- <!-- <mat-progress-bar mode="determinate" [value]="progressbarValue" class="progress-bar"></mat-progress-bar>  -->
+	<mat-progress-spinner  
+	[color]="color"
+	[mode]="mode"
+	[value]="valueProgressSpinner" 
+	aria-label="showText"
+	[strokeWidth] = "strokeWidth">
+<!-- 	{{count}} --></mat-progress-spinner>
+	<div style="position:relative; top: -60px; left: 40px;">{{count}}</div>
 
 <div *ngIf = "gameStarted === 'start'">
-<button (click)= "timer()" class="buttonred">Начать игру</button>
+<button class="buttonred" (click)="startTimer()">Начать игру</button>
 </div>
-<p>{{ count }}</p>
 <div *ngIf = "gameStarted === 'game'">
 <div>{{word.englishWord}}</div>
  <button *ngFor = "let w of arrayAnswers" (click)="checkAnswer(w)">{{w}}</button>

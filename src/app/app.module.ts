@@ -18,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TranslatorComponent } from './components/translator/translator.component';
 import { TranslateEffects } from './store/effect/translate.effect';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
 	declarations: [
@@ -37,7 +37,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 		EffectsModule.forRoot([AppEffects, TranslateEffects]),
 		StoreRouterConnectingModule.forRoot(),
 		BrowserAnimationsModule,
-		MatProgressBarModule
+	 	MatProgressSpinnerModule
 	],
 	providers: [DataService],
 	bootstrap: [AppComponent]
