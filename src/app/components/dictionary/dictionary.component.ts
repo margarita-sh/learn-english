@@ -9,14 +9,11 @@ import { Word } from '../game/word.model';
   styleUrls: ['./dictionary.component.scss']
 })
 export class DictionaryComponent implements OnInit {
-public dictionaryFirst: Word[] = [];
-public dictionary: Subscription = this.dataGameService.loadWordList().subscribe((items: Word[]) => items);
-//public dictionaryObs: Observable<Word> = this.dataGameService.loadWordList();
+public dictionary: Word[] = [];
   constructor(public dataGameService: DataGameService) { }
 
   public ngOnInit(): void {
- this.dataGameService.loadWordList().subscribe((items: Word[]) => console.log( items));
- this.dataGameService.loadWordList().subscribe(data => this.dictionaryFirst = data);
+ this.dataGameService.loadWordList().subscribe(data => this.dictionary = data);
   }
 
 }
