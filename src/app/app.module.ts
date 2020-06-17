@@ -21,13 +21,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { DictionaryComponent } from './components/dictionary/dictionary.component';
 import { DataGameService } from './components/game/service/data-game.service';
+import { AboutMeComponent } from './components/about-me/about-me.component';
+import { HomeComponent } from './components/home/home.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		GameComponent,
 		TranslatorComponent,
-		DictionaryComponent
+		DictionaryComponent,
+		AboutMeComponent,
+		HomeComponent,
+		NotFoundComponent
 	],
 	imports: [
 		BrowserModule,

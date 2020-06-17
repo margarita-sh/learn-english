@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { interval } from 'rxjs';
 import { take, delay } from 'rxjs/operators';
-import { Word } from './game.model';
+import { Word } from './word.model';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { DataGameService } from './service/data-game.service';
@@ -58,8 +58,6 @@ export class GameComponent  /* implements OnInit  */ {
 			this.outputResult = 'X';
 			this.wrongAnswer++;
 			this.arrayForDictionary.push(this.word);
-			console.log('arrayForDictionary', this.arrayForDictionary);
-
 		}
 		of(this.outputResult).pipe(delay(this.resultDuration)).subscribe(() => {
 			this.outputResult = '';
@@ -68,7 +66,6 @@ export class GameComponent  /* implements OnInit  */ {
 	}
 
 	public startTimer(): void {
-		this.arrayForDictionary = [];
 		this.game();
 		this.count = this.timeRound;
 	 	// tslint:disable-next-line: no-magic-numbers
@@ -84,6 +81,9 @@ export class GameComponent  /* implements OnInit  */ {
 				this.valueProgressSpinner = 100 / this.timeRound * count;
 				if (this.count <= 0) {
 					this.gameStarted = 'complete';
+					console.log('GAME', this.arrayForDictionary);
+					this.dataGameService.getWordsForLearning(this.arrayForDictionary);
+					this.dataGameService.save();
 				}
 			});
 
