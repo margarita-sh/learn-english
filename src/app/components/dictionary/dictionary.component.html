@@ -1,4 +1,7 @@
 <div>
-	<div *ngFor = "let words of dictionary">{{words.englishWord}}   {{words.russianWord}}</div>
+	<div *ngFor = "let words of dictionary; let i = index">{{i+1}}. {{words.englishWord}} -   {{words.russianWord}}
+		<button>🔈</button>
+		<button (click)="dataGameService.removeWordFromDictionary()">Выучила</button>
+	</div>
 </div>
 
