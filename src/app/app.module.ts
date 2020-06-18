@@ -24,6 +24,7 @@ import { DataGameService } from './components/game/service/data-game.service';
 import { AboutMeComponent } from './components/about-me/about-me.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AudioService } from './components/game/service/audio.service';
 
 @NgModule({
 	declarations: [
@@ -48,7 +49,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 		BrowserAnimationsModule,
 	 	MatProgressSpinnerModule
 	],
-	providers: [DataService, DataGameService],
+	providers: [DataService, DataGameService, AudioService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

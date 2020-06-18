@@ -1,6 +1,9 @@
 <div>
 	<div *ngFor = "let word of dictionary; let i = index">{{i+1}}. {{word.englishWord}} -   {{word.russianWord}}
-		<button>🔈</button>
+		<button (click)="audioService.getAudio(word)">
+			<audio controls>
+				<source [src]="" type="audio/mp3">
+					🔈</audio></button>
 		<button (click)="removeWordFromDictionary(word)">Выучила</button>
 	</div>
 </div>

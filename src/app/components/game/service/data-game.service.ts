@@ -8,7 +8,6 @@ import { map } from 'rxjs/operators';
 export class DataGameService {
 
 	private static wordsforLearningLSKey: string = 'wordsforLearning';
-	/* public wordsForLearning: Word[] = null; */
 
 	public words: Word[] = [
 		{
@@ -7590,10 +7589,6 @@ export class DataGameService {
 		return randWord;
 	}
 
-/* 	public getWordsForLearning(data: Word[]): void {
-		this.wordsForLearning = data;
-		console.log('this.getWordsForLearning', this.wordsForLearning);
-	} */
 
 	public loadWordList(): Observable<Word[]> {
 		const gettingDataFromLocalStorage: any = localStorage.getItem(DataGameService.wordsforLearningLSKey);
@@ -7611,7 +7606,7 @@ export class DataGameService {
 			const dataForLocalSrorageString: string = JSON.stringify(words);
 			localStorage.setItem(DataGameService.wordsforLearningLSKey, dataForLocalSrorageString);
 	}
-	
+
 	public addWordsDictionary(words: Word[]): void {
 		const gettingDataFromLocalStorage: any = localStorage.getItem(DataGameService.wordsforLearningLSKey);
 		if (gettingDataFromLocalStorage) {
