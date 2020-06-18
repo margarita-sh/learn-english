@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 export class DataGameService {
 
 	private static wordsforLearningLSKey: string = 'wordsforLearning';
-	public wordsForLearning: Word[] = null;
+	/* public wordsForLearning: Word[] = null; */
 
 	public words: Word[] = [
 		{
@@ -7584,21 +7584,21 @@ export class DataGameService {
 	];
 
 	constructor(private _httpClient: HttpClient) { }
-
 	public getRandomWord(): Word {
 		const rand: number = Math.floor(Math.random() * this.words.length);
 		const randWord: Word = this.words[rand];
 		return randWord;
 	}
 
-	public getWordsForLearning(data: Word[]): void {
+/* 	public getWordsForLearning(data: Word[]): void {
 		this.wordsForLearning = data;
 		console.log('this.getWordsForLearning', this.wordsForLearning);
-	}
+	} */
 
 	public loadWordList(): Observable<Word[]> {
-		if (localStorage.getItem(DataGameService.wordsforLearningLSKey)) {
-			const wordsStorageString: any = localStorage.getItem(DataGameService.wordsforLearningLSKey);
+		const gettingDataFromLocalStorage: any = localStorage.getItem(DataGameService.wordsforLearningLSKey);
+		if (gettingDataFromLocalStorage) {
+			const wordsStorageString: any = gettingDataFromLocalStorage;
 			const wordsStorage: any = JSON.parse(wordsStorageString); // массив объеков ru-eng;
 			return of(wordsStorage).pipe(
 				map((items: Word[]) => items.map((item: Word) => item))
@@ -7606,26 +7606,26 @@ export class DataGameService {
 		}
 		return of([]);
 	}
-
-	public save(): void {
-		if (localStorage.getItem(DataGameService.wordsforLearningLSKey)) {
-			const wordsStorageString: any = localStorage.getItem(DataGameService.wordsforLearningLSKey);
+ 
+	public save(words: Word[]): void {
+			const dataForLocalSrorageString: string = JSON.stringify(words);
+			localStorage.setItem(DataGameService.wordsforLearningLSKey, dataForLocalSrorageString);
+	}
+	
+	public addWordsDictionary(words: Word[]): void {
+		const gettingDataFromLocalStorage: any = localStorage.getItem(DataGameService.wordsforLearningLSKey);
+		if (gettingDataFromLocalStorage) {
+			const wordsStorageString: any = gettingDataFromLocalStorage;
 			const wordsStorage: any = JSON.parse(wordsStorageString);
-			const dataForLocalSrorageConcat: Word[] = wordsStorage.concat(this.wordsForLearning);
+			const dataForLocalSrorageConcat: Word[] = wordsStorage.concat(words);
 			const dataForLocalSrorageString: string = JSON.stringify(dataForLocalSrorageConcat);
 			localStorage.setItem(DataGameService.wordsforLearningLSKey, dataForLocalSrorageString);
 		}  else {
-			const dataForLocalStorage: string = JSON.stringify(this.wordsForLearning);
+			const dataForLocalStorage: string = JSON.stringify(words);
 			localStorage.setItem(DataGameService.wordsforLearningLSKey, dataForLocalStorage);
 		}
 	}
- 	public removeWordFromDictionary() {
-	/* 	if (localStorage.getItem(DataGameService.wordsforLearningLSKey)){
-			const wordsStorageString: any = localStorage.getItem(DataGameService.wordsforLearningLSKey);
-			const wordsStorage: any = JSON.parse(wordsStorageString);
-			// localStorage.removeItem();
-			console.log(wordsStorage);
-		} */
-	}
 
+
+// tslint:disable-next-line: max-file-line-count
 }

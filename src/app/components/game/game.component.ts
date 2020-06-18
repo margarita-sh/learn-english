@@ -82,8 +82,8 @@ export class GameComponent  /* implements OnInit  */ {
 				if (this.count <= 0) {
 					this.gameStarted = 'complete';
 					console.log('GAME', this.arrayForDictionary);
-					this.dataGameService.getWordsForLearning(this.arrayForDictionary);
-					this.dataGameService.save();
+					//this.dataGameService.getWordsForLearning(this.arrayForDictionary);
+					this.dataGameService.addWordsDictionary(this.arrayForDictionary);
 				}
 			});
 
