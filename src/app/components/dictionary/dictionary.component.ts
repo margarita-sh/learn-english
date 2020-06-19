@@ -11,9 +11,13 @@ import { Subscription } from 'rxjs';
 })
 export class DictionaryComponent implements OnInit {
 public dictionary: Word[] = [];
+/* public audioSrc: string = ''; */
+public audio: HTMLAudioElement;
+/* public isSrcReceived: boolean = false; */
 
-
-  constructor(public dataGameService: DataGameService, public audioService: AudioService) { }
+  constructor(public dataGameService: DataGameService, public audioService: AudioService) { 
+	this.audio = new Audio();
+  }
 
   public ngOnInit(): void {
  this.dataGameService.loadWordList().subscribe((data: Word[]) => this.dictionary = data);
@@ -24,7 +28,15 @@ public dictionary: Word[] = [];
 	this.dataGameService.save(this.dictionary);
 	}
 
-/* 	public pronunciation: Subscription = this.audioService.getAudio(this.word).subscribe((data: any) => {
-		return data.subscribe(data => data.location); */
+
+	public playAudio(word: string): void{
+		this.audioService.getAudio(word).
+		subscribe(data=>{
+			data.subscribe(data => {
+				this.audio.src = data.location;
+				this.audio.play();
+			});
+		});
+	}
 
 }

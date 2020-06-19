@@ -15,7 +15,7 @@ export class DataService {
 
 	public translateWord(data: string): Observable<FullTranslation> {
 		const url: string = `${this.urlAPI}${this.mainAPIKey}&lang=ru-en&text=${data}`;
-		console.log(url);
+		// console.log(url);
 		return this._http.post(url, null).pipe(
 			map((items: APIYandex.RootObject) => {
 				const translation: FullTranslation = new FullTranslation();

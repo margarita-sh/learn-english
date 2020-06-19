@@ -7621,6 +7621,4 @@ export class DataGameService {
 		}
 	}
 
-
-// tslint:disable-next-line: max-file-line-count
 }
