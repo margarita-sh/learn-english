@@ -13,7 +13,6 @@ import { Observable } from 'rxjs';
 
 export class TranslatorComponent {
 	public wordsEng$: Observable<string[]> = this._store$.pipe(select(selectWordEng));
-	/* public wordsRu$: Observable<any> = this._store$.pipe(select(selectWordRu)); */
 	public error$: Observable<string> = this._store$.pipe(select(selectError));
 	public word: string;
 	constructor(public _store$: Store<TranslateState>) {

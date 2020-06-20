@@ -21,7 +21,6 @@ export class TranslateEffects {
 						catchError((e: Error) => of(error({ error: e.message})))
 					)
 				),
-				//catchError((e: Error) => of(error({ error: e.message})))
 			)
 		);
 	constructor(
