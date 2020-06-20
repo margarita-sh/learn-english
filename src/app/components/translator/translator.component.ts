@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { TranslateState } from 'src/app/store/state/translate.state';
 import { Store, select } from '@ngrx/store';
-import { translate, error } from 'src/app/store/action/translate.action';
-import { selectWordEng, selectWordRu, selectError } from 'src/app/store/selectors/api.selectors';
+import { translate, resultTranslate } from 'src/app/store/action/translate.action';
+import { selectWordEng, selectError } from 'src/app/store/selectors/api.selectors';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -19,6 +19,12 @@ export class TranslatorComponent {
 	}
 
 	public translate(): void {
-		return this._store$.dispatch(translate({ wordRu: this.word}));
+		return this._store$.dispatch(translate({ wordRu: this.word }));
+	}
+
+	public onTitleChange(): void {
+		if (this.word.length === 0) {
+			return this._store$.dispatch(resultTranslate({ wordEng: [] }));
+		}
 	}
 }
