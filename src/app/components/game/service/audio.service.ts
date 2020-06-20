@@ -20,8 +20,7 @@ export class AudioService {
 					console.log('items', items);
 					return this._http.get('https://api.soundoftext.com/sounds/' + items.id);
 				})
-			)
+			);
 	}
-
 
 }

@@ -25,6 +25,7 @@ import { AboutMeComponent } from './components/about-me/about-me.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AudioService } from './components/game/service/audio.service';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
 	declarations: [
@@ -34,7 +35,8 @@ import { AudioService } from './components/game/service/audio.service';
 		DictionaryComponent,
 		AboutMeComponent,
 		HomeComponent,
-		NotFoundComponent
+		NotFoundComponent,
+		MenuComponent
 	],
 	imports: [
 		BrowserModule,
@@ -47,7 +49,7 @@ import { AudioService } from './components/game/service/audio.service';
 		EffectsModule.forRoot([AppEffects, TranslateEffects]),
 		StoreRouterConnectingModule.forRoot(),
 		BrowserAnimationsModule,
-	 	MatProgressSpinnerModule
+		MatProgressSpinnerModule,
 	],
 	providers: [DataService, DataGameService, AudioService],
 	bootstrap: [AppComponent]
