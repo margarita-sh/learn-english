@@ -1,20 +1,20 @@
-<div class="container-game">
+<div class="app-game">
 	<mat-progress-spinner  
-	[color]="color"
 	[mode]="mode"
 	[value]="valueProgressSpinner" 
 	aria-label="showText"
-	[strokeWidth] = "strokeWidth">
+	[strokeWidth] = "strokeWidth"
+	[diameter] = "diameter">
 	</mat-progress-spinner>
-	<div style="position:relative; top: -60px; left: 40px;">{{count}}</div>
+	<div class="app-game--count">{{count}}</div>
 
 <div *ngIf = "gameStarted === 'start'">
-<button class="buttonred" (click)="startTimer()">Начать игру</button>
+<button class="app-game--btn-start" (click)="startTimer()">Начать игру</button>
 </div>
 <div *ngIf = "gameStarted === 'game'">
-<div>{{word.englishWord}}</div>
- <button *ngFor = "let w of arrayAnswers" (click)="checkAnswer(w)">{{w}}</button>
-<p>{{ outputResult }}</p>
+<div class="app-game--word-english">{{word.englishWord}}</div>
+ <button *ngFor = "let wordRu of arrayAnswers" (click)="checkAnswer(wordRu)" class="app-game--btn-answer">{{wordRu}}</button>
+<p class="app-game--btn-result">{{ outputResult }}</p>
 </div>
 <div *ngIf = "gameStarted === 'complete'">
 	<p>Количество правильных ответов:<span>{{correctAnswer}}</span></p>

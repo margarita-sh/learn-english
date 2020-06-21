@@ -1,7 +1,84 @@
-.container-game {
-	margin:10px;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+.app-game {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	box-shadow: 0px 10px 10px black;
+	width:900px; 
+	height: 500px;
+	margin: 50px auto;
+	padding:40px;
+	box-sizing: border-box;
+
+	&--count {
+	position:relative; 
+	font-size: 18px;
+	top: -70px;
+	font-family: 'Roboto', sans-serif;
+	color: #414141;
+	}
+
+	&--btn-start {
+		font-family: 'Roboto', sans-serif;
+		font-size: 18px;
+		color: rgb(245,245,245);
+		text-shadow: 0 -1px rgba(0,0,0,.1);
+		user-select: none;
+		padding: 10px;
+		outline: none;
+		border: none;
+		border-radius: 6px;
+		background: rgb(210, 95, 184) linear-gradient(#d182c0, #a212a7);
+		box-shadow: inset #f027e6 0 -1px 1px, inset 0 1px 1px #f698ff, #a63caa 0 0 0 1px, rgba(0,0,0,.3) 0 2px 5px;
+		-webkit-animation: pulsate 1.2s linear infinite;
+		animation: pulsate 1.2s linear infinite;
+		
+	}
+	&--btn-start:hover {
+		-webkit-animation-play-state: paused;
+		animation-play-state: paused;
+		cursor: pointer;
+	  }
+	  &--btn-start:active {
+		top: 1px;
+		color: #fff;
+		text-shadow: 0 -1px rgba(0,0,0,.3), 0 0 5px #ffd, 0 0 8px #fff;
+		box-shadow: 0 -1px 3px rgba(0,0,0,.3), 0 1px 1px #fff, inset 0 1px 2px rgba(0,0,0,.8), inset 0 -1px 0 rgba(0,0,0,.05);
+	  }
+	  @-webkit-keyframes pulsate {
+		50% {color: #fff; text-shadow: 0 -1px rgba(0,0,0,.3), 0 0 5px #ffd, 0 0 8px #fff;}
+	  }
+	  @keyframes pulsate {
+		50% {color: #fff; text-shadow: 0 -1px rgba(0,0,0,.3), 0 0 5px #ffd, 0 0 8px #fff;}
+	  }
+
+	  &--word-english {
+		font-family: 'Roboto', sans-serif;
+		font-size:28px;
+		font-weight: 800;
+		color: #414141;
+		text-align: center;
+		padding:20px;
+	  }
+	  &--btn-answer {
+		  display:block;
+		  width:240px;
+		  font-size: 18px;
+		  font-family: 'Roboto', sans-serif;
+		  padding:10px;
+		  margin:5px;
+		  border-radius: 6px;
+		  background:#ded9df;
+	  }
+	  &--btn-answer:hover {
+         opacity: 0.8;
+	  };
+
 }
-.progress-bar {
-	margin:10px;
-	width:1000px;
+
+::ng-deep.mat-progress-spinner circle,
+.mat-spinner circle {
+	stroke: rgb(210, 95, 184) !important;
 }

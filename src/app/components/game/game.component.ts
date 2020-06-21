@@ -3,7 +3,6 @@ import { Observable, of, Subscription } from 'rxjs';
 import { interval } from 'rxjs';
 import { take, delay } from 'rxjs/operators';
 import { Word } from './word.model';
-import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { DataGameService } from './service/data-game.service';
 
@@ -12,7 +11,7 @@ import { DataGameService } from './service/data-game.service';
 	templateUrl: './game.component.html',
 	styleUrls: ['./game.component.scss']
 })
-export class GameComponent  /* implements OnInit  */ {
+export class GameComponent {
 	public word: Word = null;
 	public gameStarted: string = 'start';
 	public count: number = null;
@@ -25,11 +24,11 @@ export class GameComponent  /* implements OnInit  */ {
 	public timeRound: number = 30;
 	public arrayForDictionary: Word[] = [];
 
-	public color: ThemePalette = 'primary';
 	public mode: ProgressSpinnerMode = 'determinate';
 	public valueProgressSpinner: number;
 	public showText: number = this.count;
-	public strokeWidth: number = 10;
+	public strokeWidth: number = 15;
+	public diameter: number = 120;
 
 	constructor(public dataGameService: DataGameService) {
 
@@ -82,13 +81,10 @@ export class GameComponent  /* implements OnInit  */ {
 				if (this.count <= 0) {
 					this.gameStarted = 'complete';
 					console.log('GAME', this.arrayForDictionary);
-					//this.dataGameService.getWordsForLearning(this.arrayForDictionary);
 					this.dataGameService.addWordsDictionary(this.arrayForDictionary);
 				}
 			});
 
 	}
 
-	/*  public ngOnInit(): void {
-	} */
 }
