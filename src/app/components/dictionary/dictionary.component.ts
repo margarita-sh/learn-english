@@ -10,6 +10,7 @@ import { AudioService } from '../game/service/audio.service';
 })
 export class DictionaryComponent implements OnInit {
 	public dictionary: Word[] = [];
+	public numberWordsInDictionary: number = null;
 
 	public audio: HTMLAudioElement;
 
@@ -19,6 +20,8 @@ export class DictionaryComponent implements OnInit {
 
 	public ngOnInit(): void {
 		this.dataGameService.loadWordList().subscribe((data: Word[]) => this.dictionary = data);
+		this.numberWordsInDictionary = this.dictionary.length;
+		console.log('dictionary', this.numberWordsInDictionary);
 	}
 
 	public removeWordFromDictionary(word: Word): void {

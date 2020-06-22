@@ -7589,7 +7589,6 @@ export class DataGameService {
 		return randWord;
 	}
 
-
 	public loadWordList(): Observable<Word[]> {
 		const gettingDataFromLocalStorage: any = localStorage.getItem(DataGameService.wordsforLearningLSKey);
 		if (gettingDataFromLocalStorage) {
@@ -7601,7 +7600,7 @@ export class DataGameService {
 		}
 		return of([]);
 	}
- 
+
 	public save(words: Word[]): void {
 			const dataForLocalSrorageString: string = JSON.stringify(words);
 			localStorage.setItem(DataGameService.wordsforLearningLSKey, dataForLocalSrorageString);

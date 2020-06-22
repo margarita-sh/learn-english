@@ -74,9 +74,8 @@ export class GameComponent {
 		}
 		of(this.outputResult).pipe(delay(this.resultDuration)).subscribe(() => {
 			this.outputResult = '';
-			this.color = {}
+			this.color = { };
 		});
-		/* this.changeColor(answer, i); */
 		this.game();
 	}
 
