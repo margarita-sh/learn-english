@@ -13,9 +13,10 @@
 <button class="app-game--btn-start" (click)="startTimer()">Начать игру</button>
 </div>
 <div *ngIf = "gameStarted === 'game'">
+	<img src="../../../assets/img/checkmark.png" alt="checkmark" class="app-game--checkmark" [style.display]="selectedAnswer === 'true'?'block':'none'">
+	<img src="../../../assets/img/close.svg.png" alt="checkmark" class="app-game--close" [style.display]="selectedAnswer === 'false'?'block':'none'">
 <div class="app-game--word-english">{{word.englishWord}}</div>
  <button *ngFor = "let wordRu of arrayAnswers; let i = index" (click)= "checkAnswer(wordRu, i)"  class="app-game--btn-answer"  [ngStyle] = "color[i]">{{wordRu}}</button>
-<p class="app-game--btn-result">{{ outputResult }}</p>
 </div>
 <div *ngIf = "gameStarted === 'complete'">
 	<p class="app-game--answer">Количество правильных ответов:<span>{{correctAnswer}}</span></p>

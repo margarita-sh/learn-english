@@ -7582,7 +7582,9 @@ export class DataGameService {
 		}
 	];
 
-	constructor(private _httpClient: HttpClient) { }
+	constructor(private _httpClient: HttpClient) { 
+		this.addWordsDictionary(this.words);
+	}
 	public getRandomWord(): Word {
 		const rand: number = Math.floor(Math.random() * this.words.length);
 		const randWord: Word = this.words[rand];
@@ -7609,6 +7611,7 @@ export class DataGameService {
 	public addWordsDictionary(words: Word[]): void {
 		const gettingDataFromLocalStorage: any = localStorage.getItem(DataGameService.wordsforLearningLSKey);
 		if (gettingDataFromLocalStorage) {
+			console.log(gettingDataFromLocalStorage);
 			const wordsStorageString: any = gettingDataFromLocalStorage;
 			const wordsStorage: any = JSON.parse(wordsStorageString);
 			const dataForLocalSrorageConcat: Word[] = wordsStorage.concat(words);

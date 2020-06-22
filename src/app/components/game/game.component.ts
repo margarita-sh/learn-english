@@ -17,14 +17,15 @@ export class GameComponent {
 	public gameStarted: string = 'start';
 	public count: number = null;
 	public arrayAnswers: string[] = null;
-	public outputResult: string = null;
 	public sec: number = 1000;
 	public resultDuration: number = 200;
+	public numberOptionsAnswer: number = 3;
 	public correctAnswer: number = null;
 	public wrongAnswer: number = null;
 	public timeRound: number = 30;
 	public arrayForDictionary: Word[] = [];
 	public color: object = {};
+	public selectedAnswer: string = '';
 
 
 	public mode: ProgressSpinnerMode = 'determinate';
@@ -43,18 +44,16 @@ export class GameComponent {
 		this.word = this.dataGameService.getRandomWord();
 		const wordsForArrayAnswer: Set<string> = new Set();
 		wordsForArrayAnswer.add(this.word.russianWord);
-		// tslint:disable-next-line: no-magic-numbers
-		while (wordsForArrayAnswer.size < 3) {
+		while (wordsForArrayAnswer.size < this.numberOptionsAnswer) {
 			const randomRuWord: Word = this.dataGameService.getRandomWord();
 			wordsForArrayAnswer.add(randomRuWord.russianWord);
 		}
-		// tslint:disable-next-line: no-magic-numbers
 		this.arrayAnswers = Array.from(wordsForArrayAnswer).sort(() => Math.random() - 0.5);
 	}
 
 	public checkAnswer(answer: string, index: number): void {
 		if (answer === this.word.russianWord) {
-			this.outputResult = 'V';
+			this.selectedAnswer = 'true';
 			this.correctAnswer++;
 			this.color = {
 				[index]: {
@@ -62,7 +61,7 @@ export class GameComponent {
 			}
 		};
 		} else {
-			this.outputResult = 'X';
+			this.selectedAnswer = 'false';
 			this.wrongAnswer++;
 			this.arrayForDictionary.push(this.word);
 			this.color = {
@@ -72,9 +71,9 @@ export class GameComponent {
 		};
 
 		}
-		of(this.outputResult).pipe(delay(this.resultDuration)).subscribe(() => {
-			this.outputResult = '';
+		of(this.color).pipe(delay(this.resultDuration)).subscribe(() => {
 			this.color = { };
+			this.selectedAnswer = '';
 		});
 		this.game();
 	}
@@ -82,7 +81,6 @@ export class GameComponent {
 	public startTimer(): void {
 		this.game();
 		this.count = this.timeRound;
-	 	// tslint:disable-next-line: no-magic-numbers
 	 	this.valueProgressSpinner = 100;
 		interval(this.sec)
 			.pipe(

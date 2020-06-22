@@ -4,7 +4,7 @@
 	width:900px; 
 	height: 500px;
 	margin: 50px auto;
-	padding:40px;
+	padding:30px;
 	box-shadow: 0px 10px 10px black;
 	box-sizing: border-box;
 
@@ -65,8 +65,9 @@
 		font-weight: 800;
 		color: #414141;
 		text-align: center;
-		padding:20px;
+		padding:20px 0 50px 0;
 	  }
+
 	  &--btn-answer {
 		  display:block;
 		  width:240px;
@@ -114,6 +115,14 @@
 		font-family: 'Roboto', sans-serif;
 		font-size: 18px;
 		color:rgb(54, 54, 54);
+	  }
+	  &--checkmark,
+	  &--close {
+		width:50px;
+		height: auto;
+		position: absolute;
+		left:570px;
+		top:348px;
 	  }
 
 }
