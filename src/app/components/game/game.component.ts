@@ -5,6 +5,7 @@ import { take, delay } from 'rxjs/operators';
 import { Word } from './word.model';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { DataGameService } from './service/data-game.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-game',
@@ -18,11 +19,13 @@ export class GameComponent {
 	public arrayAnswers: string[] = null;
 	public outputResult: string = null;
 	public sec: number = 1000;
-	public resultDuration: number = 700;
+	public resultDuration: number = 200;
 	public correctAnswer: number = null;
 	public wrongAnswer: number = null;
 	public timeRound: number = 30;
 	public arrayForDictionary: Word[] = [];
+	public color: object = {};
+
 
 	public mode: ProgressSpinnerMode = 'determinate';
 	public valueProgressSpinner: number;
@@ -30,7 +33,7 @@ export class GameComponent {
 	public strokeWidth: number = 15;
 	public diameter: number = 120;
 
-	constructor(public dataGameService: DataGameService) {
+	constructor(public dataGameService: DataGameService, private router: Router) {
 
 	}
 
@@ -49,18 +52,31 @@ export class GameComponent {
 		this.arrayAnswers = Array.from(wordsForArrayAnswer).sort(() => Math.random() - 0.5);
 	}
 
-	public checkAnswer(answer: string): void {
+	public checkAnswer(answer: string, index: number): void {
 		if (answer === this.word.russianWord) {
 			this.outputResult = 'V';
 			this.correctAnswer++;
+			this.color = {
+				[index]: {
+				background: 'green'
+			}
+		};
 		} else {
 			this.outputResult = 'X';
 			this.wrongAnswer++;
 			this.arrayForDictionary.push(this.word);
+			this.color = {
+				[index]: {
+				background: 'red'
+			}
+		};
+
 		}
 		of(this.outputResult).pipe(delay(this.resultDuration)).subscribe(() => {
 			this.outputResult = '';
+			this.color = {}
 		});
+		/* this.changeColor(answer, i); */
 		this.game();
 	}
 
@@ -80,11 +96,15 @@ export class GameComponent {
 				this.valueProgressSpinner = 100 / this.timeRound * count;
 				if (this.count <= 0) {
 					this.gameStarted = 'complete';
-					console.log('GAME', this.arrayForDictionary);
+					this.count = null;
 					this.dataGameService.addWordsDictionary(this.arrayForDictionary);
 				}
 			});
 
 	}
+
+	public goToDictionary(pageName: string): void {
+		this.router.navigate([`${pageName}`]);
+	  }
 
 }

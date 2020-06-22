@@ -1,4 +1,5 @@
 <div class="app-game">
+	<div class="app-game--container">
 	<mat-progress-spinner  
 	[mode]="mode"
 	[value]="valueProgressSpinner" 
@@ -13,15 +14,18 @@
 </div>
 <div *ngIf = "gameStarted === 'game'">
 <div class="app-game--word-english">{{word.englishWord}}</div>
- <button *ngFor = "let wordRu of arrayAnswers" (click)="checkAnswer(wordRu)" class="app-game--btn-answer">{{wordRu}}</button>
+ <button *ngFor = "let wordRu of arrayAnswers; let i = index" (click)= "checkAnswer(wordRu, i)"  class="app-game--btn-answer"  [ngStyle] = "color[i]">{{wordRu}}</button>
 <p class="app-game--btn-result">{{ outputResult }}</p>
 </div>
 <div *ngIf = "gameStarted === 'complete'">
-	<p>Количество правильных ответов:<span>{{correctAnswer}}</span></p>
-	<p>Количество неправильных ответов:<span>{{wrongAnswer}}</span></p>
-	<button (click)="startTimer()">Сыграть еще</button>
+	<p class="app-game--answer">Количество правильных ответов:<span>{{correctAnswer}}</span></p>
+	<p class="app-game--answer">Количество неправильных ответов:<span>{{wrongAnswer}}</span></p>
+	<button (click)="goToDictionary('/dictionary')" class="app-game--btn-dictionary">Учить незнакомые слова</button>
+	<button (click)="startTimer()" class="app-game--btn-repeat">Сыграть еще раз</button>
 
 </div>
+</div>
+<div class="ball" [style.display] = "gameStarted === 'game'? 'none' : 'block'"></div>
 </div>
 
 

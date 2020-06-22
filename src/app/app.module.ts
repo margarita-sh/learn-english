@@ -28,6 +28,7 @@ import { AudioService } from './components/game/service/audio.service';
 import { MenuComponent } from './components/menu/menu.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
 	declarations: [
@@ -54,6 +55,7 @@ import {MatIconModule} from '@angular/material/icon';
 		MatProgressSpinnerModule,
 		MatInputModule,
 		MatIconModule,
+		MatBadgeModule
 	],
 	providers: [DataService, DataGameService, AudioService],
 	bootstrap: [AppComponent]
