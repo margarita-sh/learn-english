@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Word } from '../word.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable()
@@ -7582,9 +7582,7 @@ export class DataGameService {
 		}
 	];
 
-	constructor(private _httpClient: HttpClient) { 
-		this.addWordsDictionary(this.words);
-	}
+	constructor(private _httpClient: HttpClient) {	}
 	public getRandomWord(): Word {
 		const rand: number = Math.floor(Math.random() * this.words.length);
 		const randWord: Word = this.words[rand];
@@ -7604,20 +7602,32 @@ export class DataGameService {
 	}
 
 	public save(words: Word[]): void {
-			const dataForLocalSrorageString: string = JSON.stringify(words);
-			localStorage.setItem(DataGameService.wordsforLearningLSKey, dataForLocalSrorageString);
+		const dataForLocalSrorageString: string = JSON.stringify(words);
+		localStorage.setItem(DataGameService.wordsforLearningLSKey, dataForLocalSrorageString);
 	}
 
 	public addWordsDictionary(words: Word[]): void {
 		const gettingDataFromLocalStorage: any = localStorage.getItem(DataGameService.wordsforLearningLSKey);
 		if (gettingDataFromLocalStorage) {
-			console.log(gettingDataFromLocalStorage);
 			const wordsStorageString: any = gettingDataFromLocalStorage;
-			const wordsStorage: any = JSON.parse(wordsStorageString);
+			const wordsStorage: Word[] = JSON.parse(wordsStorageString);
+			words = words.filter(value => {
+				const result = wordsStorage.find((data) => {
+					return data.id === value.id;
+				});
+
+				if (result) {
+					return false;
+				} else {
+					return true;
+				}
+			});
+
+
 			const dataForLocalSrorageConcat: Word[] = wordsStorage.concat(words);
 			const dataForLocalSrorageString: string = JSON.stringify(dataForLocalSrorageConcat);
 			localStorage.setItem(DataGameService.wordsforLearningLSKey, dataForLocalSrorageString);
-		}  else {
+		} else {
 			const dataForLocalStorage: string = JSON.stringify(words);
 			localStorage.setItem(DataGameService.wordsforLearningLSKey, dataForLocalStorage);
 		}
