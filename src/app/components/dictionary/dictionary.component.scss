@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+.app-dictionary {
+	width:900px; 
+	margin: 50px auto;
+	padding:30px;
+	box-shadow: 0px 10px 10px black;
+	box-sizing: border-box;
+	font-size: 26px;
+	font-family: 'Roboto', sans-serif;
+
+	&--output-word {
+		border-bottom:1px solid grey;
+		display:flex;
+		padding: 10px;
+	}
+
+	&--index {
+		width:40px;
+	}
+	&--englishWord{
+		width:40%;
+		text-align: left;
+	}
+	&--russianWord{
+		width:40%;
+	}
+	&--listen {
+width:50px;
+margin-right: 10px;
+	}
+	&--done {
+		width:100px;
+		font-size: 18px;
+	}
+		
+}

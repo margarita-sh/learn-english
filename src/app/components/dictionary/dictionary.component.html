@@ -1,8 +1,10 @@
-<div>
-	
-	<div *ngFor = "let word of dictionary; let i = index">{{i+1}}. {{word.englishWord}} -   {{word.russianWord}}
-		<button (click)="playAudio(word.englishWord)">🔈</button>
-		<button (click)="removeWordFromDictionary(word)">Выучила</button>
+<div class="app-dictionary">
+	<div *ngFor = "let word of dictionary; let i = index" class="app-dictionary--output-word">
+		<div class="app-dictionary--index">{{i+1}}.</div>
+		<div class="app-dictionary--englishWord">{{word.englishWord}}</div>
+		<div class="app-dictionary--russianWord">{{word.russianWord}}</div>
+		<button (click)="playAudio(word.englishWord)" class="app-dictionary--listen">🔈</button>
+		<button (click)="removeWordFromDictionary(word)" class="app-dictionary--done">Знаю</button>
 	</div>
 </div>
 
