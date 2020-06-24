@@ -18,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TranslatorComponent } from './components/translator/translator.component';
 import { TranslateEffects } from './store/effect/translate.effect';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DictionaryComponent } from './components/dictionary/dictionary.component';
 import { DataGameService } from './components/game/service/data-game.service';
 import { AboutMeComponent } from './components/about-me/about-me.component';
@@ -26,9 +26,17 @@ import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AudioService } from './components/game/service/audio.service';
 import { MenuComponent } from './components/menu/menu.component';
-import {MatInputModule} from '@angular/material/input';
-import {MatIconModule} from '@angular/material/icon';
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatBadgeModule } from '@angular/material/badge';
+import { TranslateModule, TranslateLoader, MissingTranslationHandler } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MissingTranslationService } from './components/locale/missing-translation.service.ts';
+
+export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
+	return new TranslateHttpLoader(http, './assets/locale/', '.json');
+}
 
 @NgModule({
 	declarations: [
@@ -55,7 +63,19 @@ import {MatBadgeModule} from '@angular/material/badge';
 		MatProgressSpinnerModule,
 		MatInputModule,
 		MatIconModule,
-		MatBadgeModule
+		MatBadgeModule,
+		TranslateModule.forRoot({
+			loader: {
+				provide: TranslateLoader,
+				useFactory: HttpLoaderFactory,
+				deps: [HttpClient]
+			},
+			missingTranslationHandler: {
+				provide: MissingTranslationHandler,
+				useClass: MissingTranslationService,
+			},
+			defaultLanguage: 'ru'
+		}),
 	],
 	providers: [DataService, DataGameService, AudioService],
 	bootstrap: [AppComponent]

@@ -4,6 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { translate, resultTranslate } from 'src/app/store/action/translate.action';
 import { selectWordEng, selectError } from 'src/app/store/selectors/api.selectors';
 import { Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
 	selector: 'app-translator',
@@ -15,10 +16,15 @@ export class TranslatorComponent {
 	public wordsEng$: Observable<string[]> = this._store$.pipe(select(selectWordEng));
 	public error$: Observable<string> = this._store$.pipe(select(selectError));
 	public word: string;
-	constructor(public _store$: Store<TranslateState>) {
+	// tslint:disable-next-line: no-shadowed-variable
+	constructor(public _store$: Store<TranslateState>, public translate: TranslateService) {
+		translate.addLangs(['en', 'ru']);
+		translate.setDefaultLang('en');
+		const browserLang: any = translate.getBrowserLang();
+		translate.use(browserLang.match(/en|ru/) ? browserLang : 'en');
 	}
 
-	public translate(): void {
+	public translateWord(): void {
 		return this._store$.dispatch(translate({ wordRu: this.word }));
 	}
 

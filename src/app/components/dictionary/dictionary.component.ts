@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataGameService } from '../game/service/data-game.service';
 import { Word } from '../game/word.model';
 import { AudioService } from '../game/service/audio.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
 	selector: 'app-dictionary',
@@ -14,8 +15,12 @@ export class DictionaryComponent implements OnInit {
 
 	public audio: HTMLAudioElement;
 
-	constructor(public dataGameService: DataGameService, public audioService: AudioService) {
+	constructor(public dataGameService: DataGameService, public audioService: AudioService, public translate: TranslateService) {
 		this.audio = new Audio();
+		translate.addLangs(['en', 'ru']);
+		translate.setDefaultLang('en');
+		const browserLang: any = translate.getBrowserLang();
+		translate.use(browserLang.match(/en|ru/) ? browserLang : 'en');
 	}
 
 	public ngOnInit(): void {
@@ -33,6 +38,7 @@ export class DictionaryComponent implements OnInit {
 		word.isLoading = true;
 		this.audioService.getAudio(word.englishWord).
 			subscribe((data: any) => {
+				// tslint:disable-next-line: no-shadowed-variable
 				data.subscribe((data: any) => {
 					this.audio.src = data.location;
 					this.audio.play();

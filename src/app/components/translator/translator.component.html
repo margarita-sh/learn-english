@@ -1,8 +1,8 @@
 <div class="app-translator">
-	<form class="app-translator--form" (ngSubmit)="translate()">
+	<form class="app-translator--form" (ngSubmit)="translateWord()">
 		<mat-form-field class="app-translator--full-width">
-		  <mat-label>Введите слово...</mat-label>
-		  <input matInput placeholder="пример: Привет" value="Привет" [(ngModel)]="word" type="search" name="wordsEng"  (ngModelChange)="onTitleChange()">
+		  <mat-label>{{'TRANSLATOR.MAT-LABEL' | translate}}</mat-label>
+		  <input matInput placeholder = "{{'TRANSLATOR.EXAMPLE' | translate}}" value="Привет" [(ngModel)]="word" type="search" name="wordsEng"  (ngModelChange)="onTitleChange()">
 		  <button mat-button *ngIf="word" matSuffix mat-icon-button aria-label="Clear" (click)="word=''; onTitleChange()" class="app-translator--button" type="button">
 			<mat-icon>close</mat-icon>
 		  </button>

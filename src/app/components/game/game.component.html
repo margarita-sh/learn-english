@@ -10,7 +10,7 @@
 	<div class="app-game--count">{{count}}</div>
 
 <div *ngIf = "gameStarted === 'start'">
-<button class="app-game--btn-start" (click)="startTimer()">Начать игру</button>
+<button class="app-game--btn-start" (click)="startTimer()">{{'GAME.BUTTON-START' | translate}}</button>
 </div>
 <div *ngIf = "gameStarted === 'game'">
 <div class="app-game--word-english">{{word.englishWord}}</div>
@@ -21,10 +21,10 @@
  <button *ngFor = "let wordRu of arrayAnswers; let i = index" (click)= "checkAnswer(wordRu, i)"  class="app-game--btn-answer"  [ngStyle] = "color[i]">{{wordRu}}</button>
 </div>
 <div *ngIf = "gameStarted === 'complete'">
-	<p class="app-game--answer">Количество правильных ответов:<span>{{correctAnswer}}</span></p>
-	<p class="app-game--answer">Количество неправильных ответов:<span>{{wrongAnswer}}</span></p>
-	<button (click)="goToDictionary('/dictionary')" class="app-game--btn-dictionary">Учить незнакомые слова</button>
-	<button (click)="startTimer()" class="app-game--btn-repeat">Сыграть еще раз</button>
+	<p class="app-game--answer">{{'GAME.TRUE-ANSWER' | translate}} :<span>{{correctAnswer}}</span></p>
+	<p class="app-game--answer">{{'GAME.WRONG-ANSWER' | translate}} :<span>{{wrongAnswer}}</span></p>
+	<button (click)="goToDictionary('/dictionary')" class="app-game--btn-dictionary">{{'GAME.BUTTON-LEARN' | translate}}</button>
+	<button (click)="startTimer()" class="app-game--btn-repeat">{{'GAME.BUTTON-REPEAT' | translate}}</button>
 
 </div>
 </div>

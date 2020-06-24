@@ -1,10 +1,7 @@
 <div class="app-home">
-	<h1 class="app-home--title">Hello, my friend!</h1>
-	<p class="app-home--text">This small service will help you <br>
-		remember or learn English words, <br>
-		participate in the game, <br>
-		choosing the correct translation options. </p>
+	<h1 class="app-home--title">{{'HOME.TITLE' | translate}}</h1>
+	<div class="app-home--text">{{'HOME.TEXT' | translate}}</div>
 	<button class="app-home--button" (click)="goToGame('/game')">
-		перейти к игре...</button>
+		{{'HOME.BUTTON' | translate}}</button>
  
 </div>

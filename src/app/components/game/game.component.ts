@@ -6,6 +6,7 @@ import { Word } from './word.model';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { DataGameService } from './service/data-game.service';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
 	selector: 'app-game',
@@ -27,15 +28,17 @@ export class GameComponent {
 	public color: object = {};
 	public selectedAnswer: string = '';
 
-
 	public mode: ProgressSpinnerMode = 'determinate';
 	public valueProgressSpinner: number;
 	public showText: number = this.count;
 	public strokeWidth: number = 15;
 	public diameter: number = 120;
 
-	constructor(public dataGameService: DataGameService, private router: Router) {
-
+	constructor(public dataGameService: DataGameService, private router: Router, public translate: TranslateService) {
+		translate.addLangs(['en', 'ru']);
+		translate.setDefaultLang('en');
+		const browserLang: any = translate.getBrowserLang();
+		translate.use(browserLang.match(/en|ru/) ? browserLang : 'en');
 	}
 
 	public game(): void {
@@ -48,7 +51,8 @@ export class GameComponent {
 			const randomRuWord: Word = this.dataGameService.getRandomWord();
 			wordsForArrayAnswer.add(randomRuWord.russianWord);
 		}
-		this.arrayAnswers = Array.from(wordsForArrayAnswer).sort(() => Math.random() - 0.5);
+		const newLocal: number = 0.5;
+		this.arrayAnswers = Array.from(wordsForArrayAnswer).sort(() => Math.random() - newLocal);
 	}
 
 	public checkAnswer(answer: string, index: number): void {
@@ -81,7 +85,8 @@ export class GameComponent {
 	public startTimer(): void {
 		this.game();
 		this.count = this.timeRound;
-	 	this.valueProgressSpinner = 100;
+		const newLocal_1: number = 100;
+	 	this.valueProgressSpinner = newLocal_1;
 		interval(this.sec)
 			.pipe(
 				take(this.timeRound)
