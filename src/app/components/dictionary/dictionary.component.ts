@@ -29,12 +29,14 @@ export class DictionaryComponent implements OnInit {
 		this.dataGameService.save(this.dictionary);
 	}
 
-	public playAudio(word: string): void {
-		this.audioService.getAudio(word).
+	public playAudio(word: Word): void {
+		word.isLoading = true;
+		this.audioService.getAudio(word.englishWord).
 			subscribe((data: any) => {
 				data.subscribe((data: any) => {
 					this.audio.src = data.location;
 					this.audio.play();
+					word.isLoading = false;
 				});
 			});
 	}

@@ -3,7 +3,7 @@
 		<div class="app-dictionary--index">{{i+1}}.</div>
 		<div class="app-dictionary--englishWord">{{word.englishWord}}</div>
 		<div class="app-dictionary--russianWord">{{word.russianWord}}</div>
-		<button (click)="playAudio(word.englishWord)" class="app-dictionary--listen">🔈</button>
+		<button (click)="playAudio(word)" class="app-dictionary--listen">{{word.isLoading?"...":"🔈"}}</button>
 		<button (click)="removeWordFromDictionary(word)" class="app-dictionary--done">Знаю</button>
 	</div>
 </div>

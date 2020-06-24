@@ -1,35 +1,6 @@
-/* export class APIYandex {
-	public text: string; // English word
-	public ts: string; // transcription
-	public tr: object; // translate
-	public pos: string; // Part of speech
-	public ex: string; // example
-	public def: string;
-
-	 constructor(
-		id: number,
-		text: string,
-		ts: string,
-		tr: object,
-		pos: string,
-		ex: string) {
-		this.id = id;
-		this.text = text;
-		this.ts = ts;
-		this.tr = tr;
-		this.pos = pos;
-		this.ex = ex;
-	}
-
-	constructor(value: {}) {
-		Object.assign(this, value);
-	  }
-}
- */
 
 // tslint:disable-next-line: no-namespace
 export namespace APIYandex {
-	// tslint:disable-next-line: no-empty-interface
 	export interface Head {
 	}
 

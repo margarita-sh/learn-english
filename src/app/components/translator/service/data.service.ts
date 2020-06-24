@@ -18,6 +18,7 @@ export class DataService {
 		// console.log(url);
 		return this._http.post(url, null).pipe(
 			map((items: APIYandex.RootObject) => {
+				console.log(items);
 				const translation: FullTranslation = new FullTranslation();
 				translation.parseTranslation(items);
 				return translation;
