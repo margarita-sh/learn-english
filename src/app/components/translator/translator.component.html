@@ -1,17 +1,8 @@
-<!--  <input [(ngModel)]="word" placeholder="Enter text..."  type = "text"/>
-	<button (click)="translate()">Перевести</button>
-
-	<p *ngFor="let word of wordsEng$ |async" >
-	{{word}}
-</p>
-<p *ngIf= "error$ | async">
-	{{error$ | async}}</p> -->
-
 <div class="app-translator">
 	<form class="app-translator--form" (ngSubmit)="translate()">
 		<mat-form-field class="app-translator--full-width">
-		  <mat-label>Enter word...</mat-label>
-		  <input matInput placeholder="Ex. World" value="Hello" [(ngModel)]="word" type="search" name="wordsEng"  (ngModelChange)="onTitleChange()">
+		  <mat-label>Введите слово...</mat-label>
+		  <input matInput placeholder="пример: Привет" value="Привет" [(ngModel)]="word" type="search" name="wordsEng"  (ngModelChange)="onTitleChange()">
 		  <button mat-button *ngIf="word" matSuffix mat-icon-button aria-label="Clear" (click)="word=''; onTitleChange()" class="app-translator--button" type="button">
 			<mat-icon>close</mat-icon>
 		  </button>
