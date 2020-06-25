@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { DataGameService } from '../game/service/data-game.service';
 import { Word } from '../game/word.model';
 import { TranslateService } from '@ngx-translate/core';
-import { MatButtonToggleAppearance } from '@angular/material/button-toggle';
+
 
 @Component({
   selector: 'app-menu',

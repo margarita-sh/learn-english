@@ -35,6 +35,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MissingTranslationService } from './components/locale/missing-translation.service.ts';
 import { MatProgressButtonsModule } from 'mat-progress-buttons';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { ProfileComponent } from './components/profile/profile.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
 	return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -50,6 +51,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
 		HomeComponent,
 		NotFoundComponent,
 		MenuComponent,
+		ProfileComponent,
 	],
 	imports: [
 		BrowserModule,
