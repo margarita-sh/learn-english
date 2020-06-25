@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { DataGameService } from '../game/service/data-game.service';
 import { Word } from '../game/word.model';
 import { TranslateService } from '@ngx-translate/core';
+import { MatButtonToggleAppearance } from '@angular/material/button-toggle';
 
 @Component({
   selector: 'app-menu',
@@ -11,6 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class MenuComponent implements OnInit {
 	public dictionary: Word[] = [];
 	public numberWordsInDictionary: number = null;
+	public color: string = 'rgb(110,173,216)';
 
 	constructor(public dataGameService: DataGameService, public translate: TranslateService) {
 		translate.addLangs(['en', 'ru']);

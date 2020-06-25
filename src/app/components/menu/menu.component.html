@@ -5,10 +5,10 @@
 		<a routerLink="/dictionary" class="app-menu--link" routerLinkActive="active-link"> <span matBadge={{numberWordsInDictionary}} matBadgeOverlap="false">{{'MENU.DICTIONARY' | translate}}</span></a>
 		<a routerLink="/translate" class="app-menu--link" routerLinkActive="active-link">{{'MENU.TRANSLATOR' | translate}}</a> 
 		<a routerLink="/about-me" class="app-menu--link" routerLinkActive="active-link">{{'MENU.ABOUT ME' | translate}}</a>
+		<div>
+			<mat-button-toggle-group #langSelect="matButtonToggleGroup" (change)=" translate.use(langSelect.value)" appearance="legacy"  [style.background-color] = "color">
+				<mat-button-toggle *ngFor="let lang of translate.getLangs()" [value]="lang" [checked]="lang === translate.currentLang" class="app-menu--localButton">{{lang}}</mat-button-toggle>
+			  </mat-button-toggle-group>
+		  </div>
 	</div>
-	<div>
-		<mat-button-toggle-group #langSelect="matButtonToggleGroup" (change)=" translate.use(langSelect.value)">
-			<mat-button-toggle *ngFor="let lang of translate.getLangs()" [value]="lang" [checked]="lang === translate.currentLang">{{lang}}</mat-button-toggle>
-		  </mat-button-toggle-group>
-	  </div>
 </div>
