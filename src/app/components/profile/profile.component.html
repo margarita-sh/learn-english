@@ -1,0 +1,23 @@
+<div class="app-profile"> 
+	<p>Мой профиль</p>
+	<mat-form-field class="example-form-field">
+		<mat-label>Введите свой никнейм</mat-label>
+		<input matInput type="text" [(ngModel)]="nickname" type="text">
+		<button mat-button *ngIf="nickname" matSuffix mat-icon-button (click)="nickname=''" class="app-profile--button-close">
+		  <mat-icon>close</mat-icon>
+		</button>
+	  </mat-form-field>
+	<div class="app-profile--container">
+	<img src="./assets/avatar/1.svg" alt="user1" class="app-profile--avatar">
+	<img src="./assets/avatar/2.svg" alt="user2" class="app-profile--avatar">
+	<img src="./assets/avatar/3.svg" alt="user3" class="app-profile--avatar">
+	<img src="./assets/avatar/4.svg" alt="user4" class="app-profile--avatar">
+	<img src="./assets/avatar/5.svg" alt="user5" class="app-profile--avatar">
+	<img src="./assets/avatar/6.svg" alt="user6" class="app-profile--avatar">
+	<img src="./assets/avatar/7.svg" alt="user7" class="app-profile--avatar">
+	<img src="./assets/avatar/8.svg" alt="user8" class="app-profile--avatar">
+	<img src="./assets/avatar/9.svg" alt="user9" class="app-profile--avatar">
+	<img src="./assets/avatar/10.svg" alt="user10" class="app-profile--avatar">
+   </div>
+   <button mat-raised-button color="primary">Готово</button>
+</div>

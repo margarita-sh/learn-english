@@ -25,7 +25,6 @@
 	<p class="app-game--answer">{{'GAME.WRONG-ANSWER' | translate}} :<span>{{wrongAnswer}}</span></p>
 	<button (click)="goToDictionary('/dictionary')" class="app-game--btn-dictionary">{{'GAME.BUTTON-LEARN' | translate}}</button>
 	<button (click)="startTimer()" class="app-game--btn-repeat">{{'GAME.BUTTON-REPEAT' | translate}}</button>
-
 </div>
 </div>
 <div class="ball" [style.display] = "gameStarted === 'start'? 'block' : 'none'"></div>
