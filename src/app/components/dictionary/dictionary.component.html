@@ -1,10 +1,13 @@
 <div class="app-dictionary">
-	<div *ngFor = "let word of dictionary; let i = index" class="app-dictionary--output-word">
-		<div class="app-dictionary--index">{{i+1}}.</div>
-		<div class="app-dictionary--englishWord">{{word.englishWord}}</div>
-		<div class="app-dictionary--russianWord">{{word.russianWord}}</div>
-		<button (click)="playAudio(word)" class="app-dictionary--listen">{{word.isLoading?"...":"🔈"}}</button>
-		<button (click)="removeWordFromDictionary(word)" class="app-dictionary--done">{{'DICTIONARY.BUTTON' | translate}}</button>
-	</div>
+    <div *ngFor = "let word of dictionary; let i = index" class="app-dictionary--output-word">
+        <div class="app-dictionary--index">{{i+1}}.</div>
+        <div class="app-dictionary--englishWord">{{word.englishWord}}</div>
+        <div class="app-dictionary--russianWord">{{word.russianWord}}</div>
+        <mat-spinner-button 
+        [options]="getSpinnerButtonOptions(word)"
+        (click)="playAudio(word)">
+      </mat-spinner-button>
+        <button (click)="removeWordFromDictionary(word)" class="app-dictionary--done">{{'DICTIONARY.BUTTON' | translate}}</button>
+    </div>
 </div>
 

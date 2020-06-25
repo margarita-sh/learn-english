@@ -3,6 +3,7 @@ import { DataGameService } from '../game/service/data-game.service';
 import { Word } from '../game/word.model';
 import { AudioService } from '../game/service/audio.service';
 import { TranslateService } from '@ngx-translate/core';
+import { MatProgressButtonOptions } from 'mat-progress-buttons';
 
 @Component({
 	selector: 'app-dictionary',
@@ -12,8 +13,20 @@ import { TranslateService } from '@ngx-translate/core';
 export class DictionaryComponent implements OnInit {
 	public dictionary: Word[] = [];
 	public numberWordsInDictionary: number = null;
-
 	public audio: HTMLAudioElement;
+
+	public spinnerButtonOptions: MatProgressButtonOptions = {
+		active: false,
+		text: '🔈',
+		spinnerSize: 18,
+		raised: true,
+		stroked: false,
+		buttonColor: 'primary',
+		spinnerColor: 'accent',
+		fullWidth: false,
+		disabled: false,
+		mode: 'indeterminate',
+	};
 
 	constructor(public dataGameService: DataGameService, public audioService: AudioService, public translate: TranslateService) {
 		this.audio = new Audio();
@@ -35,6 +48,7 @@ export class DictionaryComponent implements OnInit {
 	}
 
 	public playAudio(word: Word): void {
+		this.spinnerButtonOptions.active = true;
 		word.isLoading = true;
 		this.audioService.getAudio(word.englishWord).
 			subscribe((data: any) => {
@@ -42,9 +56,15 @@ export class DictionaryComponent implements OnInit {
 				data.subscribe((data: any) => {
 					this.audio.src = data.location;
 					this.audio.play();
+					this.spinnerButtonOptions.active = false;
 					word.isLoading = false;
+
 				});
 			});
+
 	}
 
+	public getSpinnerButtonOptions(word: Word): any {
+		return { ...this.spinnerButtonOptions, active: word.isLoading };
+	}
 }

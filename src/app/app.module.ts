@@ -33,6 +33,7 @@ import { TranslateModule, TranslateLoader, MissingTranslationHandler } from '@ng
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MissingTranslationService } from './components/locale/missing-translation.service.ts';
+import { MatProgressButtonsModule } from 'mat-progress-buttons';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
 	return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -74,8 +75,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
 				provide: MissingTranslationHandler,
 				useClass: MissingTranslationService,
 			},
-			defaultLanguage: 'ru'
+			defaultLanguage: 'ru',
 		}),
+		MatProgressButtonsModule,
 	],
 	providers: [DataService, DataGameService, AudioService],
 	bootstrap: [AppComponent]
