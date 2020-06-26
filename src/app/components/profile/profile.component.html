@@ -8,16 +8,8 @@
 		</button>
 	  </mat-form-field>
 	<div class="app-profile--container">
-	<img src="./assets/avatar/1.svg" alt="user1" class="app-profile--avatar">
-	<img src="./assets/avatar/2.svg" alt="user2" class="app-profile--avatar">
-	<img src="./assets/avatar/3.svg" alt="user3" class="app-profile--avatar">
-	<img src="./assets/avatar/4.svg" alt="user4" class="app-profile--avatar">
-	<img src="./assets/avatar/5.svg" alt="user5" class="app-profile--avatar">
-	<img src="./assets/avatar/6.svg" alt="user6" class="app-profile--avatar">
-	<img src="./assets/avatar/7.svg" alt="user7" class="app-profile--avatar">
-	<img src="./assets/avatar/8.svg" alt="user8" class="app-profile--avatar">
-	<img src="./assets/avatar/9.svg" alt="user9" class="app-profile--avatar">
-	<img src="./assets/avatar/10.svg" alt="user10" class="app-profile--avatar">
+		<button *ngFor="let avatar of avatars" class="app-profile--button-avatar" (click)="getIdAvatar(avatar.id)"><img src="{{avatar.src}}" class="app-profile--avatar"></button>
+
    </div>
-   <button mat-raised-button color="primary">Готово</button>
+   <button mat-raised-button color="primary" (click)="getDataFromProfile(nickname, idAvatar)">Готово</button>
 </div>
