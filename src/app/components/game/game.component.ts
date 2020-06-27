@@ -30,19 +30,15 @@ export class GameComponent implements OnInit {
 	public color: object = {};
 	public selectedAnswer: string = '';
 	public dataUser: Profile = this.profileService.getProfileFromLS();
-	public dataUserSrc: string = this.dataUser.src;
-	public dataUserNickname: string = this.dataUser.nickname;
-	public randomAvatarforRival: string = null;
-	public randomRivalNickname: string =  null;
-
+	public randomUser: Profile;
+	/*public randomAvatarforRival: string = null;
+	public randomRivalNickname: string = null;*/
 
 	public mode: ProgressSpinnerMode = 'determinate';
 	public valueProgressSpinner: number;
 	public showText: number = this.count;
 	public strokeWidth: number = 15;
 	public diameter: number = 120;
-
-
 
 	constructor(public dataGameService: DataGameService, private router: Router, public translate: TranslateService,
 		public profileService: ProfileService) {
@@ -53,13 +49,14 @@ export class GameComponent implements OnInit {
 	}
 
 	public ngOnInit(): void {
-   if (this.profileService.getProfileFromLS()) {
-	   this.gameStarted = 'start';
-	} else {
-		this.gameStarted = 'profile';
-	}
-	this.randomAvatar();
-	this.randomNickname();
+		this.generateRandomUser();
+
+		if (this.profileService.getProfileFromLS()) {
+			this.gameStarted = 'start';
+		} else {
+			this.gameStarted = 'profile';
+		}
+
 	}
 
 	public game(): void {
@@ -131,15 +128,24 @@ export class GameComponent implements OnInit {
 
 	public onSaved(): void {
 		this.gameStarted = 'start';
+		this.dataUser = this.profileService.getProfileFromLS();
 	}
 
-	public randomAvatar(): void {
+	/*public randomAvatar(): void {
 		const rand: number = Math.floor(Math.random() * this.profileService.avatars.length);
-		this.randomAvatarforRival =  this.profileService.avatars[rand].src;
+		this.randomAvatarforRival = this.profileService.avatars[rand].src;
 	}
 
 	public randomNickname(): void {
 		const rand: number = Math.floor(Math.random() * this.profileService.nicknameRival.length);
-		this.randomRivalNickname =  this.profileService.nicknameRival[rand];
+		this.randomRivalNickname = this.profileService.nicknameRival[rand];
+	}*/
+
+	public generateRandomUser() {
+		const rand: number = Math.floor(Math.random() * this.profileService.avatars.length);
+		const randNickname: number = Math.floor(Math.random() * this.profileService.nicknameRival.length);
+		this.randomUser = new Profile(1);
+		this.randomUser.src = this.profileService.avatars[rand].src;
+		this.randomUser.nickname = this.profileService.nicknameRival[randNickname];
 	}
 }
