@@ -8,8 +8,7 @@
 		</button>
 	  </mat-form-field>
 	<div class="app-profile--container">
-		<button *ngFor="let avatar of avatars" class="app-profile--button-avatar" (click)="getIdAvatar(avatar.id)"><img src="{{avatar.src}}" class="app-profile--avatar"></button>
-
+		<button *ngFor="let avatar of profileService.avatars" class="app-profile--button-avatar" (click)="getIdAvatar(avatar.id)"><img src="{{avatar.src}}" class="app-profile--avatar"></button>
    </div>
-   <button mat-raised-button color="primary" (click)="getDataFromProfile(nickname, idAvatar)">Готово</button>
+   <button mat-raised-button color="primary" (click)="save(nickname, idAvatar)">Готово</button>
 </div>

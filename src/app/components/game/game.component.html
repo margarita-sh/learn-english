@@ -1,33 +1,46 @@
 <div class="app-game">
+	<div *ngIf="gameStarted === 'profile'">
+		<app-profile (onSaved)="onSaved()"></app-profile>
+	</div>
 	<div class="app-game--container">
-	<mat-progress-spinner  
-	[mode]="mode"
-	[value]="valueProgressSpinner" 
-	aria-label="showText"
-	[strokeWidth] = "strokeWidth"
-	[diameter] = "diameter">
-	</mat-progress-spinner>
-	<div class="app-game--count">{{count}}</div>
-
-<div *ngIf = "gameStarted === 'start'">
-<button class="app-game--btn-start" (click)="startTimer()">{{'GAME.BUTTON-START' | translate}}</button>
+		<div class="app-game--container-avatar" *ngIf="gameStarted === 'game'">
+			<div>
+				<div class="app-game--rival-avatar"><img src={{dataUserSrc}}></div>
+				<p class="app-game--nickname">{{dataUserNickname}}</p>
+			</div>
+			<div class="app-game--spinner">
+				<mat-progress-spinner [mode]="mode" [value]="valueProgressSpinner" aria-label="showText"
+					[strokeWidth]="strokeWidth" [diameter]="diameter">
+				</mat-progress-spinner>
+			
+			<div class="app-game--count">{{count}}</div>
+		  </div>
+			<div>
+				<div class="app-game--avatar"><img src={{dataUserSrc}}></div>
+				<p class="app-game--nickname">{{dataUserNickname}}</p>
+			</div>
+		</div>
+		<div *ngIf="gameStarted === 'start'">
+			<button class="app-game--btn-start" (click)="startTimer()">{{'GAME.BUTTON-START' | translate}}</button>
+		</div>
+		<div *ngIf="gameStarted === 'game'">
+			<div class="app-game--word-english">{{word.englishWord}}</div>
+			<div class="app-game--hidden-content">
+				<img src="./assets/img/checkmark.png" alt="checkmark" class="app-game--checkmark"
+					[style.display]="selectedAnswer === 'true'?'block':'none'">
+				<img src="./assets/img/close.svg.png" alt="checkmark" class="app-game--close"
+					[style.display]="selectedAnswer === 'false'?'block':'none'">
+			</div>
+			<button *ngFor="let wordRu of arrayAnswers; let i = index" (click)="checkAnswer(wordRu, i)"
+				class="app-game--btn-answer" [ngStyle]="color[i]">{{wordRu}}</button>
+		</div>
+		<div *ngIf="gameStarted === 'complete'">
+			<p class="app-game--answer">{{'GAME.TRUE-ANSWER' | translate}} :<span>{{correctAnswer}}</span></p>
+			<p class="app-game--answer">{{'GAME.WRONG-ANSWER' | translate}} :<span>{{wrongAnswer}}</span></p>
+			<button (click)="goToDictionary('/dictionary')"
+				class="app-game--btn-dictionary">{{'GAME.BUTTON-LEARN' | translate}}</button>
+			<button (click)="startTimer()" class="app-game--btn-repeat">{{'GAME.BUTTON-REPEAT' | translate}}</button>
+		</div>
+	</div>
+	<div class="ball" [style.display]="gameStarted === 'start'? 'block' : 'none'"></div>
 </div>
-<div *ngIf = "gameStarted === 'game'">
-<div class="app-game--word-english">{{word.englishWord}}</div>
-<div class="app-game--hidden-content">
-<img src="./assets/img/checkmark.png" alt="checkmark" class="app-game--checkmark" [style.display]="selectedAnswer === 'true'?'block':'none'">
-<img src="./assets/img/close.svg.png" alt="checkmark" class="app-game--close" [style.display]="selectedAnswer === 'false'?'block':'none'">
-</div>
- <button *ngFor = "let wordRu of arrayAnswers; let i = index" (click)= "checkAnswer(wordRu, i)"  class="app-game--btn-answer"  [ngStyle] = "color[i]">{{wordRu}}</button>
-</div>
-<div *ngIf = "gameStarted === 'complete'">
-	<p class="app-game--answer">{{'GAME.TRUE-ANSWER' | translate}} :<span>{{correctAnswer}}</span></p>
-	<p class="app-game--answer">{{'GAME.WRONG-ANSWER' | translate}} :<span>{{wrongAnswer}}</span></p>
-	<button (click)="goToDictionary('/dictionary')" class="app-game--btn-dictionary">{{'GAME.BUTTON-LEARN' | translate}}</button>
-	<button (click)="startTimer()" class="app-game--btn-repeat">{{'GAME.BUTTON-REPEAT' | translate}}</button>
-</div>
-</div>
-<div class="ball" [style.display] = "gameStarted === 'start'? 'block' : 'none'"></div>
-</div>
-
-

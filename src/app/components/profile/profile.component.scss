@@ -1,5 +1,5 @@
 .app-profile {
-	display: flex;
+	/* display: flex;
 	flex-direction:column;
 	align-items: center;
 	border:1px solid lightgrey;
@@ -9,14 +9,17 @@
 	height: 500px;
 	margin: 50px auto;
 	padding:50px 60px; 
-	box-sizing: border-box;
+	box-sizing: border-box; */
+
+	display: flex;
+	flex-direction:column;
+	align-items: center;
 
 	&--container {
 	display: flex;
 	flex-direction:row;
 	flex-wrap: wrap;
 	justify-content: space-between;
-
 	}
 
 	&--avatar {

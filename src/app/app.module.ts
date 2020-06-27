@@ -37,6 +37,7 @@ import { MatProgressButtonsModule } from 'mat-progress-buttons';
 import { MatButtonToggleModule} from '@angular/material/button-toggle';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MatButtonModule } from '@angular/material/button';
+import { ProfileService } from './components/profile/service/profile.service';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
 	return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -85,7 +86,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
 		MatButtonToggleModule,
 		MatButtonModule,
 	],
-	providers: [DataService, DataGameService, AudioService],
+	providers: [DataService, DataGameService, AudioService, ProfileService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

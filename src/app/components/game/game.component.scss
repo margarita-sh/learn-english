@@ -14,15 +14,16 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
+	/* border:2px solid green; */
 	}
 	
-
 	&--count {
-	position:relative; 
+	position: relative; 
 	font-size: 18px;
-	top: -70px;
+	left:50px;
+	bottom:70px;
 	font-family: 'Roboto', sans-serif;
-	color: #414141;
+	color: #414141; 
 	}
 
 	&--btn-start {
@@ -64,7 +65,7 @@
 		font-weight: 800;
 		color: #414141;
 		text-align: center;
-		padding:20px 0;
+		padding:10px 0;
 	  }
 
 	  &--btn-answer {
@@ -133,6 +134,29 @@
 		  margin: auto;
 	  }
 
+	  &--avatar, 
+	  &--rival-avatar {
+		  width:150px;
+		  height: 150px;
+	  }
+
+	  &--container-avatar {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	} 
+
+
+	  &--nickname {
+		  margin-top: 5px;
+		  text-align: center;
+	  }
+
+	  &--spinner {
+		  margin:0 50px;
+	  }
+
 }
 
 ::ng-deep.mat-progress-spinner circle,
@@ -184,3 +208,5 @@
 		opacity:0;
     }
 }
+
+

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { interval } from 'rxjs';
 import { take, delay } from 'rxjs/operators';
@@ -7,15 +7,17 @@ import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { DataGameService } from './service/data-game.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ProfileService } from '../profile/service/profile.service';
+import { Profile } from '../profile/profile.model';
 
 @Component({
 	selector: 'app-game',
 	templateUrl: './game.component.html',
 	styleUrls: ['./game.component.scss']
 })
-export class GameComponent {
+export class GameComponent implements OnInit {
 	public word: Word = null;
-	public gameStarted: string = 'start';
+	public gameStarted: string = 'profile';
 	public count: number = null;
 	public arrayAnswers: string[] = null;
 	public sec: number = 1000;
@@ -27,6 +29,10 @@ export class GameComponent {
 	public arrayForDictionary: Word[] = [];
 	public color: object = {};
 	public selectedAnswer: string = '';
+	public dataUser: Profile = this.profileService.getProfileFromLS();
+	public dataUserSrc: string = this.dataUser.src;
+	public dataUserNickname: string = this.dataUser.nickname;
+
 
 	public mode: ProgressSpinnerMode = 'determinate';
 	public valueProgressSpinner: number;
@@ -34,11 +40,23 @@ export class GameComponent {
 	public strokeWidth: number = 15;
 	public diameter: number = 120;
 
-	constructor(public dataGameService: DataGameService, private router: Router, public translate: TranslateService) {
+
+
+	constructor(public dataGameService: DataGameService, private router: Router, public translate: TranslateService,
+		public profileService: ProfileService) {
 		translate.addLangs(['en', 'ru']);
 		translate.setDefaultLang('en');
 		const browserLang: any = translate.getBrowserLang();
 		translate.use(browserLang.match(/en|ru/) ? browserLang : 'en');
+	}
+
+	public ngOnInit(): void {
+		console.log('dataUserSRC', this.dataUserSrc);
+   if (this.profileService.getProfileFromLS()) {
+	   this.gameStarted = 'start';
+	} else {
+		this.gameStarted = 'profile';
+	}
 	}
 
 	public game(): void {
@@ -61,22 +79,22 @@ export class GameComponent {
 			this.correctAnswer++;
 			this.color = {
 				[index]: {
-				background: 'green'
-			}
-		};
+					background: 'green'
+				}
+			};
 		} else {
 			this.selectedAnswer = 'false';
 			this.wrongAnswer++;
 			this.arrayForDictionary.push(this.word);
 			this.color = {
 				[index]: {
-				background: 'red'
-			}
-		};
+					background: 'red'
+				}
+			};
 
 		}
 		of(this.color).pipe(delay(this.resultDuration)).subscribe(() => {
-			this.color = { };
+			this.color = {};
 			this.selectedAnswer = '';
 		});
 		this.game();
@@ -86,7 +104,7 @@ export class GameComponent {
 		this.game();
 		this.count = this.timeRound;
 		const newLocal_1: number = 100;
-	 	this.valueProgressSpinner = newLocal_1;
+		this.valueProgressSpinner = newLocal_1;
 		interval(this.sec)
 			.pipe(
 				take(this.timeRound)
@@ -107,6 +125,11 @@ export class GameComponent {
 
 	public goToDictionary(pageName: string): void {
 		this.router.navigate([`${pageName}`]);
-	  }
+	}
+
+	public onSaved(): void {
+		this.gameStarted = 'start';
+	}
+
 
 }
