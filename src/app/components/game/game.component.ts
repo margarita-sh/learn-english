@@ -31,8 +31,7 @@ export class GameComponent implements OnInit {
 	public selectedAnswer: string = '';
 	public dataUser: Profile = this.profileService.getProfileFromLS();
 	public randomUser: Profile;
-	/*public randomAvatarforRival: string = null;
-	public randomRivalNickname: string = null;*/
+
 
 	public mode: ProgressSpinnerMode = 'determinate';
 	public valueProgressSpinner: number;
@@ -112,6 +111,7 @@ export class GameComponent implements OnInit {
 			.subscribe((count: number) => {
 				count = this.timeRound - (count + 1);
 				this.count = count;
+				// tslint:disable-next-line: no-magic-numbers
 				this.valueProgressSpinner = 100 / this.timeRound * count;
 				if (this.count <= 0) {
 					this.gameStarted = 'complete';
@@ -131,17 +131,7 @@ export class GameComponent implements OnInit {
 		this.dataUser = this.profileService.getProfileFromLS();
 	}
 
-	/*public randomAvatar(): void {
-		const rand: number = Math.floor(Math.random() * this.profileService.avatars.length);
-		this.randomAvatarforRival = this.profileService.avatars[rand].src;
-	}
-
-	public randomNickname(): void {
-		const rand: number = Math.floor(Math.random() * this.profileService.nicknameRival.length);
-		this.randomRivalNickname = this.profileService.nicknameRival[rand];
-	}*/
-
-	public generateRandomUser() {
+	public generateRandomUser(): void {
 		const rand: number = Math.floor(Math.random() * this.profileService.avatars.length);
 		const randNickname: number = Math.floor(Math.random() * this.profileService.nicknameRival.length);
 		this.randomUser = new Profile(1);
