@@ -5,8 +5,8 @@
 	<div class="app-game--container">
 		<div class="app-game--container-avatar" *ngIf="gameStarted === 'game'">
 			<div>
-				<div class="app-game--rival-avatar"><img src={{dataUserSrc}}></div>
-				<p class="app-game--nickname">{{dataUserNickname}}</p>
+				<div class="app-game--rival-avatar"><img src={{randomAvatarforRival}}></div>
+				<p class="app-game--nickname">{{randomRivalNickname}}</p>
 			</div>
 			<div class="app-game--spinner">
 				<mat-progress-spinner [mode]="mode" [value]="valueProgressSpinner" aria-label="showText"

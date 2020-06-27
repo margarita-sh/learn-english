@@ -32,6 +32,8 @@ export class GameComponent implements OnInit {
 	public dataUser: Profile = this.profileService.getProfileFromLS();
 	public dataUserSrc: string = this.dataUser.src;
 	public dataUserNickname: string = this.dataUser.nickname;
+	public randomAvatarforRival: string = null;
+	public randomRivalNickname: string =  null;
 
 
 	public mode: ProgressSpinnerMode = 'determinate';
@@ -51,12 +53,13 @@ export class GameComponent implements OnInit {
 	}
 
 	public ngOnInit(): void {
-		console.log('dataUserSRC', this.dataUserSrc);
    if (this.profileService.getProfileFromLS()) {
 	   this.gameStarted = 'start';
 	} else {
 		this.gameStarted = 'profile';
 	}
+	this.randomAvatar();
+	this.randomNickname();
 	}
 
 	public game(): void {
@@ -112,7 +115,6 @@ export class GameComponent implements OnInit {
 			.subscribe((count: number) => {
 				count = this.timeRound - (count + 1);
 				this.count = count;
-				// tslint:disable-next-line: no-magic-numbers
 				this.valueProgressSpinner = 100 / this.timeRound * count;
 				if (this.count <= 0) {
 					this.gameStarted = 'complete';
@@ -131,5 +133,13 @@ export class GameComponent implements OnInit {
 		this.gameStarted = 'start';
 	}
 
+	public randomAvatar(): void {
+		const rand: number = Math.floor(Math.random() * this.profileService.avatars.length);
+		this.randomAvatarforRival =  this.profileService.avatars[rand].src;
+	}
 
+	public randomNickname(): void {
+		const rand: number = Math.floor(Math.random() * this.profileService.nicknameRival.length);
+		this.randomRivalNickname =  this.profileService.nicknameRival[rand];
+	}
 }

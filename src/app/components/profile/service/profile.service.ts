@@ -46,6 +46,9 @@ export class ProfileService {
 			src: './assets/avatar/10.svg',
 		}
 	];
+
+	public nicknameRival: any = ['Саша', 'Женя', 'Знаток', 'Учитель'];
+
 	public saveProfile(userName: string, idAvatar: number): void {
 		const dataUser: Profile = {
 			nickname: userName,
