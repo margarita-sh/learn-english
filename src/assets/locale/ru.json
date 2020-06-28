@@ -18,7 +18,10 @@
 		"BUTTON-REPEAT": "Сыграть еще раз",
 		"BUTTON-LEARN": "Учить незнакомые слова",
 		"TRUE-ANSWER": "Количество верных ответов",
-		"WRONG-ANSWER": "Количество неверных ответов"
+		"WRONG-ANSWER": "Количество неверных ответов",
+		"RESULT_WIN": "Победа!",
+		"RESULT_FAIL": "Поражение :(",
+		"RESULT_DRAW": "Ничья :|"
 	},
 
 	"DICTIONARY": {

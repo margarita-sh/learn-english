@@ -154,11 +154,11 @@ export class GameComponent implements OnInit {
 		const totalPoints: number = this.correctAnswer - this.wrongAnswer * 2;
 		const totalPointRival: number = this.correctAnswerRival - this.wrongAnserRival * 2;
 		if (totalPoints > totalPointRival) {
-			this.resultAllGame = 'Победа';
+			this.resultAllGame = 'GAME.RESULT_WIN';
 		} else if (totalPoints < totalPointRival) {
-			this.resultAllGame = 'Поражение';
+			this.resultAllGame = 'GAME.RESULT_FAIL';
 		} else {
-			this.resultAllGame = 'Ничья';
+			this.resultAllGame = 'GAME.RESULT_DRAW';
 		}
 	}
 

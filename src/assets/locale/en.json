@@ -18,7 +18,10 @@
 		"BUTTON-REPEAT": "Play again",
 		"BUTTON-LEARN": "Learn unfamiliar words",
 		"TRUE-ANSWER": "The number of correct answers",
-		"WRONG-ANSWER": "Number of incorrect answers"
+		"WRONG-ANSWER": "Number of incorrect answers",
+		"RESULT_WIN": "Victory!",
+		"RESULT_FAIL": "Defeat :(",
+		"RESULT_DRAW": "Draw :|"
 	},
 
 	"DICTIONARY": {

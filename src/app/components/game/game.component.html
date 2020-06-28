@@ -34,7 +34,7 @@
 			<button mat-stroked-button *ngFor="let wordRu of arrayAnswers; let i = index" (click)="checkAnswer(wordRu, i)" [ngStyle]="color[i]" class="app-game--btn-answer">{{wordRu}}</button>
 		</div>
 		<div *ngIf="gameStarted === 'complete'">
-			<div  [ngClass]="{ win: (resultAllGame === 'Победа')}">
+			<div  [ngClass]="{ win: (resultAllGame === 'GAME.RESULT_WIN')}">
 			<div class="app-game--result-game">
 				<div class="app-game--game-outcome">
 					<div class="app-game--avatar"><img src={{randomUser.src}}></div>
@@ -43,7 +43,7 @@
 					<p class="app-game--answer">{{'GAME.WRONG-ANSWER' | translate}}: <span>{{wrongAnserRival}}</span></p>
 				</div>
 				<div class="app-game--result-text" 
-				[style.color]="resultAllGame === 'Победа'? 'green' : 'red'">{{resultAllGame}}</div>
+				[style.color]="resultAllGame === 'GAME.RESULT_WIN'? 'green' : 'red'">{{resultAllGame | translate}}</div>
 				<div class="app-game--game-outcome">
 					<div class="app-game--avatar"><img src={{dataUser.src}}></div>
 					<p class="app-game--nickname">{{dataUser.nickname}}</p>
