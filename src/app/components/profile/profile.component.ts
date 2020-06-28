@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { ProfileService } from './service/profile.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
 	selector: 'app-profile',
@@ -12,7 +13,11 @@ export class ProfileComponent {
 
 	@Output() public onSaved: EventEmitter<any> = new EventEmitter();
 
-	constructor(public profileService: ProfileService) {
+	constructor(public profileService: ProfileService, public translate: TranslateService) {
+		translate.addLangs(['en', 'ru']);
+		translate.setDefaultLang('en');
+		const browserLang: any = translate.getBrowserLang();
+		translate.use(browserLang.match(/en|ru/) ? browserLang : 'en');
 	}
 
 	public getIdAvatar(data: number): void {

@@ -1,7 +1,7 @@
 <div class="app-profile"> 
-	<p>Мой профиль</p>
+	<p>{{'PROFILE.TITLE' | translate}}</p>
 	<mat-form-field class="example-form-field">
-		<mat-label>Введите свой никнейм</mat-label>
+		<mat-label>{{'PROFILE.MAT-LABEL' | translate}}</mat-label>
 		<input matInput type="text" [(ngModel)]="nickname" #xxx = "ngModel" required>
 		<button mat-button *ngIf="nickname" matSuffix mat-icon-button (click)="nickname=''" class="app-profile--button-close">
 		  <mat-icon>close</mat-icon>
@@ -10,5 +10,5 @@
 	<div class="app-profile--container">
 		<button *ngFor="let avatar of profileService.avatars" class="app-profile--button-avatar" (click)="getIdAvatar(avatar.id)"><img src="{{avatar.src}}" class="app-profile--avatar"></button>
    </div>
-   <button mat-raised-button color="primary" (click)="save(nickname, idAvatar)" [disabled]="xxx.invalid || !idAvatar" >Готово</button>
+   <button mat-raised-button color="primary" (click)="save(nickname, idAvatar)" [disabled]="xxx.invalid || !idAvatar" >{{'PROFILE.BUTTON' | translate}}</button>
 </div>

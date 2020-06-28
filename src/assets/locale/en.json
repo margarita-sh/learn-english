@@ -28,6 +28,12 @@
 	"TRANSLATOR": {
 		"MAT-LABEL": "Enter the word",
 		"EXAMPLE": "Example: кот"
+	},
+
+	"PROFILE": {
+		"TITLE": "My profile",
+		"MAT-LABEL": "Enter your nickname",
+		"BUTTON": "Done"
 	}
 
   }

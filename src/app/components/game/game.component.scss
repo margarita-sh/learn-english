@@ -71,48 +71,22 @@
 	  &--btn-answer {
 		  display:block;
 		  width:240px;
-		  font-size: 18px;
+		/*   font-size: 18px;
 		  font-family: 'Roboto', sans-serif;
-		  padding:10px;
+		  padding:10px; */
 		  margin:5px;
-		  border-radius: 6px;
-		  background:#ded9df;
+ 		 /*  border: 1px solid rgb(128, 128, 128); */
+		 /* background:#ded9df; */
 	  }
-
+	  /* 
 	  &--btn-answer:hover {
          opacity: 0.8;
-	  }
+	  } */
 
-	  &--btn-repeat {
+	  &--btn-complete {
 		display: block;
 		width:250px;
-		font-family: 'Roboto', sans-serif;
-		font-size: 18px;
-		color: rgb(245,245,245);
-		text-shadow: 0 -1px rgba(0,0,0,.1);
-		user-select: none;
-		padding: 10px;
-		margin:7px auto;
-		outline: none;
-		border: none;
-		border-radius: 6px;
-		background: rgb(0, 174, 255);
-	  }
-
-	  &--btn-dictionary {
-		display: block;
-		width:250px;
-		font-family: 'Roboto', sans-serif;
-		font-size: 18px;
-		color: rgb(245,245,245);
-		text-shadow: 0 -1px rgba(0,0,0,.1);
-		user-select: none;
-		padding: 10px;
-		margin:7px auto;
-		outline: none;
-		border: none;
-		border-radius: 6px;
-		background: rgb(15, 194, 125);
+		margin:10px auto;
 	  }
 
 	  &--answer {
@@ -134,8 +108,7 @@
 		  margin: auto;
 	  }
 
-	  &--avatar, 
-	  &--rival-avatar {
+	  &--avatar img{
 		  width:150px;
 		  height: 150px;
 	  }
@@ -230,9 +203,6 @@
     }
 }
 .win {
-/* 	background-image: url('./assets/img/win.png'); */
- /*   	background-image: url('~src/assets/img/win.png'); */
-    background-image: url('~src/assets/img/bright.png');
+    background-image: url('~src/assets/img/win.png');
 	background-size: cover; 
-	/* background: green; */
 }

@@ -5,7 +5,7 @@
 	<div class="app-game--container">
 		<div class="app-game--container-avatar" *ngIf="gameStarted === 'game'">
 			<div>
-				<div class="app-game--rival-avatar"><img src={{randomUser.src}}></div>
+				<div class="app-game--avatar"><img src={{randomUser.src}}></div>
 				<p class="app-game--nickname">{{randomUser.nickname}}</p>
 			</div>
 			<div class="app-game--spinner">
@@ -31,14 +31,13 @@
 				<img src="./assets/img/close.svg.png" alt="checkmark" class="app-game--close"
 					[style.display]="selectedAnswer === 'false'?'block':'none'">
 			</div>
-			<button *ngFor="let wordRu of arrayAnswers; let i = index" (click)="checkAnswer(wordRu, i)"
-				class="app-game--btn-answer" [ngStyle]="color[i]">{{wordRu}}</button>
+			<button mat-stroked-button *ngFor="let wordRu of arrayAnswers; let i = index" (click)="checkAnswer(wordRu, i)" [ngStyle]="color[i]" class="app-game--btn-answer">{{wordRu}}</button>
 		</div>
 		<div *ngIf="gameStarted === 'complete'">
-			<div  [ngClass]="{ win: true}">
+			<div  [ngClass]="{ win: (resultAllGame === 'Победа')}">
 			<div class="app-game--result-game">
 				<div class="app-game--game-outcome">
-					<div class="app-game--rival-avatar"><img src={{randomUser.src}}></div>
+					<div class="app-game--avatar"><img src={{randomUser.src}}></div>
 					<p class="app-game--nickname">{{randomUser.nickname}}</p>
 					<p class="app-game--answer">{{'GAME.TRUE-ANSWER' | translate}}: <span>{{correctAnswerRival}}</span></p>
 					<p class="app-game--answer">{{'GAME.WRONG-ANSWER' | translate}}: <span>{{wrongAnserRival}}</span></p>
@@ -52,9 +51,8 @@
 					<p class="app-game--answer">{{'GAME.WRONG-ANSWER' | translate}}: <span>{{wrongAnswer}}</span></p>
 				</div>
 			</div>
-			<button (click)="goToDictionary('/dictionary')"
-				class="app-game--btn-dictionary">{{'GAME.BUTTON-LEARN' | translate}}</button>
-			<button (click)="startTimer()" class="app-game--btn-repeat">{{'GAME.BUTTON-REPEAT' | translate}}</button>
+			<button mat-raised-button color="accent" (click)="goToDictionary('/dictionary')" class="app-game--btn-complete">{{'GAME.BUTTON-LEARN' | translate}}</button>
+			<button mat-raised-button color="primary" (click)="startTimer()" class="app-game--btn-complete">{{'GAME.BUTTON-REPEAT' | translate}}</button>
 		</div>
 		</div>
 	</div>

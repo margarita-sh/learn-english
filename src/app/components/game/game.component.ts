@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of, Subscription } from 'rxjs';
+import { of} from 'rxjs';
 import { interval } from 'rxjs';
 import { take, delay } from 'rxjs/operators';
 import { Word } from './word.model';
@@ -52,13 +52,11 @@ export class GameComponent implements OnInit {
 
 	public ngOnInit(): void {
 		this.generateRandomUser();
-		/* if (this.profileService.getProfileFromLS()) {
+		 if (this.profileService.getProfileFromLS()) {
 			this.gameStarted = 'start';
 		} else {
 			this.gameStarted = 'profile';
-		} */
-		this.gameStarted = 'complete';
-
+		}
 	}
 
 	public game(): void {
@@ -93,7 +91,6 @@ export class GameComponent implements OnInit {
 					background: 'red'
 				}
 			};
-
 		}
 		of(this.color).pipe(delay(this.resultDuration)).subscribe(() => {
 			this.color = {};
@@ -128,7 +125,6 @@ export class GameComponent implements OnInit {
 					this.dataGameService.addWordsDictionary(this.arrayForDictionary);
 				}
 			});
-
 	}
 
 	public goToDictionary(pageName: string): void {
@@ -155,15 +151,15 @@ export class GameComponent implements OnInit {
 	}
 
 	public resultGame(): void {
-	const totalPoints: number = this.correctAnswer - this.wrongAnswer * 2;
-	const totalPointRival: number = this.correctAnswerRival - this.wrongAnserRival * 2;
+		const totalPoints: number = this.correctAnswer - this.wrongAnswer * 2;
+		const totalPointRival: number = this.correctAnswerRival - this.wrongAnserRival * 2;
 		if (totalPoints > totalPointRival) {
 			this.resultAllGame = 'Победа';
-		  } else if (totalPoints < totalPointRival) {
+		} else if (totalPoints < totalPointRival) {
 			this.resultAllGame = 'Поражение';
-		  } else {
+		} else {
 			this.resultAllGame = 'Ничья';
-		  }
+		}
 	}
 
 }
