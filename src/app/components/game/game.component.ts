@@ -52,19 +52,16 @@ export class GameComponent implements OnInit {
 
 	public ngOnInit(): void {
 		this.generateRandomUser();
-		if (this.profileService.getProfileFromLS()) {
+		/* if (this.profileService.getProfileFromLS()) {
 			this.gameStarted = 'start';
 		} else {
 			this.gameStarted = 'profile';
-		}
+		} */
+		this.gameStarted = 'complete';
 
 	}
 
 	public game(): void {
-		/* this.correctAnswer = 0;
-		this.wrongAnswer = 0; */
-		/* this.correctAnswerRival = 0;
-		this.wrongAnserRival = 0; */
 		this.gameStarted = 'game';
 		this.arrayAnswers = [];
 		this.word = this.dataGameService.getRandomWord();
