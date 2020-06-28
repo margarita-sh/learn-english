@@ -23,15 +23,18 @@ export class GameComponent implements OnInit {
 	public sec: number = 1000;
 	public resultDuration: number = 200;
 	public numberOptionsAnswer: number = 3;
-	public correctAnswer: number = null;
-	public wrongAnswer: number = null;
+	public correctAnswer: number = 0;
+	public wrongAnswer: number = 0;
 	public timeRound: number = 30;
 	public arrayForDictionary: Word[] = [];
 	public color: object = {};
 	public selectedAnswer: string = '';
 	public dataUser: Profile = this.profileService.getProfileFromLS();
 	public randomUser: Profile;
-
+	public allAnswerRival: number = 30;
+	public correctAnswerRival: number = 0;
+	public wrongAnserRival: number = 0;
+	public resultAllGame: string = null;
 
 	public mode: ProgressSpinnerMode = 'determinate';
 	public valueProgressSpinner: number;
@@ -49,7 +52,6 @@ export class GameComponent implements OnInit {
 
 	public ngOnInit(): void {
 		this.generateRandomUser();
-
 		if (this.profileService.getProfileFromLS()) {
 			this.gameStarted = 'start';
 		} else {
@@ -59,6 +61,10 @@ export class GameComponent implements OnInit {
 	}
 
 	public game(): void {
+		/* this.correctAnswer = 0;
+		this.wrongAnswer = 0; */
+		/* this.correctAnswerRival = 0;
+		this.wrongAnserRival = 0; */
 		this.gameStarted = 'game';
 		this.arrayAnswers = [];
 		this.word = this.dataGameService.getRandomWord();
@@ -100,6 +106,10 @@ export class GameComponent implements OnInit {
 	}
 
 	public startTimer(): void {
+		this.correctAnswer = 0;
+		this.wrongAnswer = 0;
+		this.correctAnswerRival = 0;
+		this.wrongAnserRival = 0;
 		this.game();
 		this.count = this.timeRound;
 		const newLocal_1: number = 100;
@@ -116,6 +126,8 @@ export class GameComponent implements OnInit {
 				if (this.count <= 0) {
 					this.gameStarted = 'complete';
 					this.count = null;
+					this.resultGameRival();
+					this.resultGame();
 					this.dataGameService.addWordsDictionary(this.arrayForDictionary);
 				}
 			});
@@ -138,4 +150,23 @@ export class GameComponent implements OnInit {
 		this.randomUser.src = this.profileService.avatars[rand].src;
 		this.randomUser.nickname = this.profileService.nicknameRival[randNickname];
 	}
+
+	public resultGameRival(): void {
+		// tslint:disable-next-line: no-magic-numbers
+		this.correctAnswerRival = Math.floor(Math.random() * (this.allAnswerRival - 15) + 15);
+		this.wrongAnserRival = this.allAnswerRival - this.correctAnswerRival;
+	}
+
+	public resultGame(): void {
+	const totalPoints: number = this.correctAnswer - this.wrongAnswer * 2;
+	const totalPointRival: number = this.correctAnswerRival - this.wrongAnserRival * 2;
+		if (totalPoints > totalPointRival) {
+			this.resultAllGame = 'Победа';
+		  } else if (totalPoints < totalPointRival) {
+			this.resultAllGame = 'Поражение';
+		  } else {
+			this.resultAllGame = 'Ничья';
+		  }
+	}
+
 }

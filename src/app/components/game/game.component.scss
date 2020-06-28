@@ -157,6 +157,27 @@
 		  margin:0 50px;
 	  }
 
+	  &--result-game {
+		  display: flex;
+		  flex-direction: row;
+	  }
+
+	  &--game-outcome {
+		  display: flex;
+		  flex-direction: column;
+		  justify-content: center;
+		  align-items: center;
+		 margin: 0 20px 40px 20px;
+	  }
+
+	  &--result-text {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 24px;
+		font-family: 'Roboto', sans-serif;
+	  }
+
 }
 
 ::ng-deep.mat-progress-spinner circle,
@@ -208,5 +229,3 @@
 		opacity:0;
     }
 }
-
-
