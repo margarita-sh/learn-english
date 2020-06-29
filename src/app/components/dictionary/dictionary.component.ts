@@ -27,6 +27,7 @@ export class DictionaryComponent implements OnInit {
 		disabled: false,
 		mode: 'indeterminate',
 	};
+	public displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
 
 	constructor(public dataGameService: DataGameService, public audioService: AudioService, public translate: TranslateService) {
 		this.audio = new Audio();

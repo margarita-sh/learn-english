@@ -16,22 +16,23 @@
 	}
 
 	&--index {
-		width:40px;
+		width:10%;
+		margin-right: 20px;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
 	}
-	&--englishWord{
-		width:40%;
+	&--word{
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		width:35%;
 		text-align: left;
 	}
-	&--russianWord{
-		width:40%;
-	}
-	&--listen {
-width:50px;
-margin-right: 10px;
-	}
+
 	&--done {
-		width:100px;
-		font-size: 18px;
+		margin-left: 5px;
+		width: 10%;
 	}
 		
 }
