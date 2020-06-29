@@ -25,7 +25,11 @@
 	},
 
 	"DICTIONARY": {
-		"BUTTON": "I know"
+		"BUTTON": "I know",
+		"TRANSLATION":"Translation",
+		"ENGLISH-WORD": "English word",
+		"LISTEN": "Listen",
+		"REMOVE": "Remove"
 	},
 
 	"TRANSLATOR": {

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataGameService } from '../game/service/data-game.service';
 import { Word } from '../game/word.model';
 import { AudioService } from '../game/service/audio.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MatProgressButtonOptions } from 'mat-progress-buttons';
+
 
 @Component({
 	selector: 'app-dictionary',
@@ -14,6 +15,7 @@ export class DictionaryComponent implements OnInit {
 	public dictionary: Word[] = [];
 	public numberWordsInDictionary: number = null;
 	public audio: HTMLAudioElement;
+	public displayedColumns: string[] = ['index', 'englishWord', 'russianWord', 'listen', 'actions' ];
 
 	public spinnerButtonOptions: MatProgressButtonOptions = {
 		active: false,
@@ -27,7 +29,6 @@ export class DictionaryComponent implements OnInit {
 		disabled: false,
 		mode: 'indeterminate',
 	};
-	public displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
 
 	constructor(public dataGameService: DataGameService, public audioService: AudioService, public translate: TranslateService) {
 		this.audio = new Audio();
@@ -53,7 +54,6 @@ export class DictionaryComponent implements OnInit {
 		word.isLoading = true;
 		this.audioService.getAudio(word.englishWord).
 			subscribe((data: any) => {
-				// tslint:disable-next-line: no-shadowed-variable
 				data.subscribe((data: any) => {
 					this.audio.src = data.location;
 					this.audio.play();

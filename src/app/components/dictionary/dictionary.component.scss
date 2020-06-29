@@ -1,38 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 .app-dictionary {
-	width:900px; 
-	margin: 50px auto;
-	padding:30px;
-	box-shadow: 0px 10px 10px black;
-	box-sizing: border-box;
-	font-size: 26px;
-	font-family: 'Roboto', sans-serif;
-
-	&--output-word {
-		border-bottom:1px solid grey;
-		display:flex;
-		padding: 10px;
-	}
-
 	&--index {
 		width:10%;
-		margin-right: 20px;
-		display: flex;
-		justify-content: flex-start;
-		align-items: center;
 	}
-	&--word{
-		display: flex;
-		justify-content: flex-start;
-		align-items: center;
+	&--word {
 		width:35%;
-		text-align: left;
 	}
-
-	&--done {
-		margin-left: 5px;
-		width: 10%;
+	&--sound,
+	&--remove {
+		text-align: center;
+		width:10%;
 	}
 		
+}
+
+.mat-elevation-z8 {
+	width:900px;
+	margin:auto;
 }

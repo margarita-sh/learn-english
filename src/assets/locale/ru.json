@@ -25,7 +25,11 @@
 	},
 
 	"DICTIONARY": {
-		"BUTTON": "Знаю"
+		"BUTTON": "Знаю",
+		"TRANSLATION":"Перевод",
+		"ENGLISH-WORD": "Английское слово",
+		"LISTEN": "Прослушать",
+		"REMOVE": "Удалить"
 	},
 
 	"TRANSLATOR": {
