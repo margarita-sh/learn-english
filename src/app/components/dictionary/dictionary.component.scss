@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 .app-dictionary {
+	width:900px;
+	margin:auto;
+
 	&--index {
 		width:10%;
 	}
@@ -16,6 +19,5 @@
 }
 
 .mat-elevation-z8 {
-	width:900px;
-	margin:auto;
+	width:100%;
 }

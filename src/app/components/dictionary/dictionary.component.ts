@@ -4,7 +4,8 @@ import { Word } from '../game/word.model';
 import { AudioService } from '../game/service/audio.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MatProgressButtonOptions } from 'mat-progress-buttons';
-
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
 	selector: 'app-dictionary',
@@ -16,6 +17,8 @@ export class DictionaryComponent implements OnInit {
 	public numberWordsInDictionary: number = null;
 	public audio: HTMLAudioElement;
 	public displayedColumns: string[] = ['index', 'englishWord', 'russianWord', 'listen', 'actions' ];
+	public dataSource: MatTableDataSource<Word> = new MatTableDataSource<Word>(this.dictionary);
+	@ViewChild(MatPaginator, {static: true}) public paginator: MatPaginator;
 
 	public spinnerButtonOptions: MatProgressButtonOptions = {
 		active: false,
@@ -39,8 +42,12 @@ export class DictionaryComponent implements OnInit {
 	}
 
 	public ngOnInit(): void {
-		this.dataGameService.loadWordList().subscribe((data: Word[]) => this.dictionary = data);
+		this.dataGameService.loadWordList().subscribe((data: Word[]) => {
+			this.dictionary = data;
+			this.dataSource.data = data;
+		});
 		this.numberWordsInDictionary = this.dictionary.length;
+		this.dataSource.paginator = this.paginator;
 		console.log('dictionary', this.numberWordsInDictionary);
 	}
 

@@ -39,6 +39,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { MatButtonModule } from '@angular/material/button';
 import { ProfileService } from './components/profile/service/profile.service';
 import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
 	return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -87,6 +88,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
 		MatButtonToggleModule,
 		MatButtonModule,
 		MatTableModule,
+		MatPaginatorModule
 	],
 	providers: [DataService, DataGameService, AudioService, ProfileService],
 	bootstrap: [AppComponent]

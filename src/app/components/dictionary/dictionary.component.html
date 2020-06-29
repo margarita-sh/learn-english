@@ -1,10 +1,10 @@
 <div class="app-dictionary">
 
-	<table mat-table [dataSource]="dictionary" class="mat-elevation-z8">
+	<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
 		<ng-container matColumnDef="index">
 			<th mat-header-cell *matHeaderCellDef> N. </th>
-			<td mat-cell *matCellDef="let element; let i = index" class="app-dictionary--index"> {{i+1}} </td>
+			<td mat-cell *matCellDef="let element" class="app-dictionary--index"> {{dataSource.filteredData.indexOf(element)+1}} </td>
 		</ng-container>
 
 		<ng-container matColumnDef="russianWord">
@@ -36,5 +36,7 @@
 		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 		<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 	</table>
+
+	<mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
 
 </div>
