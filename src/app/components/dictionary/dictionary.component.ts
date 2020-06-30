@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Store, select } from '@ngrx/store';
 import { DictionaryState } from 'src/app/store/state/dictionary.state';
-import { getWordsFromLS, removeWordFromDictionary } from 'src/app/store/action/dictionary.action';
+import { getWordsFromLS, removeWordFromDictionary, changeWordStatus } from 'src/app/store/action/dictionary.action';
 import { Observable } from 'rxjs';
 import { selectDictionary } from 'src/app/store/selectors/dictionary.selectors';
 
@@ -54,13 +54,15 @@ export class DictionaryComponent implements OnInit {
 		});
 	}
 
- 	public removeWordFromDictionary(word: Word): void {
-		this._store$.dispatch(removeWordFromDictionary({word}));
+	public removeWordFromDictionary(word: Word): void {
+		this._store$.dispatch(removeWordFromDictionary({ word }));
 	}
 
 	public playAudio(word: Word): void {
 		this.spinnerButtonOptions.active = true;
-		word.isLoading = true;
+		/* word.isLoading = true; */
+	/* 	const newWord: Word = { ...word, isLoading: true }; */
+		this._store$.dispatch(changeWordStatus({ word, isLoading: true}));
 		this.audioService.getAudio(word.englishWord).
 			subscribe((data: any) => {
 				// tslint:disable-next-line: no-shadowed-variable
@@ -68,8 +70,8 @@ export class DictionaryComponent implements OnInit {
 					this.audio.src = data.location;
 					this.audio.play();
 					this.spinnerButtonOptions.active = false;
-					word.isLoading = false;
-
+					/* 	word.isLoading = false; */
+					this._store$.dispatch(changeWordStatus({ word, isLoading: false }));
 				});
 			});
 

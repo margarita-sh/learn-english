@@ -7612,7 +7612,6 @@ export class DataGameService {
 				const result = wordsStorage.find((data) => {
 					return data.id === value.id;
 				});
-
 				if (result) {
 					return false;
 				} else {
@@ -7640,3 +7639,4 @@ export class DataGameService {
 			);
 	}
 }
+

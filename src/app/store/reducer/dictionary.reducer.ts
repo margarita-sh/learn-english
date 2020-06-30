@@ -1,4 +1,4 @@
-import { initialState} from '../state/dictionary.state';
+import { initialState } from '../state/dictionary.state';
 import { createReducer, on, Action, ActionReducer } from '@ngrx/store';
 import * as DictionaryAction from '../action/dictionary.action';
 import { DictionaryState } from '../state/dictionary.state';
@@ -10,6 +10,18 @@ export const dictionaryReducer: ActionReducer<DictionaryState, Action> = createR
 		return {
 			...state,
 			dictionary: action.dictionary
+		};
+
+	}),
+	on(DictionaryAction.changeWordStatus, (state: DictionaryState, action: DictionaryAction.CustomAction): DictionaryState => {
+		return {
+			...state,
+			dictionary: state.dictionary.map((item: Word) => {
+				if (item.id === action.word.id) {
+					return { ...item, isLoading: action.isLoading };
+				}
+				return item;
+			})
 		};
 
 	}),

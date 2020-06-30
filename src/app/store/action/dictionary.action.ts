@@ -9,6 +9,7 @@ type TypeActionCreator<S extends string, O extends object> = ActionCreator<
 export interface CustomAction extends Action {
 	dictionary: Word[];
 	word: Word;
+	isLoading: boolean;
 }
 
 export const getWordsFromLS: TypeActionCreator<string, {}> = createAction(
@@ -22,5 +23,10 @@ export const setWordsFromLS: TypeActionCreator<string, { dictionary: Word[] }> =
 
 export const removeWordFromDictionary: TypeActionCreator<string, { word: Word }> = createAction(
 	'[Dictionary] remove word from dictionary',
+	props<{word: Word}>()
+);
+
+export const changeWordStatus: TypeActionCreator<string, { word: Word, isLoading: boolean }> = createAction(
+	'[Dictionary] change status word',
 	props<{word: Word}>()
 );
