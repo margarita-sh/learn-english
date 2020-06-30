@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TranslateState } from 'src/app/store/state/translate.state';
 import { Store, select } from '@ngrx/store';
 import { translate, resultTranslate } from 'src/app/store/action/translate.action';
-import { selectWordEng, selectError } from 'src/app/store/selectors/api.selectors';
+import { selectWordEng, selectError } from 'src/app/store/selectors/translate.selectors';
 import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 

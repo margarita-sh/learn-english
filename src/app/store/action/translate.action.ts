@@ -21,9 +21,7 @@ export const translate: TypeActionCreator<string, { wordRu: string }> = createAc
 
 export const resultTranslate: TypeActionCreator<string, { wordEng: string[]}> = createAction(
 	'[Translate] result translate',
-	props<{
-		wordEng: string[]
-	}>()
+	props<{wordEng: string[]}>()
 );
 
 export const error: TypeActionCreator<string, { error: string}> = createAction(

@@ -7590,6 +7590,8 @@ export class DataGameService {
 	}
 
 	public loadWordList(): Observable<Word[]> {
+	console.log('12312');
+	
 		const gettingDataFromLocalStorage: any = localStorage.getItem(DataGameService.wordsforLearningLSKey);
 		if (gettingDataFromLocalStorage) {
 			const wordsStorageString: any = gettingDataFromLocalStorage;

@@ -40,6 +40,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ProfileService } from './components/profile/service/profile.service';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { DictionaryEffects } from './store/effect/dictionary.effect';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
 	return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -65,7 +66,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
 		HttpClientModule,
 		StoreModule.forRoot(reducer),
 		StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-		EffectsModule.forRoot([AppEffects, TranslateEffects]),
+		EffectsModule.forRoot([AppEffects, TranslateEffects, DictionaryEffects]),
 		StoreRouterConnectingModule.forRoot(),
 		BrowserAnimationsModule,
 		MatProgressSpinnerModule,

@@ -2,7 +2,7 @@
 	<div class="app-menu--navigate">
 		<a routerLink="" class="app-menu--link" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">{{'MENU.HOME' | translate}}</a>
 		<a routerLink="/game" class="app-menu--link" routerLinkActive="active-link">{{'MENU.GAME' | translate}}</a>
-		<a routerLink="/dictionary" class="app-menu--link" routerLinkActive="active-link"> <span matBadge={{numberWordsInDictionary}} matBadgeOverlap="false">{{'MENU.DICTIONARY' | translate}}</span></a>
+		<a routerLink="/dictionary" class="app-menu--link" routerLinkActive="active-link"> <span matBadge="{{dictionaryCount$ | async}}" matBadgeOverlap="false">{{'MENU.DICTIONARY' | translate}}</span></a>
 		<a routerLink="/translate" class="app-menu--link" routerLinkActive="active-link">{{'MENU.TRANSLATOR' | translate}}</a> 
 		<a routerLink="/about-me" class="app-menu--link" routerLinkActive="active-link">{{'MENU.ABOUT ME' | translate}}</a>
 		<div>
