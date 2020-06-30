@@ -8,7 +8,6 @@ import { map } from 'rxjs/operators';
 export class DataGameService {
 
 	private static wordsforLearningLSKey: string = 'wordsforLearning';
-
 	public words: Word[] = [
 		{
 			id: '2',
@@ -7582,7 +7581,7 @@ export class DataGameService {
 		}
 	];
 
-	constructor(private _httpClient: HttpClient) {	}
+	constructor(private _httpClient: HttpClient) { }
 	public getRandomWord(): Word {
 		const rand: number = Math.floor(Math.random() * this.words.length);
 		const randWord: Word = this.words[rand];
@@ -7590,15 +7589,11 @@ export class DataGameService {
 	}
 
 	public loadWordList(): Observable<Word[]> {
-	console.log('12312');
-	
 		const gettingDataFromLocalStorage: any = localStorage.getItem(DataGameService.wordsforLearningLSKey);
 		if (gettingDataFromLocalStorage) {
 			const wordsStorageString: any = gettingDataFromLocalStorage;
-			const wordsStorage: any = JSON.parse(wordsStorageString); // массив объеков ru-eng;
-			return of(wordsStorage).pipe(
-				map((items: Word[]) => items.map((item: Word) => item))
-			);
+			const wordsStorage: Word[] = JSON.parse(wordsStorageString);
+			return of(wordsStorage);
 		}
 		return of([]);
 	}
@@ -7624,8 +7619,6 @@ export class DataGameService {
 					return true;
 				}
 			});
-
-
 			const dataForLocalSrorageConcat: Word[] = wordsStorage.concat(words);
 			const dataForLocalSrorageString: string = JSON.stringify(dataForLocalSrorageConcat);
 			localStorage.setItem(DataGameService.wordsforLearningLSKey, dataForLocalSrorageString);
@@ -7635,4 +7628,15 @@ export class DataGameService {
 		}
 	}
 
+	public removeWordFromDictionary(word: Word): Observable<any> {
+		return this.loadWordList().
+			pipe(
+				map((items: Word[]) => {
+					items = items.filter((item: Word) => item.id !== word.id);
+					this.save(items);
+
+					return items;
+				})
+			);
+	}
 }

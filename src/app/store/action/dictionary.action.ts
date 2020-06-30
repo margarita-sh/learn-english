@@ -7,9 +7,8 @@ type TypeActionCreator<S extends string, O extends object> = ActionCreator<
 >;
 
 export interface CustomAction extends Action {
-/* 	type: string;
-	payload?: any; */
 	dictionary: Word[];
+	word: Word;
 }
 
 export const getWordsFromLS: TypeActionCreator<string, {}> = createAction(
@@ -19,4 +18,9 @@ export const getWordsFromLS: TypeActionCreator<string, {}> = createAction(
 export const setWordsFromLS: TypeActionCreator<string, { dictionary: Word[] }> = createAction(
 	'[Dictionary] set words from LS',
 	props<{dictionary: Word[]}>()
+);
+
+export const removeWordFromDictionary: TypeActionCreator<string, { word: Word }> = createAction(
+	'[Dictionary] remove word from dictionary',
+	props<{word: Word}>()
 );

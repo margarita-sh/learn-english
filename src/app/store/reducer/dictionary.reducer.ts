@@ -2,6 +2,7 @@ import { initialState} from '../state/dictionary.state';
 import { createReducer, on, Action, ActionReducer } from '@ngrx/store';
 import * as DictionaryAction from '../action/dictionary.action';
 import { DictionaryState } from '../state/dictionary.state';
+import { Word } from 'src/app/components/game/word.model';
 
 export const dictionaryReducer: ActionReducer<DictionaryState, Action> = createReducer(
 	initialState,

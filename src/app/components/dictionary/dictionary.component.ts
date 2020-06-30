@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Store, select } from '@ngrx/store';
 import { DictionaryState } from 'src/app/store/state/dictionary.state';
-import { setWordsFromLS, getWordsFromLS } from 'src/app/store/action/dictionary.action';
+import { getWordsFromLS, removeWordFromDictionary } from 'src/app/store/action/dictionary.action';
 import { Observable } from 'rxjs';
 import { selectDictionary } from 'src/app/store/selectors/dictionary.selectors';
 
@@ -18,7 +18,6 @@ import { selectDictionary } from 'src/app/store/selectors/dictionary.selectors';
 	styleUrls: ['./dictionary.component.scss']
 })
 export class DictionaryComponent implements OnInit {
-	public dictionary: Word[] = [];
 	public dictionary$: Observable<Word[]> = this._store$.pipe(select(selectDictionary));
 	public audio: HTMLAudioElement;
 	public displayedColumns: string[] = ['index', 'englishWord', 'russianWord', 'listen', 'actions'];
@@ -55,10 +54,8 @@ export class DictionaryComponent implements OnInit {
 		});
 	}
 
-	public removeWordFromDictionary(word: Word): void {
-		console.log(word);
-		/*this.dictionary = this.dictionary.filter((item: Word) => item.id !== word.id);
-		this.dataGameService.save(this.dictionary);*/
+ 	public removeWordFromDictionary(word: Word): void {
+		this._store$.dispatch(removeWordFromDictionary({word}));
 	}
 
 	public playAudio(word: Word): void {
