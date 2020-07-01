@@ -29,7 +29,7 @@ export const removeWordFromDictionary: TypeActionCreator<string, { word: Word }>
 
 export const changeWordStatus: TypeActionCreator<string, { word: Word, isLoading: boolean }> = createAction(
 	'[Dictionary] change status word',
-	props<{word: Word}>()
+	props<{word: Word, isLoading: boolean}>()
 );
 
 export const getAudioSrc: TypeActionCreator<string, { word: Word }> = createAction(

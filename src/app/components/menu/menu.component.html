@@ -1,14 +1,48 @@
 <div class="app-menu">
+	<div class="app-menu--container">
 	<div class="app-menu--navigate">
 		<a routerLink="" class="app-menu--link" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">{{'MENU.HOME' | translate}}</a>
 		<a routerLink="/game" class="app-menu--link" routerLinkActive="active-link">{{'MENU.GAME' | translate}}</a>
 		<a routerLink="/dictionary" class="app-menu--link" routerLinkActive="active-link"> <span matBadge="{{dictionaryCount$ | async}}" matBadgeOverlap="false">{{'MENU.DICTIONARY' | translate}}</span></a>
 		<a routerLink="/translate" class="app-menu--link" routerLinkActive="active-link">{{'MENU.TRANSLATOR' | translate}}</a> 
 		<a routerLink="/about-me" class="app-menu--link" routerLinkActive="active-link">{{'MENU.ABOUT ME' | translate}}</a>
-		<div>
+	</div>
+	<div class="app-menu--mat-menu">
+		<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+			<mat-icon>more_vert</mat-icon>
+		  </button>
+		  <mat-menu #menu="matMenu">
+			<button mat-menu-item [routerLink] = "['/']">
+			  <mat-icon>home</mat-icon>
+			  <span>{{'MENU.HOME' | translate}}</span>
+			<!--   <a routerLink="" class="app-menu--link" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">{{'MENU.HOME' | translate}}</a> -->
+			</button>
+			<button mat-menu-item [routerLink] = "['/game']">
+			  <mat-icon>gamepad</mat-icon>
+			  <span>{{'MENU.GAME' | translate}}</span>
+			 <!--  <a routerLink="/game" class="app-menu--link" routerLinkActive="active-link">{{'MENU.GAME' | translate}}</a> -->
+			</button>
+			<button mat-menu-item [routerLink] = "['/dictionary']">
+			  <mat-icon>menu_book</mat-icon>
+			  <span>{{'MENU.DICTIONARY' | translate}}</span>
+			 <!--  <a routerLink="/dictionary" class="app-menu--link" routerLinkActive="active-link"> <span matBadge="{{dictionaryCount$ | async}}" matBadgeOverlap="false">{{'MENU.DICTIONARY' | translate}}</span></a> -->
+			</button>
+			<button mat-menu-item [routerLink] = "['/translator']">
+				<mat-icon>search</mat-icon>
+				<span>{{'MENU.TRANSLATOR' | translate}}</span>
+			<!-- 	<a routerLink="/translate" class="app-menu--link" routerLinkActive="active-link">{{'MENU.TRANSLATOR' | translate}}</a>  -->
+			  </button>
+			  <button mat-menu-item [routerLink] = "['/about-me']">
+				<mat-icon>person_outline</mat-icon>
+				<span>{{'MENU.ABOUT ME' | translate}}</span>
+			<!-- 	<a routerLink="/about-me" class="app-menu--link" routerLinkActive="active-link">{{'MENU.ABOUT ME' | translate}}</a> -->
+			  </button>
+		  </mat-menu>
+	</div>
+	<div class="app-menu--toggle-button">
 	    <mat-button-toggle-group #langSelect="matButtonToggleGroup" (change)=" translate.use(langSelect.value)">
 				<mat-button-toggle *ngFor="let lang of translate.getLangs()" [value]="lang" [checked]="lang === translate.currentLang" >{{lang=="ru"?"🇷🇺":"🇬🇧"}}</mat-button-toggle>
 			  </mat-button-toggle-group> 
-		  </div>
 	</div>
+</div>
 </div>

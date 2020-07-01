@@ -9,8 +9,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Store, select } from '@ngrx/store';
 import { DictionaryState } from 'src/app/store/state/dictionary.state';
 import { getWordsFromLS, removeWordFromDictionary, changeWordStatus, getAudioSrc } from 'src/app/store/action/dictionary.action';
-import { Observable } from 'rxjs';
+import { Observable, PartialObserver } from 'rxjs';
 import { selectDictionary, selectSrcAudio } from 'src/app/store/selectors/dictionary.selectors';
+import { Dictionary } from './dictionary.model';
 
 @Component({
 	selector: 'app-dictionary',
@@ -19,7 +20,7 @@ import { selectDictionary, selectSrcAudio } from 'src/app/store/selectors/dictio
 })
 export class DictionaryComponent implements OnInit {
 	public dictionary$: Observable<Word[]> = this._store$.pipe(select(selectDictionary));
-	public srcAudio$: Observable<string> = this._store$.pipe(select(selectSrcAudio));
+	public srcAudio$: Observable<object> = this._store$.pipe(select(selectSrcAudio));
 	public audio: HTMLAudioElement;
 	public displayedColumns: string[] = ['index', 'englishWord', 'russianWord', 'listen', 'actions'];
 	public dataSource: MatTableDataSource<Word> = new MatTableDataSource<Word>();
@@ -54,11 +55,10 @@ export class DictionaryComponent implements OnInit {
 			this.dataSource.paginator = this.paginator;
 		});
 
-		this.srcAudio$.subscribe((data: object) => {
-			if(!data.src) {
-				return
+		this.srcAudio$.subscribe((data: Dictionary) => {
+			if (!data.src) {
+				return;
 			}
-
 			this.audio.src = data.src;
 			this.audio.play();
 			this.spinnerButtonOptions.active = false;
@@ -73,8 +73,8 @@ export class DictionaryComponent implements OnInit {
 
 	public playAudio(word: Word): void {
 		this.spinnerButtonOptions.active = true;
-		this._store$.dispatch(changeWordStatus({ word, isLoading: true}));
-		this._store$.dispatch(getAudioSrc({ word}));
+		this._store$.dispatch(changeWordStatus({ word, isLoading: true }));
+		this._store$.dispatch(getAudioSrc({ word }));
 	}
 
 	/* public playAudio(word: Word): void {
