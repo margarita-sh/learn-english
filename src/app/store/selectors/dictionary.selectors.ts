@@ -8,3 +8,4 @@ export const selectDictionary: any = createSelector(selectStateDictionary, (stat
 // tslint:disable-next-line: max-line-length
 export const selectDictionaryCount: any = createSelector(selectStateDictionary, (state: DictionaryState) => state.dictionary.length);
 
+export const selectSrcAudio: any = createSelector(selectStateDictionary, (state: DictionaryState) => state.srcAudio);

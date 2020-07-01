@@ -8,9 +8,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Store, select } from '@ngrx/store';
 import { DictionaryState } from 'src/app/store/state/dictionary.state';
-import { getWordsFromLS, removeWordFromDictionary, changeWordStatus } from 'src/app/store/action/dictionary.action';
+import { getWordsFromLS, removeWordFromDictionary, changeWordStatus, getAudioSrc } from 'src/app/store/action/dictionary.action';
 import { Observable } from 'rxjs';
-import { selectDictionary } from 'src/app/store/selectors/dictionary.selectors';
+import { selectDictionary, selectSrcAudio } from 'src/app/store/selectors/dictionary.selectors';
 
 @Component({
 	selector: 'app-dictionary',
@@ -19,6 +19,7 @@ import { selectDictionary } from 'src/app/store/selectors/dictionary.selectors';
 })
 export class DictionaryComponent implements OnInit {
 	public dictionary$: Observable<Word[]> = this._store$.pipe(select(selectDictionary));
+	public srcAudio$: Observable<string> = this._store$.pipe(select(selectSrcAudio));
 	public audio: HTMLAudioElement;
 	public displayedColumns: string[] = ['index', 'englishWord', 'russianWord', 'listen', 'actions'];
 	public dataSource: MatTableDataSource<Word> = new MatTableDataSource<Word>();
@@ -52,6 +53,18 @@ export class DictionaryComponent implements OnInit {
 			this.dataSource.data = data;
 			this.dataSource.paginator = this.paginator;
 		});
+
+		this.srcAudio$.subscribe((data: object) => {
+			if(!data.src) {
+				return
+			}
+
+			this.audio.src = data.src;
+			this.audio.play();
+			this.spinnerButtonOptions.active = false;
+			this._store$.dispatch(changeWordStatus({ word: data.word, isLoading: false }));
+
+		});
 	}
 
 	public removeWordFromDictionary(word: Word): void {
@@ -60,8 +73,12 @@ export class DictionaryComponent implements OnInit {
 
 	public playAudio(word: Word): void {
 		this.spinnerButtonOptions.active = true;
-		/* word.isLoading = true; */
-	/* 	const newWord: Word = { ...word, isLoading: true }; */
+		this._store$.dispatch(changeWordStatus({ word, isLoading: true}));
+		this._store$.dispatch(getAudioSrc({ word}));
+	}
+
+	/* public playAudio(word: Word): void {
+		this.spinnerButtonOptions.active = true;
 		this._store$.dispatch(changeWordStatus({ word, isLoading: true}));
 		this.audioService.getAudio(word.englishWord).
 			subscribe((data: any) => {
@@ -70,12 +87,11 @@ export class DictionaryComponent implements OnInit {
 					this.audio.src = data.location;
 					this.audio.play();
 					this.spinnerButtonOptions.active = false;
-					/* 	word.isLoading = false; */
 					this._store$.dispatch(changeWordStatus({ word, isLoading: false }));
 				});
 			});
 
-	}
+	} */
 
 	public getSpinnerButtonOptions(word: Word): any {
 		return { ...this.spinnerButtonOptions, active: word.isLoading };

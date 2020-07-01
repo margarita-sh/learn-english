@@ -26,6 +26,14 @@ export const dictionaryReducer: ActionReducer<DictionaryState, Action> = createR
 
 	}),
 
+	on(DictionaryAction.setAudioSrc, (state: DictionaryState, action: DictionaryAction.CustomAction): DictionaryState => {
+		return {
+			...state,
+			srcAudio: {src: action.src, word: action.word}
+		};
+
+	}),
+
 );
 
 export function StateReducerDictionary(state: DictionaryState | undefined, action: Action): DictionaryState {

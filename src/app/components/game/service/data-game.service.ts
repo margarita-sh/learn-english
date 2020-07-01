@@ -7609,6 +7609,7 @@ export class DataGameService {
 			const wordsStorageString: any = gettingDataFromLocalStorage;
 			const wordsStorage: Word[] = JSON.parse(wordsStorageString);
 			words = words.filter(value => {
+				// tslint:disable-next-line: typedef
 				const result = wordsStorage.find((data) => {
 					return data.id === value.id;
 				});
@@ -7639,4 +7640,3 @@ export class DataGameService {
 			);
 	}
 }
-
