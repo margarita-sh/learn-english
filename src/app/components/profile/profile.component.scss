@@ -1,19 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 .app-profile {
 	display: flex;
 	flex-direction:column;
 	align-items: center;
+	font-size: 16px;
+	font-family: 'Roboto', sans-serif;
+	margin-top: 50px;
 
 	&--container {
-	display: flex;
-	flex-direction:row;
-	flex-wrap: wrap;
-	justify-content: space-between;
+		display: flex;
+		flex-direction:row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		margin:1.5em auto;
+		width:1200px;
+	}
+
+	&--text {
+		font-size: 2em;
+		margin-bottom: 1em;
+		font-weight: 700;
 	}
 
 	&--avatar {
-	margin:5px;
-	width:120px;
-	height: auto;
+		margin:5px;
+		width:12em;
+		height: auto;
 	}
 
 	&--button-close {
@@ -33,6 +45,126 @@
 	&--button-avatar:focus {
 		transform: scale(1.2);
 	}
+	&--button-done {
+		margin: 1em auto;
+		width: 6em;
+	    font-size: 1.6em;
 
+	}
+}
+
+  .mat-form-field{
+	width: 15em;
+  }
+
+
+@media (max-width:1440px) {
+    .app-profile {
+		&--container {
+			width:1000px;
+		}
+	
+		&--text {
+			font-size: 1.8em;
+		}
+	
+		&--avatar {
+			width:10em;
+		}
+
+		&--button-done {
+			margin: .8em auto;
+		}
+
+	}
 
 }
+
+
+@media (max-width:1200px) {
+	 .app-profile {
+		&--container {
+			margin:1.2em auto;
+			width:800px;
+		}
+	
+		&--avatar {
+			width:8em;
+		}
+
+		&--button-done {
+			font-size: 1.4em;
+		}
+
+	 }
+
+}
+
+
+
+@media (max-width:998px) {
+	.app-profile {
+	   &--container {
+		   width:700px;
+	   }
+   
+	   &--text {
+		   font-size: 1.6em;
+	   }
+   
+	   &--avatar {
+		   width:10em;
+	   }
+
+	   &--button-done {
+		   width: 5em;
+		   font-size: 1.2em;
+	   }
+
+	}
+ 	.mat-form-field{
+		width: 12em;
+	  } 
+
+}
+
+@media(max-width: 768px) {
+.app-profile {
+	&--container {
+		width:520px;
+	}
+
+	&--text {
+		font-size: 1.4em;
+	}
+
+	&--avatar {
+		width:8em;
+	}
+
+	&--button-done {
+		margin: .5em auto;
+		font-size: 1em;
+	}
+
+}
+
+}
+
+@media(max-width: 550px) {
+	.app-profile {
+		&--container {
+			margin:0.5em auto;
+			width:350px;
+		}
+	
+		&--text {
+			font-size: 1.2em;
+		}
+	
+		&--avatar {
+			width:7em;
+		}
+	}
+	}
+ 

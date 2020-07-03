@@ -12,48 +12,39 @@
 		flex-direction: column;
 		align-items: flex-start;
 		justify-content: center;
-	/* 	border:1px solid lightgrey; */
 		box-shadow: 0px 10px 10px black;
 	    background-image: url('../../../assets/img/3269841.jpg'); 
 		background-size: cover; 
-	    width:1200px; 
+		width:1200px; 
+		min-width:360px;
 		height: 800px;
 		background-position: 50% 50%;
 		margin: 50px auto;
-/* 		padding:50px 60px;  */
 		padding:4em;
 		box-sizing: border-box;
-/* 		background: red; */
 	}
 	&--title {
 		color:rgb(156, 47, 156);
-/* 		font-family: 'Roboto', sans-serif; */
 		font-size: 2.4em;
 	}
 
 	&--text {
 		width:40%;
 		margin:3em 0;
-	/* 	font-family: 'Roboto', sans-serif; */
 		font-size: 1.5em;
 		color:rgb(58, 56, 56);
 		line-height:2; 
 
 	}
 	&--button{
-	/* 	font-family: 'Roboto', sans-serif; */
-	/* 	font-size: 22px; */
 		font-size:1.8em;
 		width:10em;
 		line-height: 20px;
-	/* 	margin:auto; */
 		padding: 1em;
 		text-align: center;
 		text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
 	    position: relative;
 	  	transition-duration: 0.3s;
-	  /* 	transition-property: transform; */
-	  	/* transform: translateZ(0); */
 	  	background: linear-gradient(to bottom, rgb(189, 53, 189), rgb(231, 186, 231));
 	  	border:1px solid rgb(156, 47, 156);
 	  	color:rgb(58, 56, 56);
@@ -74,7 +65,6 @@
 	 	opacity: 0;
 	 	background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
 	 	transition-duration: 0.3s;
-/* 	  	transition-property: transform, opacity; */
 	}
 	
 	&--button:hover {
@@ -108,8 +98,6 @@
 	}
 }
 
-
-
 @media (max-width:768px) {
 
 	.app-home {
@@ -138,16 +126,15 @@
 			align-items: center;
 			width:100%; 
 			height: 500px;
-		/* 	background-image: url(../../../assets/img/bigben.jpg); 
-			background-size: contain; */
-
+			background: white;
 		}
 		&--title {
-			font-size: 1.2em;
-			width:100%;
+			font-size: 1.6em;
 		}
 		&--text {
-			font-size: 0.8em;
+			font-size: 1em;
+			margin:2em 0;
+			width:90%
 		}
 		&--button {
 			font-size: 1em;

@@ -44,6 +44,14 @@ export class ProfileService {
 		{
 			id: 10,
 			src: './assets/avatar/10.svg',
+		},
+		{
+			id: 11,
+			src: './assets/avatar/11.svg',
+		},
+		{
+			id: 12,
+			src: './assets/avatar/12.svg',
 		}
 	];
 

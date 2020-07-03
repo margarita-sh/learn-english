@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { of} from 'rxjs';
+import { of } from 'rxjs';
 import { interval } from 'rxjs';
 import { take, delay } from 'rxjs/operators';
 import { Word } from './word.model';
@@ -52,7 +52,7 @@ export class GameComponent implements OnInit {
 
 	public ngOnInit(): void {
 		this.generateRandomUser();
-		 if (this.profileService.getProfileFromLS()) {
+		if (this.profileService.getProfileFromLS()) {
 			this.gameStarted = 'start';
 		} else {
 			this.gameStarted = 'profile';
