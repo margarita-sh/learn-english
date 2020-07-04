@@ -7,26 +7,25 @@ type TypeActionCreator<S extends string, O extends object> = ActionCreator<
 >;
 
 export interface CustomAction extends Action {
-	wordEng: string[];
-	wordRu: string;
-	type: string;
-	payload?: any;
+	wordTranslate: string[];
+	word: string;
+	lang: string;
+	/* type: string;
+	payload?: any; */
 	error: string;
 }
 
-export const translate: TypeActionCreator<string, { wordRu: string }> = createAction(
+export const translate: TypeActionCreator<string, { word: string, lang: string }> = createAction(
 	'[Translate] translate word',
-	props<{ wordRu: string }>()
+	props<{ word: string, lang: string }>()
 );
 
-export const resultTranslate: TypeActionCreator<string, { wordEng: string[]}> = createAction(
+export const resultTranslate: TypeActionCreator<string, { wordTranslate: string[]}> = createAction(
 	'[Translate] result translate',
-	props<{wordEng: string[]}>()
+	props<{wordTranslate: string[]}>()
 );
 
 export const error: TypeActionCreator<string, { error: string}> = createAction(
 	'[Translate] error translate',
-	props<{
-		error: string
-	}>()
+	props<{error: string}>()
 );

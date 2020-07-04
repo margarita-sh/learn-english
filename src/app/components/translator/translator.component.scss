@@ -1,91 +1,62 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+  
 .app-translator{
 	width:100%;
 	margin: 50px auto;
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
+	box-sizing: border-box;
 
 	&--container {
-	width:1200px;
-	margin:auto;
+		width:800px;
+		margin:auto;
+		border:1px solid gray; 
 	}
 
 	&--translate {
-	padding:0.5em;
-	font-size: 1em;
-	text-align: center;
+		display:flex;
+		border-bottom: 1px solid gray; 
+		padding:1em;
+		font-size:1.2em;
 	}
+	&--text {
+		display:flex;
+	}
+
+	&--lang {
+		width:50%;
+		text-align: center;
+		color:rgb(80, 78, 78);
+	}
+
+	&--textarea {
+		width:25em;
+		resize: none;
+		min-height: 8em;
+		padding:0.5em;
+		border: none;
+		outline: none;
+	} 
 
 	&--form {
-	width: 500px;
-	margin:auto;
-  	}
-
-  	&--field {
-	width: 100%;
-	  }
-	  
-  	&--button {
-	border: none;
-	background: transparent;
-  	}
-
-}
-
-
-@media (max-width:1440px) {
-    .app-translator {
-		&--container {
-			width:1000px;
-		   }
-		}
-}
-
-@media (max-width:1200px) {
-	.app-translator {
-		&--container {
-			width:800px;
-		   }
-		&--form {
-			width: 600px;
-			}
-		}
-}
-
-@media (max-width:998px) {
-	.app-translator {
-		&--container {
-			width:700px;
-		   }
-		&--form {
-			width: 500px;
-			}
-		}
-}
-
-@media(max-width: 768px) {
-	.app-translator {
-		&--container {
-			width:520px;
-		   }
-
-		&--form {
-			width: 400px;
-			}
-		}
-}
-
-
-@media(max-width: 550px) {
-	.app-translator {
-		&--container {
-			width:350px;
-		   }
-		&--form {
-			width: 250px;
-		}
-		}
-		
+		width:400px;
+		border-right:1px solid gray;
+		box-sizing: border-box;
 	}
 
-  
+	&--arrows {
+		color:rgb(80, 78, 78);
+		cursor: pointer;
+	}
+	&--arrows:hover  {
+		color:black
+	}
+
+	&--btn {
+		position: absolute;
+	}
+}
+.btn {
+	width:10em;
+	padding:1em;
+}

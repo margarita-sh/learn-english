@@ -9,7 +9,7 @@ export const translateReducer: ActionReducer<TranslateState, Action> = createRed
 		return {
 			...state,
 			error: '',
-			wordEng: action.wordEng
+			wordTranslate: action.wordTranslate
 		};
 
 	}),

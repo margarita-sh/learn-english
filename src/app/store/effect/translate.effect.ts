@@ -13,10 +13,10 @@ export class TranslateEffects {
 		public translate$: Observable<TypedAction<string>> = createEffect(
 			() => this.actions$.pipe(
 				ofType(translate),
-				mergeMap((action: CustomAction) => this.dataService.translateWord(action.wordRu)
+				mergeMap((action: CustomAction) => this.dataService.translateWord(action.word, action.lang)
 					.pipe(
 						map((data: FullTranslation) => {
-							return resultTranslate({ wordEng: data.translate});
+							return resultTranslate({ wordTranslate: data.translate});
 						}),
 						catchError((e: Error) => of(error({ error: e.message})))
 					)

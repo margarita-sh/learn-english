@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TranslateState } from 'src/app/store/state/translate.state';
 import { Store, select } from '@ngrx/store';
 import { translate, resultTranslate } from 'src/app/store/action/translate.action';
-import { selectWordEng, selectError } from 'src/app/store/selectors/translate.selectors';
+import { selectError, selectWordTranslate } from 'src/app/store/selectors/translate.selectors';
 import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -13,9 +13,10 @@ import { TranslateService } from '@ngx-translate/core';
 })
 
 export class TranslatorComponent {
-	public wordsEng$: Observable<string[]> = this._store$.pipe(select(selectWordEng));
+	public wordTranslate$: Observable<string[]> = this._store$.pipe(select(selectWordTranslate));
 	public error$: Observable<string> = this._store$.pipe(select(selectError));
 	public word: string;
+	public lang: string = 'ru-en';
 	// tslint:disable-next-line: no-shadowed-variable
 	constructor(public _store$: Store<TranslateState>, public translate: TranslateService) {
 		translate.addLangs(['en', 'ru']);
@@ -25,12 +26,20 @@ export class TranslatorComponent {
 	}
 
 	public translateWord(): void {
-		return this._store$.dispatch(translate({ wordRu: this.word }));
+		return this._store$.dispatch(translate({ word: this.word, lang: this.lang}));
 	}
 
 	public onTitleChange(): void {
 		if (this.word.length === 0) {
-			return this._store$.dispatch(resultTranslate({ wordEng: [] }));
+			return this._store$.dispatch(resultTranslate({ wordTranslate: [] }));
+		}
+	}
+
+	public changeLang(): void {
+		if (this.lang === 'ru-en') {
+			this.lang = 'en-ru';
+		} else {
+			this.lang = 'ru-en';
 		}
 	}
 }
