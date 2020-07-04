@@ -15,27 +15,22 @@
 			<button mat-menu-item [routerLink] = "['/']">
 			  <mat-icon>home</mat-icon>
 			  <span>{{'MENU.HOME' | translate}}</span>
-			<!--   <a routerLink="" class="app-menu--link" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">{{'MENU.HOME' | translate}}</a> -->
 			</button>
 			<button mat-menu-item [routerLink] = "['/game']">
 			  <mat-icon>gamepad</mat-icon>
 			  <span>{{'MENU.GAME' | translate}}</span>
-			 <!--  <a routerLink="/game" class="app-menu--link" routerLinkActive="active-link">{{'MENU.GAME' | translate}}</a> -->
 			</button>
 			<button mat-menu-item [routerLink] = "['/dictionary']">
 			  <mat-icon>menu_book</mat-icon>
 			  <span>{{'MENU.DICTIONARY' | translate}}</span>
-			 <!--  <a routerLink="/dictionary" class="app-menu--link" routerLinkActive="active-link"> <span matBadge="{{dictionaryCount$ | async}}" matBadgeOverlap="false">{{'MENU.DICTIONARY' | translate}}</span></a> -->
 			</button>
-			<button mat-menu-item [routerLink] = "['/translator']">
+			<button mat-menu-item [routerLink] = "['/translate']">
 				<mat-icon>search</mat-icon>
 				<span>{{'MENU.TRANSLATOR' | translate}}</span>
-			<!-- 	<a routerLink="/translate" class="app-menu--link" routerLinkActive="active-link">{{'MENU.TRANSLATOR' | translate}}</a>  -->
 			  </button>
 			  <button mat-menu-item [routerLink] = "['/about-me']">
 				<mat-icon>person_outline</mat-icon>
 				<span>{{'MENU.ABOUT ME' | translate}}</span>
-			<!-- 	<a routerLink="/about-me" class="app-menu--link" routerLinkActive="active-link">{{'MENU.ABOUT ME' | translate}}</a> -->
 			  </button>
 		  </mat-menu>
 	</div>

@@ -1,23 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 .app-translator{
-	width:900px; 
+	width:100%;
 	margin: 50px auto;
-	padding:30px;
-	box-shadow: 0px 10px 10px black;
-	box-sizing: border-box;
-	font-size: 26px;
 	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+
+	&--container {
+	width:1200px;
+	margin:auto;
+	}
+
+	&--translate {
+	padding:0.5em;
+	font-size: 1em;
+	text-align: center;
+	}
 
 	&--form {
 	width: 500px;
 	margin:auto;
-  }
-  	&--full-width {
+  	}
+
+  	&--field {
 	width: 100%;
-  }
-  &--button {
-	  border: none;
-	  background: transparent;
-  }
+	  }
+	  
+  	&--button {
+	border: none;
+	background: transparent;
+  	}
+
 }
+
+
+@media (max-width:1440px) {
+    .app-translator {
+		&--container {
+			width:1000px;
+		   }
+		}
+}
+
+@media (max-width:1200px) {
+	.app-translator {
+		&--container {
+			width:800px;
+		   }
+		&--form {
+			width: 600px;
+			}
+		}
+}
+
+@media (max-width:998px) {
+	.app-translator {
+		&--container {
+			width:700px;
+		   }
+		&--form {
+			width: 500px;
+			}
+		}
+}
+
+@media(max-width: 768px) {
+	.app-translator {
+		&--container {
+			width:520px;
+		   }
+
+		&--form {
+			width: 400px;
+			}
+		}
+}
+
+
+@media(max-width: 550px) {
+	.app-translator {
+		&--container {
+			width:350px;
+		   }
+		&--form {
+			width: 250px;
+		}
+		}
+		
+	}
 
   

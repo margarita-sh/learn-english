@@ -41,6 +41,11 @@
 		"TITLE": "My profile",
 		"MAT-LABEL": "Enter your nickname",
 		"BUTTON": "Done"
+	},
+
+	"NOTFOUND": {
+		"TEXT": "Page not found",
+		"BUTTON": "Back"
 	}
 
   }

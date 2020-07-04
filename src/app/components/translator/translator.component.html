@@ -1,6 +1,7 @@
 <div class="app-translator">
+	<div class="app-translator--container">
 	<form class="app-translator--form" (ngSubmit)="translateWord()">
-		<mat-form-field class="app-translator--full-width">
+		<mat-form-field class="app-translator--field">
 		  <mat-label>{{'TRANSLATOR.MAT-LABEL' | translate}}</mat-label>
 		  <input matInput placeholder = "{{'TRANSLATOR.EXAMPLE' | translate}}" value="Привет" [(ngModel)]="word" type="search" name="wordsEng"  (ngModelChange)="onTitleChange()">
 		  <button mat-button *ngIf="word" matSuffix mat-icon-button aria-label="Clear" (click)="word=''; onTitleChange()" class="app-translator--button" type="button">
@@ -8,11 +9,14 @@
 		  </button>
 		</mat-form-field>
 	</form>
-	<p *ngFor="let word of wordsEng$ |async" >
-		{{word}}
-	  </p>
-	<p *ngIf= "error$ | async">
-		{{error$ | async}}</p>
+	<div class="app-translator--translate">
+		<p *ngFor="let word of wordsEng$ |async" >
+			{{word}}
+		  </p>
+		<p *ngIf= "error$ | async">
+			{{error$ | async}}</p>
+	</div>
+	</div>
 	</div>
 
 	

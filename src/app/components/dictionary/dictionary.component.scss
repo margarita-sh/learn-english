@@ -1,15 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 .app-dictionary {
-	width:900px;
-	margin:auto;
+	width:100%;
+	margin:50px auto;
 
+
+   &--container {
+	width:1200px;
+	margin: auto;
+   }
+
+ 	&--index,
+ 	&--word,
+ 	&--sound,
+	&--remove {
+	padding:0.5em;
+}
 	&--index {
 		width:10%;
 	}
+
 	&--word {
 		width:35%;
 	}
+
 	&--sound,
 	&--remove {
 		text-align: center;
@@ -18,6 +32,76 @@
 		
 }
 
-.mat-elevation-z8 {
+ .mat-elevation-z8 {
 	width:100%;
+	margin:auto;
+}   
+
+@media (max-width:1440px) {
+    .app-dictionary {
+		&--container {
+			width:1000px;
+		   }
+		}
 }
+
+@media (max-width:1200px) {
+	.app-dictionary {
+		&--container {
+			width:800px;
+		   }
+		}
+}
+
+@media (max-width:998px) {
+	.app-dictionary {
+		&--container {
+			width:700px;
+		   }
+	}
+}
+
+@media(max-width: 768px) {
+	.app-dictionary {
+		&--container {
+			width:520px;
+		}
+	}
+}
+
+
+@media(max-width: 550px) {
+	.app-dictionary {
+		&--container {
+			width:350px;
+		   }
+
+		&--remove-btn ,
+		&--spinner-btn {
+			font-size: 0.8em;
+			line-height: 2.2em; 
+			min-width: 2em;
+			padding:0.5em;
+			text-align: right;
+		   }
+
+		&--index,
+		&--word,
+		&--sound,
+		&--remove {
+		 	padding:0.2em;
+	  		} 
+	}
+	
+	td.mat-cell:last-of-type,
+	th.mat-header-cell:last-of-type {
+		padding-right: 0.5em;
+	}
+
+	td.mat-cell:first-of-type,
+	th.mat-header-cell:first-of-type {
+		padding-left: 0.5em;
+	}
+	
+}
+ 

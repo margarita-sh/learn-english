@@ -9,7 +9,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Store, select } from '@ngrx/store';
 import { DictionaryState } from 'src/app/store/state/dictionary.state';
 import { getWordsFromLS, removeWordFromDictionary, changeWordStatus, getAudioSrc } from 'src/app/store/action/dictionary.action';
-import { Observable, PartialObserver } from 'rxjs';
+import { Observable } from 'rxjs';
 import { selectDictionary, selectSrcAudio } from 'src/app/store/selectors/dictionary.selectors';
 import { Dictionary } from './dictionary.model';
 
@@ -49,7 +49,7 @@ export class DictionaryComponent implements OnInit {
 	}
 
 	public ngOnInit(): void {
-		this._store$.dispatch(getWordsFromLS({}));
+	 	this._store$.dispatch(getWordsFromLS({}));
 		this.dictionary$.subscribe((data: Word[]) => {
 			this.dataSource.data = data;
 			this.dataSource.paginator = this.paginator;
@@ -76,22 +76,6 @@ export class DictionaryComponent implements OnInit {
 		this._store$.dispatch(changeWordStatus({ word, isLoading: true }));
 		this._store$.dispatch(getAudioSrc({ word }));
 	}
-
-	/* public playAudio(word: Word): void {
-		this.spinnerButtonOptions.active = true;
-		this._store$.dispatch(changeWordStatus({ word, isLoading: true}));
-		this.audioService.getAudio(word.englishWord).
-			subscribe((data: any) => {
-				// tslint:disable-next-line: no-shadowed-variable
-				data.subscribe((data: any) => {
-					this.audio.src = data.location;
-					this.audio.play();
-					this.spinnerButtonOptions.active = false;
-					this._store$.dispatch(changeWordStatus({ word, isLoading: false }));
-				});
-			});
-
-	} */
 
 	public getSpinnerButtonOptions(word: Word): any {
 		return { ...this.spinnerButtonOptions, active: word.isLoading };
