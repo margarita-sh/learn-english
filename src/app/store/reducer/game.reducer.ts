@@ -11,7 +11,15 @@ export const gameReducer: ActionReducer<GameState, Action> = createReducer(
 			...state,
 			gameStatus: action.gameStatus
 		});
-	})
+	}),
+
+	on(GameAction.setNewQuestion, (state: GameState, action: GameAction.CustomAction): GameState => {
+		return ({
+			...state,
+			word: action.word,
+			answers: action.answers
+		});
+	}),
 );
 
 export function StateReducerGame(state: GameState | undefined, action: Action): GameState {

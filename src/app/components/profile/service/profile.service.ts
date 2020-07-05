@@ -41,4 +41,13 @@ export class ProfileService {
 
 		return new Profile();
 	}
+
+	public getRandomUser(): Profile {
+		const rand: number = Math.floor(Math.random() * this.avatars.length);
+		const randNickname: number = Math.floor(Math.random() * this.nicknameRival.length);
+		const profile: Profile = new Profile();
+		profile.src = this.avatars[rand].src;
+		profile.nickname = this.nicknameRival[randNickname];
+		return profile;
+	}
 }

@@ -24,3 +24,11 @@ export const setProfileUser: TypeActionCreator<string, { profile: Profile }> = c
 export const getProfileUserFromLS: TypeActionCreator<string, {}> = createAction(
 	'[Profile] get profile user from LS'
 );
+
+export const getRivalProfile: TypeActionCreator<string, {}> = createAction(
+	'[Profile] get profile rival',
+);
+
+export const setRivalProfile: TypeActionCreator<string, { profile: Profile }> = createAction(
+	'[Profile] set profile rival',
+);

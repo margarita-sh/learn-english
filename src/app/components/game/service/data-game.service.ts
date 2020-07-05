@@ -10,8 +10,10 @@ export class DataGameService {
 	private static wordsforLearningLSKey: string = 'wordsforLearning';
 	public url: string = './assets/words.json';
 	public words: Word[] = [];
+	public numberOptionsAnswer: number = 3;
 
 	constructor(private _httpClient: HttpClient) { }
+	
 	public getRandomWord(): Word {
 		const rand: number = Math.floor(Math.random() * this.words.length);
 		const randWord: Word = this.words[rand];
@@ -72,5 +74,16 @@ export class DataGameService {
 
 	public loadWordsHttp(): void {
 		this._httpClient.get<Word[]>(this.url).subscribe((items: Word[]) => this.words = items);
+	}
+
+	public getRandomAnswers(word: Word): string[] {
+		const wordsForArrayAnswer: Set<string> = new Set();
+		wordsForArrayAnswer.add(word.russianWord);
+		while (wordsForArrayAnswer.size < this.numberOptionsAnswer) {
+			const randomRuWord: Word = this.getRandomWord();
+			wordsForArrayAnswer.add(randomRuWord.russianWord);
+		}
+		const newLocal: number = 0.5;
+		return Array.from(wordsForArrayAnswer).sort(() => Math.random() - newLocal);
 	}
 }

@@ -12,8 +12,10 @@ import { Profile } from '../profile/profile.model';
 import { getWordsFromLS } from 'src/app/store/action/dictionary.action';
 import { Store, select } from '@ngrx/store';
 import { DictionaryState } from 'src/app/store/state/dictionary.state';
-import { setGameStatus } from 'src/app/store/action/game.action';
-import { selectStatusGame } from 'src/app/store/selectors/game.selectors';
+import { setGameStatus, getNewQuestion } from 'src/app/store/action/game.action';
+import { selectStatusGame, selectWord, selectAnswers } from 'src/app/store/selectors/game.selectors';
+import { getRivalProfile } from 'src/app/store/action/profile.actions';
+import { selectRivalProfile } from 'src/app/store/selectors/profile.select';
 
 @Component({
 	selector: 'app-game',
@@ -22,12 +24,16 @@ import { selectStatusGame } from 'src/app/store/selectors/game.selectors';
 })
 export class GameComponent implements OnInit {
 	public gameStatus$: Observable<string> = this._store$.pipe(select(selectStatusGame));
-	public word: Word = null;
+	public word$: Observable<Word> = this._store$.pipe(select(selectWord));
+	public answers$: Observable<string[]> = this._store$.pipe(select(selectAnswers));
+	public randomRival$: Observable<Profile> = this._store$.pipe(select(selectRivalProfile));
+
+	//public word: Word = null;
 	public count: number = null;
-	public arrayAnswers: string[] = null;
+	//public arrayAnswers: string[] = [];
 	public sec: number = 1000;
 	public resultDuration: number = 200;
-	public numberOptionsAnswer: number = 3;
+	/* public numberOptionsAnswer: number = 3; */
 	public correctAnswer: number = 0;
 	public wrongAnswer: number = 0;
 	public timeRound: number = 30;
@@ -35,7 +41,7 @@ export class GameComponent implements OnInit {
 	public color: object = {};
 	public selectedAnswer: string = '';
 	public dataUser: Profile;
-	public randomUser: Profile;
+	/* public randomUser: Profile; */
 	public allAnswerRival: number = 30;
 	public correctAnswerRival: number = 0;
 	public wrongAnserRival: number = 0;
@@ -69,42 +75,36 @@ export class GameComponent implements OnInit {
 
 	public game(): void {
 		this._store$.dispatch(setGameStatus({ gameStatus: 'game' }));
-		this.arrayAnswers = [];
-		this.word = this.dataGameService.getRandomWord();
-		const wordsForArrayAnswer: Set<string> = new Set();
-		wordsForArrayAnswer.add(this.word.russianWord);
-		while (wordsForArrayAnswer.size < this.numberOptionsAnswer) {
-			const randomRuWord: Word = this.dataGameService.getRandomWord();
-			wordsForArrayAnswer.add(randomRuWord.russianWord);
-		}
-		const newLocal: number = 0.5;
-		this.arrayAnswers = Array.from(wordsForArrayAnswer).sort(() => Math.random() - newLocal);
+		this._store$.dispatch(getNewQuestion({}));
 	}
 
 	public checkAnswer(answer: string, index: number): void {
-		if (answer === this.word.russianWord) {
-			this.selectedAnswer = 'true';
-			this.correctAnswer++;
-			this.color = {
-				[index]: {
-					background: 'green'
+		this.word$.pipe(take(1))
+			.subscribe((word: Word) => {
+				if (answer === word.russianWord) {
+					this.selectedAnswer = 'true';
+					this.correctAnswer++;
+					this.color = {
+						[index]: {
+							background: 'green'
+						}
+					};
+				} else {
+					this.selectedAnswer = 'false';
+					this.wrongAnswer++;
+					this.arrayForDictionary.push(word);
+					this.color = {
+						[index]: {
+							background: 'red'
+						}
+					};
 				}
-			};
-		} else {
-			this.selectedAnswer = 'false';
-			this.wrongAnswer++;
-			this.arrayForDictionary.push(this.word);
-			this.color = {
-				[index]: {
-					background: 'red'
-				}
-			};
-		}
-		of(this.color).pipe(delay(this.resultDuration)).subscribe(() => {
-			this.color = {};
-			this.selectedAnswer = '';
-		});
-		this.game();
+				of(this.color).pipe(delay(this.resultDuration)).subscribe(() => {
+					this.color = {};
+					this.selectedAnswer = '';
+				});
+				this.game();
+			});
 	}
 
 	public startTimer(): void {
@@ -146,11 +146,7 @@ export class GameComponent implements OnInit {
 	}
 
 	public generateRandomUser(): void {
-		const rand: number = Math.floor(Math.random() * this.profileService.avatars.length);
-		const randNickname: number = Math.floor(Math.random() * this.profileService.nicknameRival.length);
-		this.randomUser = new Profile();
-		this.randomUser.src = this.profileService.avatars[rand].src;
-		this.randomUser.nickname = this.profileService.nicknameRival[randNickname];
+		this._store$.dispatch(getRivalProfile({}));
 	}
 
 	public resultGameRival(): void {

@@ -10,6 +10,12 @@ export const profileReducer: ActionReducer<ProfileState, Action> = createReducer
 			userProfile: action.profile
 		});
 	}),
+	on(ProfileAction.setRivalProfile, (state: ProfileState, action: ProfileAction.CustomAction): ProfileState => {
+		return ({
+			...state,
+			rivalProfile: action.profile
+		});
+	}),
 
 );
 

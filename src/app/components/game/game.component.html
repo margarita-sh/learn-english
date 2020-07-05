@@ -10,8 +10,8 @@
 	<div *ngIf="(gameStatus$ | async) === 'game'" class="app-game--container-game">
 		<div class="app-game--container-avatar">
 			<div>
-				<div class="app-game--avatar"><img src={{randomUser.src}}></div>
-				<p class="app-game--nickname">{{randomUser.nickname}}</p>
+				<div class="app-game--avatar"><img src={{(randomRival$ | async).src}}></div>
+				<p class="app-game--nickname">{{(randomRival$ | async).nickname}}</p>
 			</div>
 			<div class="app-game--spinner">
 				<mat-progress-spinner [mode]="mode" [value]="valueProgressSpinner" aria-label="showText"
@@ -25,14 +25,14 @@
 				<p class="app-game--nickname">{{dataUser.nickname}}</p>
 			</div>
 		</div>
-		<div class="app-game--word-english">{{word.englishWord}}</div>
+		<div class="app-game--word-english">{{(word$ | async).englishWord}}</div>
 		<div class="app-game--hidden-content">
 			<img src="./assets/img/checkmark.png" alt="checkmark" class="app-game--checkmark"
 				[style.display]="selectedAnswer === 'true'?'block':'none'">
 			<img src="./assets/img/close.svg.png" alt="checkmark" class="app-game--close"
 				[style.display]="selectedAnswer === 'false'?'block':'none'">
 		</div>
-		<button mat-stroked-button *ngFor="let wordRu of arrayAnswers; let i = index" (click)="checkAnswer(wordRu, i)"
+		<button mat-stroked-button *ngFor="let wordRu of answers$ | async; let i = index" (click)="checkAnswer(wordRu, i)"
 			[ngStyle]="color[i]" class="app-game--btn-answer">{{wordRu}}</button>
 	</div>
 	<div *ngIf="(gameStatus$ | async) === 'complete'" class="app-game--container-complete">
@@ -42,8 +42,8 @@
 					{{resultAllGame | translate}}</div>
 				<div class="app-game--game-outcome">
 					<div>
-						<div class="app-game--avatar-complete"><img src={{randomUser.src}}></div>
-						<p class="app-game--nickname">{{randomUser.nickname}}</p>
+						<div class="app-game--avatar-complete"><img src={{(randomRival$ | async).src}}></div>
+						<p class="app-game--nickname">{{(randomRival$ | async).nickname}}</p>
 					</div>
 					<div class="app-game--result">
 						<p class="app-game--answer">{{'GAME.TRUE-ANSWER' | translate}}:

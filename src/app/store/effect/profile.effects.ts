@@ -3,7 +3,7 @@ import { ofType, createEffect, Actions } from '@ngrx/effects';
 import { mergeMap, map } from 'rxjs/operators';
 import { Observable, of, } from 'rxjs';
 import { TypedAction } from '@ngrx/store/src/models';
-import { setProfileUser, saveProfileUser, getProfileUserFromLS } from '../action/profile.actions';
+import { setProfileUser, saveProfileUser, getProfileUserFromLS, getRivalProfile, setRivalProfile } from '../action/profile.actions';
 import { ProfileService } from 'src/app/components/profile/service/profile.service';
 import { CustomAction } from '../action/profile.actions';
 import { Profile } from 'src/app/components/profile/profile.model';
@@ -30,6 +30,19 @@ export class ProfileEffects {
 				.pipe(
 					map((profile: Profile) => {
 						return setProfileUser({ profile });
+					})
+				)
+			)
+		)
+	);
+
+	public getRivalProfile$: Observable<TypedAction<string>> = createEffect(
+		() => this.actions$.pipe(
+			ofType(getRivalProfile),
+			mergeMap(() => of(this.profileService.getRandomUser())
+				.pipe(
+					map((profile: Profile) => {
+						return setRivalProfile({ profile });
 					})
 				)
 			)

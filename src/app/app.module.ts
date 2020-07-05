@@ -42,6 +42,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { DictionaryEffects } from './store/effect/dictionary.effect';
 import {MatMenuModule} from '@angular/material/menu';
+import { GameEffects } from './store/effect/game.effect';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
 	return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -67,7 +68,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
 		HttpClientModule,
 		StoreModule.forRoot(reducer),
 		StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-		EffectsModule.forRoot([TranslateEffects, DictionaryEffects, ProfileEffects]),
+		EffectsModule.forRoot([TranslateEffects, DictionaryEffects, ProfileEffects, GameEffects]),
 		StoreRouterConnectingModule.forRoot(),
 		BrowserAnimationsModule,
 		MatProgressSpinnerModule,
