@@ -29,15 +29,14 @@
 		color:rgb(80, 78, 78);
 	}
 
-	&--textarea {
+	&--input {
 		width:25em;
-		resize: none;
-		min-height: 8em;
-		padding:0.5em;
+	 	padding:1em; 
 		border: none;
 		outline: none;
+		background: transparent;
 	} 
-
+	
 	&--form {
 		width:400px;
 		border-right:1px solid gray;
@@ -55,8 +54,75 @@
 	&--btn {
 		position: absolute;
 	}
+	&--answer {
+		padding:0.6em;
+	}
 }
-.btn {
-	width:10em;
-	padding:1em;
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+} 
+
+@media(max-width: 998px) {
+	.app-translator{
+	&--container {
+		width:600px;
+	}
+	&--translate {
+		padding:0.5em;
+		font-size:1em;
+	}
+	&--input {
+		width:18em;
+	 	padding:1em; 
+	} 
+	&--form {
+		width:300px;
+	}
 }
+
+}
+
+@media(max-width: 768px) {
+	.app-translator{
+	&--container {
+		width:500px;
+	}
+
+	&--input {
+		width:14em;
+	 	padding:1em; 
+	} 
+	&--form {
+		width:250px;
+	}
+}
+
+}
+
+@media(max-width: 550px) {
+	.app-translator{
+	&--container {
+		width:350px;
+	}
+	&--translate {
+		padding:0.5em;
+		font-size:1em;
+	}
+	&--input {
+		width:14em;
+	 	padding:1em; 
+	} 
+	&--form {
+		width:250px;
+	}
+	&--text {
+		flex-direction: column;
+	}
+}
+
+}
+

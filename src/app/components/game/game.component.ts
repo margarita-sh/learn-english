@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ProfileService } from '../profile/service/profile.service';
 import { Profile } from '../profile/profile.model';
+import { getWordsFromLS } from 'src/app/store/action/dictionary.action';
+import { Store } from '@ngrx/store';
+import { DictionaryState } from 'src/app/store/state/dictionary.state';
 
 @Component({
 	selector: 'app-game',
@@ -43,7 +46,7 @@ export class GameComponent implements OnInit {
 	public diameter: number = 120;
 
 	constructor(public dataGameService: DataGameService, private router: Router, public translate: TranslateService,
-		public profileService: ProfileService) {
+		public profileService: ProfileService, private _store$: Store<DictionaryState>) {
 		translate.addLangs(['en', 'ru']);
 		translate.setDefaultLang('en');
 		const browserLang: any = translate.getBrowserLang();
@@ -123,6 +126,7 @@ export class GameComponent implements OnInit {
 					this.resultGameRival();
 					this.resultGame();
 					this.dataGameService.addWordsDictionary(this.arrayForDictionary);
+					this._store$.dispatch(getWordsFromLS({}));
 				}
 			});
 	}

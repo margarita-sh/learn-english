@@ -49,13 +49,13 @@ export class DictionaryComponent implements OnInit {
 	}
 
 	public ngOnInit(): void {
-	 	this._store$.dispatch(getWordsFromLS({}));
 		this.dictionary$.subscribe((data: Word[]) => {
 			this.dataSource.data = data;
 			this.dataSource.paginator = this.paginator;
 		});
 
 		this.srcAudio$.subscribe((data: Dictionary) => {
+			// tslint:disable-next-line: strict-boolean-expressions
 			if (!data.src) {
 				return;
 			}

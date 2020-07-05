@@ -31,10 +31,10 @@
 
 		<div class="app-translator--text">
 			<div class="app-translator--form">
-				<form class="app-translator--form">
-					<textarea matInput placeholder="{{'TRANSLATOR.EXAMPLE' | translate}}" value="Привет"
+				<form class="app-translator--form" (keyup.enter) ="translateWord()">
+					<input placeholder="{{'TRANSLATOR.EXAMPLE' | translate}}" 
 						[(ngModel)]="word" type="text" name="wordTranslate" (ngModelChange)="onTitleChange()"
-						class="app-translator--textarea"></textarea>
+						class="app-translator--input">
 					<button mat-button *ngIf="word" matSuffix mat-icon-button aria-label="Clear"
 						(click)="word=''; onTitleChange()" class="app-translator--button" type="button" class="app-translator--btn">
 						<mat-icon>close</mat-icon>
@@ -42,14 +42,10 @@
 				</form>
 			</div>
 
-			<!--<div *ngFor="let word of wordTranslate$ |async">
-				{{word}}
-			</div>-->
-		<p>{{(wordTranslate$ | async)[0]}}</p>
+		<div class="app-translator--answer">{{(wordTranslate$ | async)[0]}}</div>
 			<div *ngIf= "error$ | async">
 				{{error$ | async}}</div>
 		</div>
 	</div>
-	<button (click)="translateWord()" class="btn">перевести</button>
 </div>
 
