@@ -59,7 +59,7 @@ export class GameComponent implements OnInit {
 		this.profileService.loadAvatarHttp().subscribe(() => {
 			this.dataUser = this.profileService.getProfileFromLS();
 			this.generateRandomUser();
-			if (this.profileService.getProfileFromLS()) {
+			if (typeof this.profileService.getProfileFromLS().id === 'number') {
 				this._store$.dispatch(setGameStatus({ gameStatus: 'start' }));
 			} else {
 				this._store$.dispatch(setGameStatus({ gameStatus: 'profile' }));
@@ -148,7 +148,7 @@ export class GameComponent implements OnInit {
 	public generateRandomUser(): void {
 		const rand: number = Math.floor(Math.random() * this.profileService.avatars.length);
 		const randNickname: number = Math.floor(Math.random() * this.profileService.nicknameRival.length);
-		this.randomUser = new Profile(1);
+		this.randomUser = new Profile();
 		this.randomUser.src = this.profileService.avatars[rand].src;
 		this.randomUser.nickname = this.profileService.nicknameRival[randNickname];
 	}

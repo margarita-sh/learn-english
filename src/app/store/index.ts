@@ -1,24 +1,24 @@
 import { ActionReducerMap } from '@ngrx/store';
-import { featureKeyCount, CountState } from './state/app.state';
-import { StateReducerCount } from './reducer/app.reducers';
 import { TranslateState, featureKeyTranslate } from './state/translate.state';
 import { StateReducerTranslate } from './reducer/translate.reducer';
 import { StateReducerDictionary } from './reducer/dictionary.reducer';
 import { featureKeyDictionary, DictionaryState } from './state/dictionary.state';
 import { featureKeyGame, GameState } from './state/game.state';
 import { StateReducerGame } from './reducer/game.reducer';
+import { ProfileState, featureKeyProfile } from './state/profile.state';
+import { StateReducerProfile } from './reducer/profile.reducers';
 
 export interface IAppState {
-[featureKeyCount]: CountState;
 [featureKeyTranslate]: TranslateState;
 [featureKeyDictionary]: DictionaryState;
 [featureKeyGame]: GameState;
+[featureKeyProfile]: ProfileState;
 
 }
 
 export const reducer: ActionReducerMap<IAppState> = {
-[featureKeyCount]: StateReducerCount,
 [featureKeyTranslate]: StateReducerTranslate,
 [featureKeyDictionary]: StateReducerDictionary,
 [featureKeyGame]: StateReducerGame,
+[featureKeyProfile]: StateReducerProfile,
 };

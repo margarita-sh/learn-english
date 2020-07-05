@@ -1,6 +1,9 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { ProfileService } from './service/profile.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Store } from '@ngrx/store';
+import { Profile } from './profile.model';
+import { saveProfileUser } from 'src/app/store/action/profile.actions';
 
 @Component({
 	selector: 'app-profile',
@@ -13,7 +16,7 @@ export class ProfileComponent {
 
 	@Output() public onSaved: EventEmitter<any> = new EventEmitter();
 
-	constructor(public profileService: ProfileService, public translate: TranslateService) {
+	constructor(public profileService: ProfileService, public translate: TranslateService, private _store: Store) {
 		translate.addLangs(['en', 'ru']);
 		translate.setDefaultLang('en');
 		const browserLang: any = translate.getBrowserLang();
@@ -25,7 +28,11 @@ export class ProfileComponent {
 	}
 
 	public save(nickname: string, idAvatar: number): void {
-		this.profileService.saveProfile(nickname, idAvatar);
+	/* 	this.profileService.saveProfile(nickname, idAvatar); */
+	const profile: Profile = new Profile();
+	profile.nickname = nickname;
+	profile.id = idAvatar;
+	this._store.dispatch(saveProfileUser({profile}));
 		this.onSaved.emit();
 	}
 

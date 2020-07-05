@@ -10,7 +10,7 @@ export class ProfileService {
 	public baseURL: string = './assets/avatars.json';
 	public avatars: Profile[] = [];
 	public nicknameRival: any = ['Саша', 'Женя', 'Знаток', 'Учитель'];
-	constructor(private _http: HttpClient) {}
+	constructor(private _http: HttpClient) { }
 	public loadAvatarHttp(): Observable<Profile[]> {
 		/* this._http.get<Profile[]>(this.baseURL).subscribe((items: Profile[]) => this.avatars = items); */
 		return this._http.get<Profile[]>(this.baseURL).pipe(
@@ -30,7 +30,7 @@ export class ProfileService {
 		localStorage.setItem(ProfileService.profileKeyLS, dataUserLS);
 	}
 
-	public getProfileFromLS(): any {
+	public getProfileFromLS(): Profile {
 		const gettingDataFromLocalStorage: any = localStorage.getItem(ProfileService.profileKeyLS);
 		if (gettingDataFromLocalStorage) {
 			const datafromStorage: Profile = JSON.parse(gettingDataFromLocalStorage);
@@ -38,6 +38,7 @@ export class ProfileService {
 			datafromStorage.src = foundElement.src;
 			return datafromStorage;
 		}
-		return false;
+
+		return new Profile();
 	}
 }
