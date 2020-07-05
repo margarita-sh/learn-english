@@ -10,8 +10,6 @@ export interface CustomAction extends Action {
 	wordTranslate: string[];
 	word: string;
 	lang: string;
-	/* type: string;
-	payload?: any; */
 	error: string;
 }
 

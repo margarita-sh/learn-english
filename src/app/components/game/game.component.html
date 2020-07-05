@@ -1,13 +1,13 @@
 <div class="app-game">
-	<div *ngIf="gameStarted === 'profile'" class="app-game--container-profile">
+	<div *ngIf="(gameStatus$ | async) === 'profile'" class="app-game--container-profile">
 		<app-profile (onSaved)="onSaved()"></app-profile>
 	</div>
 
-	<div *ngIf="gameStarted === 'start'" class="app-game--container-start">
+	<div *ngIf="(gameStatus$ | async) === 'start'" class="app-game--container-start">
 		<button class="app-game--btn-start" (click)="startTimer()">{{'GAME.BUTTON-START' | translate}}</button>
 		<div class="app-game--ball"></div>
 	</div>
-	<div *ngIf="gameStarted === 'game'" class="app-game--container-game">
+	<div *ngIf="(gameStatus$ | async) === 'game'" class="app-game--container-game">
 		<div class="app-game--container-avatar">
 			<div>
 				<div class="app-game--avatar"><img src={{randomUser.src}}></div>
@@ -35,7 +35,7 @@
 		<button mat-stroked-button *ngFor="let wordRu of arrayAnswers; let i = index" (click)="checkAnswer(wordRu, i)"
 			[ngStyle]="color[i]" class="app-game--btn-answer">{{wordRu}}</button>
 	</div>
-	<div *ngIf="gameStarted === 'complete'" class="app-game--container-complete">
+	<div *ngIf="(gameStatus$ | async) === 'complete'" class="app-game--container-complete">
 		<div [ngClass]="{ win: (resultAllGame === 'GAME.RESULT_WIN')}">
 			<div class="app-game--result-game">
 				<div class="app-game--result-text-complete" [style.color]="resultAllGame === 'GAME.RESULT_WIN'? 'green' : 'red'">

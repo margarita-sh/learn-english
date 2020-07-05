@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { interval } from 'rxjs';
 import { take, delay } from 'rxjs/operators';
 import { Word } from './word.model';
@@ -10,8 +10,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { ProfileService } from '../profile/service/profile.service';
 import { Profile } from '../profile/profile.model';
 import { getWordsFromLS } from 'src/app/store/action/dictionary.action';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { DictionaryState } from 'src/app/store/state/dictionary.state';
+import { setGameStatus } from 'src/app/store/action/game.action';
+import { selectStatusGame } from 'src/app/store/selectors/game.selectors';
 
 @Component({
 	selector: 'app-game',
@@ -19,8 +21,8 @@ import { DictionaryState } from 'src/app/store/state/dictionary.state';
 	styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
+	public gameStatus$: Observable<string> = this._store$.pipe(select(selectStatusGame));
 	public word: Word = null;
-	public gameStarted: string = 'profile';
 	public count: number = null;
 	public arrayAnswers: string[] = null;
 	public sec: number = 1000;
@@ -32,7 +34,7 @@ export class GameComponent implements OnInit {
 	public arrayForDictionary: Word[] = [];
 	public color: object = {};
 	public selectedAnswer: string = '';
-	public dataUser: Profile = this.profileService.getProfileFromLS();
+	public dataUser: Profile;
 	public randomUser: Profile;
 	public allAnswerRival: number = 30;
 	public correctAnswerRival: number = 0;
@@ -54,16 +56,19 @@ export class GameComponent implements OnInit {
 	}
 
 	public ngOnInit(): void {
-		this.generateRandomUser();
-		if (this.profileService.getProfileFromLS()) {
-			this.gameStarted = 'start';
-		} else {
-			this.gameStarted = 'profile';
-		}
+		this.profileService.loadAvatarHttp().subscribe(() => {
+			this.dataUser = this.profileService.getProfileFromLS();
+			this.generateRandomUser();
+			if (this.profileService.getProfileFromLS()) {
+				this._store$.dispatch(setGameStatus({ gameStatus: 'start' }));
+			} else {
+				this._store$.dispatch(setGameStatus({ gameStatus: 'profile' }));
+			}
+		});
 	}
 
 	public game(): void {
-		this.gameStarted = 'game';
+		this._store$.dispatch(setGameStatus({ gameStatus: 'game' }));
 		this.arrayAnswers = [];
 		this.word = this.dataGameService.getRandomWord();
 		const wordsForArrayAnswer: Set<string> = new Set();
@@ -121,7 +126,7 @@ export class GameComponent implements OnInit {
 				// tslint:disable-next-line: no-magic-numbers
 				this.valueProgressSpinner = 100 / this.timeRound * count;
 				if (this.count <= 0) {
-					this.gameStarted = 'complete';
+					this._store$.dispatch(setGameStatus({ gameStatus: 'complete' }));
 					this.count = null;
 					this.resultGameRival();
 					this.resultGame();
@@ -136,7 +141,7 @@ export class GameComponent implements OnInit {
 	}
 
 	public onSaved(): void {
-		this.gameStarted = 'start';
+		this._store$.dispatch(setGameStatus({ gameStatus: 'start' }));
 		this.dataUser = this.profileService.getProfileFromLS();
 	}
 

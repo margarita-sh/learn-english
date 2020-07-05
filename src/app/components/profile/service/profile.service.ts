@@ -1,62 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Profile } from '../profile.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 @Injectable()
 export class ProfileService {
 
 	private static profileKeyLS: string = 'profileKeyLS';
-	public avatars: Profile[] = [
-		{
-			id: 1,
-			src: './assets/avatar/1.svg',
-		},
-		{
-			id: 2,
-			src: './assets/avatar/2.svg',
-		},
-		{
-			id: 3,
-			src: './assets/avatar/3.svg',
-		},
-		{
-			id: 4,
-			src: './assets/avatar/4.svg',
-		},
-		{
-			id: 5,
-			src: './assets/avatar/5.svg',
-		},
-		{
-			id: 6,
-			src: './assets/avatar/6.svg',
-		},
-		{
-			id: 7,
-			src: './assets/avatar/7.svg',
-		},
-		{
-			id: 8,
-			src: './assets/avatar/8.svg',
-		},
-		{
-			id: 9,
-			src: './assets/avatar/9.svg',
-		},
-		{
-			id: 10,
-			src: './assets/avatar/10.svg',
-		},
-		{
-			id: 11,
-			src: './assets/avatar/11.svg',
-		},
-		{
-			id: 12,
-			src: './assets/avatar/12.svg',
-		}
-	];
-
+	public baseURL: string = './assets/avatars.json';
+	public avatars: Profile[] = [];
 	public nicknameRival: any = ['Саша', 'Женя', 'Знаток', 'Учитель'];
+	constructor(private _http: HttpClient) {}
+	public loadAvatarHttp(): Observable<Profile[]> {
+		/* this._http.get<Profile[]>(this.baseURL).subscribe((items: Profile[]) => this.avatars = items); */
+		return this._http.get<Profile[]>(this.baseURL).pipe(
+			map((items: Profile[]) => {
+				this.avatars = items;
 
+				return items;
+			})
+		);
+	}
 	public saveProfile(userName: string, idAvatar: number): void {
 		const dataUser: Profile = {
 			nickname: userName,
@@ -74,7 +38,6 @@ export class ProfileService {
 			datafromStorage.src = foundElement.src;
 			return datafromStorage;
 		}
-
 		return false;
 	}
 }
