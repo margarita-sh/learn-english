@@ -29,7 +29,8 @@
 		"TRANSLATION":"Translation",
 		"ENGLISH-WORD": "English word",
 		"LISTEN": "Listen",
-		"REMOVE": "Remove"
+		"REMOVE": "Remove",
+		"WARNING": "There are no words to learn in your dictionary. In order for the words to appear, please play the game, all the incorrect answers in the game will appear in the dictionary for further training."
 	},
 
 	"TRANSLATOR": {
