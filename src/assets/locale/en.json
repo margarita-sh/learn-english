@@ -47,6 +47,12 @@
 	"NOTFOUND": {
 		"TEXT": "Page not found",
 		"BUTTON": "Back"
+	},
+
+	"ABOUT-ME": {
+		"ARTICLE": "Hello! My name is Margarita. I began my introduction to programming in December 2019. This is my first project written in a programming language.",
+		"TEXT": "This project was created as part of the EPAM training. The project uses technologies such as",
+		"CONTINUE": "using libraries"
 	}
 
   }
