@@ -5,3 +5,4 @@ export const selectStateProfile: any = createFeatureSelector<ProfileState>(featu
 
 export const selectRivalProfile: any = createSelector(selectStateProfile, (state: ProfileState) => state.rivalProfile);
 
+export const selectUserProfile: any = createSelector(selectStateProfile, (state: ProfileState) => state.userProfile);

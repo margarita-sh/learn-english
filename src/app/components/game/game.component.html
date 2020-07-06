@@ -10,7 +10,7 @@
 	<div *ngIf="(gameStatus$ | async) === 'game'" class="app-game--container-game">
 		<div class="app-game--container-avatar">
 			<div>
-				<div class="app-game--avatar"><img src={{(randomRival$ | async).src}}></div>
+				<div class="app-game--avatar"><img src="{{(randomRival$ | async).src}}"></div>
 				<p class="app-game--nickname">{{(randomRival$ | async).nickname}}</p>
 			</div>
 			<div class="app-game--spinner">
@@ -21,8 +21,8 @@
 				<div class="app-game--count">{{count}}</div>
 			</div>
 			<div>
-				<div class="app-game--avatar"><img src={{dataUser.src}}></div>
-				<p class="app-game--nickname">{{dataUser.nickname}}</p>
+				<div class="app-game--avatar"><img src="{{(User$ | async ).src}}"></div>
+				<p class="app-game--nickname">{{(User$ | async ).nickname}}</p>
 			</div>
 		</div>
 		<div class="app-game--word-english">{{(word$ | async).englishWord}}</div>
@@ -42,7 +42,7 @@
 					{{resultAllGame | translate}}</div>
 				<div class="app-game--game-outcome">
 					<div>
-						<div class="app-game--avatar-complete"><img src={{(randomRival$ | async).src}}></div>
+						<div class="app-game--avatar-complete"><img src="{{(randomRival$ | async).src}}"></div>
 						<p class="app-game--nickname">{{(randomRival$ | async).nickname}}</p>
 					</div>
 					<div class="app-game--result">
@@ -56,8 +56,8 @@
 					{{resultAllGame | translate}}</div>
 				<div class="app-game--game-outcome">
 					<div>
-						<div class="app-game--avatar-complete"><img src={{dataUser.src}}></div>
-						<p class="app-game--nickname">{{dataUser.nickname}}</p>
+						<div class="app-game--avatar-complete"><img src="{{(User$ | async ).src}}"></div>
+						<p class="app-game--nickname">{{(User$ | async ).nickname}}</p>
 					</div>
 					<div class="app-game--result">
 						<p class="app-game--answer">{{'GAME.TRUE-ANSWER' | translate}}: <span>{{correctAnswer}}</span>

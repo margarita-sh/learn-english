@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { of, Observable } from 'rxjs';
+import { of, Observable, Subscription } from 'rxjs';
 import { interval } from 'rxjs';
 import { take, delay } from 'rxjs/operators';
 import { Word } from './word.model';
@@ -14,8 +14,8 @@ import { Store, select } from '@ngrx/store';
 import { DictionaryState } from 'src/app/store/state/dictionary.state';
 import { setGameStatus, getNewQuestion } from 'src/app/store/action/game.action';
 import { selectStatusGame, selectWord, selectAnswers } from 'src/app/store/selectors/game.selectors';
-import { getRivalProfile } from 'src/app/store/action/profile.actions';
-import { selectRivalProfile } from 'src/app/store/selectors/profile.select';
+import { getRivalProfile, getProfileUserFromLS } from 'src/app/store/action/profile.actions';
+import { selectRivalProfile, selectUserProfile } from 'src/app/store/selectors/profile.selectors';
 
 @Component({
 	selector: 'app-game',
@@ -27,21 +27,17 @@ export class GameComponent implements OnInit {
 	public word$: Observable<Word> = this._store$.pipe(select(selectWord));
 	public answers$: Observable<string[]> = this._store$.pipe(select(selectAnswers));
 	public randomRival$: Observable<Profile> = this._store$.pipe(select(selectRivalProfile));
+	public User$: Observable<Profile> = this._store$.pipe(select(selectUserProfile));
 
-	//public word: Word = null;
 	public count: number = null;
-	//public arrayAnswers: string[] = [];
 	public sec: number = 1000;
 	public resultDuration: number = 200;
-	/* public numberOptionsAnswer: number = 3; */
 	public correctAnswer: number = 0;
 	public wrongAnswer: number = 0;
 	public timeRound: number = 30;
 	public arrayForDictionary: Word[] = [];
 	public color: object = {};
 	public selectedAnswer: string = '';
-	public dataUser: Profile;
-	/* public randomUser: Profile; */
 	public allAnswerRival: number = 30;
 	public correctAnswerRival: number = 0;
 	public wrongAnserRival: number = 0;
@@ -63,8 +59,8 @@ export class GameComponent implements OnInit {
 
 	public ngOnInit(): void {
 		this.profileService.loadAvatarHttp().subscribe(() => {
-			this.dataUser = this.profileService.getProfileFromLS();
-			this.generateRandomUser();
+			this._store$.dispatch(getProfileUserFromLS({}));
+			this._store$.dispatch(getRivalProfile({}));
 			if (typeof this.profileService.getProfileFromLS().id === 'number') {
 				this._store$.dispatch(setGameStatus({ gameStatus: 'start' }));
 			} else {
@@ -123,8 +119,8 @@ export class GameComponent implements OnInit {
 			.subscribe((count: number) => {
 				count = this.timeRound - (count + 1);
 				this.count = count;
-				// tslint:disable-next-line: no-magic-numbers
-				this.valueProgressSpinner = 100 / this.timeRound * count;
+				const valueSpinner: number = 100;
+				this.valueProgressSpinner = valueSpinner / this.timeRound * count;
 				if (this.count <= 0) {
 					this._store$.dispatch(setGameStatus({ gameStatus: 'complete' }));
 					this.count = null;
@@ -142,16 +138,12 @@ export class GameComponent implements OnInit {
 
 	public onSaved(): void {
 		this._store$.dispatch(setGameStatus({ gameStatus: 'start' }));
-		this.dataUser = this.profileService.getProfileFromLS();
-	}
-
-	public generateRandomUser(): void {
-		this._store$.dispatch(getRivalProfile({}));
+		this._store$.dispatch(getProfileUserFromLS({}));
 	}
 
 	public resultGameRival(): void {
-		// tslint:disable-next-line: no-magic-numbers
-		this.correctAnswerRival = Math.floor(Math.random() * (this.allAnswerRival - 15) + 15);
+		const minAnswerRival: number = 15;
+		this.correctAnswerRival = Math.floor(Math.random() * (this.allAnswerRival - minAnswerRival) + minAnswerRival);
 		this.wrongAnserRival = this.allAnswerRival - this.correctAnswerRival;
 	}
 

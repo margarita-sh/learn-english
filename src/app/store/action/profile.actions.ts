@@ -31,4 +31,5 @@ export const getRivalProfile: TypeActionCreator<string, {}> = createAction(
 
 export const setRivalProfile: TypeActionCreator<string, { profile: Profile }> = createAction(
 	'[Profile] set profile rival',
+	props<{ profile: Profile }>()
 );

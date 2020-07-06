@@ -6,7 +6,6 @@ export class FullTranslation {
 	public example: string[];
 
 	public parseTranslation(data: APIYandex.RootObject): any {
-		console.log(data);
 		if (data.def.length === 0) {
 			throw new Error('word not found');
 		}
