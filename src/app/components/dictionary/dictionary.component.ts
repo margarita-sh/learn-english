@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Store, select } from '@ngrx/store';
 import { DictionaryState } from 'src/app/store/state/dictionary.state';
-import { getWordsFromLS, removeWordFromDictionary, changeWordStatus, getAudioSrc } from 'src/app/store/action/dictionary.action';
+import { removeWordFromDictionary, changeWordStatus, getAudioSrc } from 'src/app/store/action/dictionary.action';
 import { Observable } from 'rxjs';
 import { selectDictionary, selectSrcAudio } from 'src/app/store/selectors/dictionary.selectors';
 import { Dictionary } from './dictionary.model';
@@ -53,6 +53,7 @@ export class DictionaryComponent implements OnInit {
 			this.dataSource.data = data;
 			this.dataSource.paginator = this.paginator;
 		});
+		console.log('this.dataSource', this.dataSource.data);
 
 		this.srcAudio$.subscribe((data: Dictionary) => {
 			// tslint:disable-next-line: strict-boolean-expressions

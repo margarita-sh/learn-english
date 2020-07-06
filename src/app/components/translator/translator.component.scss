@@ -17,7 +17,7 @@
 		display:flex;
 		border-bottom: 1px solid gray; 
 		padding:1em;
-		font-size:1.2em;
+		font-size:1.4em;
 	}
 	&--text {
 		display:flex;
@@ -30,11 +30,13 @@
 	}
 
 	&--input {
-		width:25em;
-	 	padding:1em; 
+		width:16em;
+	 	padding:0.8em; 
 		border: none;
 		outline: none;
 		background: transparent;
+		font-size: 1.2em;
+
 	} 
 	
 	&--form {
@@ -55,8 +57,10 @@
 		position: absolute;
 	}
 	&--answer {
-		padding:0.6em;
-	/* 	background: darkblue; */
+		padding:0.8em;
+		font-size: 1.2em;
+		height: 3em;
+	 	box-sizing: border-box; 
 	}
 }
 
@@ -74,14 +78,17 @@ input:-webkit-autofill:active {
 	}
 	&--translate {
 		padding:0.5em;
-		font-size:1em;
+		font-size: 1.2;
 	}
 	&--input {
-		width:18em;
+		width:11em;
 	 	padding:1em; 
 	} 
 	&--form {
 		width:300px;
+	}
+	&--answer {
+	padding: 1em;
 	}
 }
 
@@ -94,14 +101,15 @@ input:-webkit-autofill:active {
 	}
 
 	&--input {
-		width:14em;
-	 	padding:1em; 
+		font-size: 1em; 
 	} 
 	&--form {
 		width:250px;
 	}
+	&--answer {
+		font-size:1em;
+	}
 }
-
 }
 
 @media(max-width: 550px) {
@@ -109,13 +117,13 @@ input:-webkit-autofill:active {
 	&--container {
 		width:350px;
 	}
+
 	&--translate {
-		padding:0.5em;
-		font-size:1em;
+		font-size: 1em;
 	}
+	
 	&--input {
-		width:14em;
-	 	padding:1em; 
+		width:16em;
 	} 
 	&--form {
 		width:300px;
@@ -125,10 +133,58 @@ input:-webkit-autofill:active {
 		flex-direction: column;
 	}
 	&--answer {
-		padding:0.6em;
+	 	padding:0.8em 1em; 
 		border-top:1px solid gray; 
 	}
 }
 
 }
 
+
+
+.ball {
+	width:120px;
+	height:120px;
+	line-height:50px;
+	border:5px solid purple;
+	position:relative;
+	animation: combined 5s linear infinite;
+	left:0;
+	top:0; 
+}
+
+
+
+@keyframes combined {
+16%, 48%, 78%  {
+	top: 280px;
+	animation-timing-function: ease-out;
+}
+32% {
+	top: 50px;
+	animation-timing-function: ease-in;
+}
+62% {
+	top: 120px;
+	animation-timing-function: ease-in;
+	opacity:0.8;
+}
+82% {
+	top: 120px;
+	animation-timing-function: ease-in;
+	opacity:0.6;
+}
+90% {
+	top: 120px;
+	animation-timing-function: ease-in;
+	opacity:0;
+}
+
+100% {
+	transform: rotate(360deg);
+	top: 160px;
+	animation-timing-function: ease-out;
+	left:100%;
+	opacity:0;
+}
+}
