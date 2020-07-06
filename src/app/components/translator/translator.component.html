@@ -2,11 +2,11 @@
 <div class="app-translator">
 	<div class="app-translator--container">
 		<div class="app-translator--translate">
-			<div class="app-translator--lang">{{lang === 'ru-en'? 'Русский': 'Английский'}}</div>
+			<div class="app-translator--lang">{{(lang === 'ru-en'?'TRANSLATOR.RU':'TRANSLATOR.EN') | translate}}</div>
 			<div class="app-translator--arrows" (click)="changeLang()"><span class="material-icons">
 				sync_alt
 				</span></div>
-			<div class="app-translator--lang">{{lang === 'ru-en'? 'Английский': 'Русский'}}</div>
+			<div class="app-translator--lang">{{(lang === 'ru-en'?'TRANSLATOR.EN':'TRANSLATOR.RU') | translate}}</div>
 		</div>
 
 		<div class="app-translator--text">
