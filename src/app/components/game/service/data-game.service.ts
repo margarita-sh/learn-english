@@ -13,7 +13,7 @@ export class DataGameService {
 	public numberOptionsAnswer: number = 3;
 
 	constructor(private _httpClient: HttpClient) { }
-	
+
 	public getRandomWord(): Word {
 		const rand: number = Math.floor(Math.random() * this.words.length);
 		const randWord: Word = this.words[rand];

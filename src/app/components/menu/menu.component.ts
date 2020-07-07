@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DataGameService } from '../game/service/data-game.service';
 import { Word } from '../game/word.model';
 import { TranslateService } from '@ngx-translate/core';
@@ -23,6 +23,5 @@ export class MenuComponent {
 		const browserLang: any = translate.getBrowserLang();
 		translate.use(browserLang.match(/en|ru/) ? browserLang : 'en');
 	}
-
 
 }

@@ -31,8 +31,7 @@ export class DictionaryEffects {
 				.pipe(
 					map((dictionary: Word[]) => {
 						return setWordsFromLS({ dictionary });
-					}),
-					// catchError(() => of({ type: '[Todo] Todos Loaded Error' }))
+					})
 				)
 			)
 		)
@@ -45,8 +44,7 @@ export class DictionaryEffects {
 				.pipe(
 					map((data: any) => {
 						return setAudioSrc({ word: action.word, src: data.location });
-					}),
-					// catchError(() => of({ type: '[Todo] Todos Loaded Error' }))
+					})
 				)
 			)
 		)

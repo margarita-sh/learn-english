@@ -12,7 +12,6 @@ export class ProfileService {
 	public nicknameRival: any = ['Саша', 'Женя', 'Знаток', 'Учитель'];
 	constructor(private _http: HttpClient) { }
 	public loadAvatarHttp(): Observable<Profile[]> {
-		/* this._http.get<Profile[]>(this.baseURL).subscribe((items: Profile[]) => this.avatars = items); */
 		return this._http.get<Profile[]>(this.baseURL).pipe(
 			map((items: Profile[]) => {
 				this.avatars = items;

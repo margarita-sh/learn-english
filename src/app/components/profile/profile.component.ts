@@ -28,7 +28,6 @@ export class ProfileComponent {
 	}
 
 	public save(nickname: string, idAvatar: number): void {
-	/* 	this.profileService.saveProfile(nickname, idAvatar); */
 	const profile: Profile = new Profile();
 	profile.nickname = nickname;
 	profile.id = idAvatar;

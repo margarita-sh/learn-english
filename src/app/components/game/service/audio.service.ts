@@ -7,9 +7,7 @@ import { Word } from '../word.model';
 @Injectable()
 export class AudioService {
 	public urlAPI: string = 'https://api.soundoftext.com/sounds';
-/* 	public audio: HTMLAudioElement; */
 	constructor(private _http: HttpClient) {
-		/* this.audio = new Audio(); */
 	}
 
 	public getAudio(word: string): Observable<any> {

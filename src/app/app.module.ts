@@ -32,16 +32,16 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { TranslateModule, TranslateLoader, MissingTranslationHandler } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { MissingTranslationService } from './components/locale/missing-translation.service.ts';
+import { MissingTranslationService } from './components/locale service/missing-translation.service.ts';
 import { MatProgressButtonsModule } from 'mat-progress-buttons';
-import { MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MatButtonModule } from '@angular/material/button';
 import { ProfileService } from './components/profile/service/profile.service';
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { DictionaryEffects } from './store/effect/dictionary.effect';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { GameEffects } from './store/effect/game.effect';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {

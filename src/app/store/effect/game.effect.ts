@@ -25,7 +25,6 @@ export class GameEffects {
 		)
 	);
 
-
 	constructor(
 		private actions$: Actions,
 		private dataGameService: DataGameService
