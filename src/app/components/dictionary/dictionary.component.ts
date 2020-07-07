@@ -53,7 +53,7 @@ export class DictionaryComponent implements OnInit, OnDestroy {
 	public ngOnInit(): void {
 		this._store$.dispatch(setAudioSrc({ word: new Word(), src: '' }));
 		this.dictionarySubscription = this.dictionary$.subscribe((data: Word[]) => {
-			this.dataSource.data = data;
+			this.dataSource = new MatTableDataSource(data);
 			this.dataSource.paginator = this.paginator;
 		});
 
