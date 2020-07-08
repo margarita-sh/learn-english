@@ -10,7 +10,6 @@
 	&--container {
 		width:800px;
 		margin:auto;
-		border:1px solid gray; 
 	}
 
 	&--translate {
@@ -18,6 +17,7 @@
 		border-bottom: 1px solid gray; 
 		padding:1em;
 		font-size:1.4em;
+
 	}
 	&--text {
 		display:flex;
@@ -61,6 +61,14 @@
 		font-size: 1.2em;
 		height: 3em;
 	 	box-sizing: border-box; 
+	}
+
+	&--container-translator {
+		border:1px solid gray; 
+		margin-bottom: 2em;
+	}
+	&--img {
+	 text-align: center;
 	}
 }
 
@@ -136,6 +144,10 @@ input:-webkit-autofill:active {
 	 	padding:0.8em 1em; 
 		border-top:1px solid gray; 
 	}
+	&--img img{
+		width:350px;
+		height: auto;
+	   }
 }
 
 }

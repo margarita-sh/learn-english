@@ -2,8 +2,6 @@ import { APIYandex } from './apiYandex.model';
 
 export class FullTranslation {
 	public translate: string[];
-	public transcription: string;
-	public example: string[];
 
 	public parseTranslation(data: APIYandex.RootObject): any {
 		if (data.def.length === 0) {

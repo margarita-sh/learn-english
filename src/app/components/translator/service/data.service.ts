@@ -9,8 +9,7 @@ import { FullTranslation } from '../fullTranslator.model';
 export class DataService {
 	public urlAPI: string = 'https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=';
 	public mainAPIKey: string = 'dict.1.1.20200609T214032Z.bb7f13f95e75ccf2.de79d0d2a909a5510ae3147dde13ba2f0d3f1dd8';
-	public langRU: string = 'ru-en';
-	public langEN: string = 'en-ru';
+	public urlForImg: string = 'https://source.unsplash.com/500x500/?';
 
 	constructor(private _http: HttpClient) { }
 
@@ -22,5 +21,10 @@ export class DataService {
 				translation.parseTranslation(items);
 				return translation;
 			}));
+	}
+
+	public getImg(data: string): any {
+		const url: string = `${this.urlForImg}${data}`;
+		return this._http.get(url, { responseType: 'blob', observe: 'response' });
 	}
 }

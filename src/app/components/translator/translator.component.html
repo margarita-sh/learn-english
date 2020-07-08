@@ -1,6 +1,7 @@
 
 <div class="app-translator">
 	<div class="app-translator--container">
+		<div class="app-translator--container-translator">
 		<div class="app-translator--translate">
 			<div class="app-translator--lang">{{(lang === 'ru-en'?'TRANSLATOR.RU':'TRANSLATOR.EN') | translate}}</div>
 			<div class="app-translator--arrows" (click)="changeLang()"><span class="material-icons">
@@ -27,7 +28,13 @@
 				{{error$ | async}}</div>
 		</div>
 	</div>
+	</div>
+	<div class="app-translator--img">
+		<img src ={{srcImg}}>
+	</div>
 </div>
-<div class="ball"></div>
+
+
+<div class="ball" [style.visibility]="srcImg.length === 0 ? 'visible' : 'hidden'"></div>
 </div>
 

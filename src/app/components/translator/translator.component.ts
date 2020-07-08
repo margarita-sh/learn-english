@@ -5,6 +5,7 @@ import { translate, resultTranslate } from 'src/app/store/action/translate.actio
 import { selectError, selectWordTranslate } from 'src/app/store/selectors/translate.selectors';
 import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { DataService } from './service/data.service';
 
 @Component({
 	selector: 'app-translator',
@@ -16,9 +17,10 @@ export class TranslatorComponent {
 	public wordTranslate$: Observable<string[]> = this._store$.pipe(select(selectWordTranslate));
 	public error$: Observable<string> = this._store$.pipe(select(selectError));
 	public word: string;
+	public srcImg: string = '';
 	public lang: string = 'ru-en';
 	// tslint:disable-next-line: no-shadowed-variable
-	constructor(public _store$: Store<TranslateState>, public translate: TranslateService) {
+	constructor(public _store$: Store<TranslateState>, public translate: TranslateService, public translator: DataService) {
 		translate.addLangs(['en', 'ru']);
 		translate.setDefaultLang('en');
 		const browserLang: any = translate.getBrowserLang();
@@ -26,7 +28,18 @@ export class TranslatorComponent {
 	}
 
 	public translateWord(): void {
-		return this._store$.dispatch(translate({ word: this.word, lang: this.lang}));
+		this.translator.getImg(this.word).subscribe((data: any) =>  {
+			const link: string = data.url;
+		if (link.includes('source-404')) {
+			this.srcImg = './assets/img/705.jpg';
+		} else {
+			this.srcImg = link;
+		}
+		},
+		 (error: any ) => {
+			error = this.srcImg = './assets/img/705.jpg';
+		});
+		return this._store$.dispatch(translate({ word: this.word, lang: this.lang }));
 	}
 
 	public onTitleChange(): void {
@@ -42,4 +55,5 @@ export class TranslatorComponent {
 			this.lang = 'ru-en';
 		}
 	}
+
 }
