@@ -68,7 +68,11 @@
 		margin-bottom: 2em;
 	}
 	&--img {
-	 text-align: center;
+	  text-align: center;
+	}
+	&--button {
+ 	  display: none; 
+	  text-align: center;
 	}
 }
 
@@ -147,7 +151,11 @@ input:-webkit-autofill:active {
 	&--img img{
 		width:350px;
 		height: auto;
-	   }
+	}
+	&--button {
+		display: block; 
+		margin-bottom: 2em;
+	}
 }
 
 }
